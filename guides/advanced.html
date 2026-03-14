@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -82,14 +81,15 @@
         </aside>
 
         <main class="guide-content">
-            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span>Advanced</span></nav>
+            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span data-i18n="sidebar_advanced">Advanced</span></nav>
+            <div class="lang-content" lang="zh">
             <h1>高级技巧</h1>
 
             <h2>提示词工程</h2>
 
             <h3>四大要素框架</h3>
             <p>有效的提示应包含四个要素：</p>
-            
+
             <table>
                 <thead>
                     <tr>
@@ -247,6 +247,174 @@ web_search = "live"  # 或 "cached"
                 <li>使用 <code>--quiet</code> 批量处理</li>
                 <li>预热常用上下文</li>
             </ul>
+            </div>
+
+            <div class="lang-content" lang="en" hidden>
+            <h1>Advanced Tips</h1>
+
+            <h2>Prompt Engineering</h2>
+
+            <h3>Four Elements Framework</h3>
+            <p>An effective prompt should contain four elements:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Goal</strong></td>
+                        <td>What do you want to change or build?</td>
+                        <td>"Add user authentication feature"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Context</strong></td>
+                        <td>Which files or errors are relevant?</td>
+                        <td>"@auth.ts @user.ts"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Constraints</strong></td>
+                        <td>What standards should be followed?</td>
+                        <td>"Use JWT, no sessions"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Completion Criteria</strong></td>
+                        <td>Under what conditions is it considered done?</td>
+                        <td>"Tests pass, login and registration work"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example Prompt</h3>
+            <pre><code>Goal: Refactor the auth module to support JWT token refresh
+Context: All files under the @src/auth/ directory
+Constraints:
+- Use pure JWT, no sessions
+- Maintain backward compatibility
+- Add rate limiting
+Completion Criteria:
+- All existing tests pass
+- New token refresh tests added
+- Manual testing confirms login flow works</code></pre>
+
+            <h2>Planning Mode</h2>
+
+            <h3>When to Use /plan</h3>
+            <ul>
+                <li>Changes involving multiple files</li>
+                <li>Need to modify architecture or interfaces</li>
+                <li>Unsure about the best implementation approach</li>
+                <li>Task may take a long time</li>
+            </ul>
+
+            <h3>Usage Flow</h3>
+            <pre><code>/plan
+# Or with an initial description
+/plan Refactor database access layer, add connection pooling</code></pre>
+
+            <h2>Git Workflow Integration</h2>
+
+            <h3>Using Git Checkpoints</h3>
+            <p>Codex may significantly modify the codebase, so it is recommended to:</p>
+            <ol>
+                <li>Create a checkpoint before starting a task:</pre><code>git add -A && git commit -m "checkpoint: before codex auth refactor"</code></li>
+                <li>Review the diff after the task is complete</li>
+                <li>Roll back if necessary:<pre><code>git reset --hard HEAD~1</code></li>
+            </ol>
+
+            <h3>Using Git Worktrees</h3>
+            <p>When you need to run multiple Codex threads on the same codebase:</p>
+            <pre><code># Create worktrees
+git worktree add ../my-project-feature-a feature-a
+git worktree add ../my-project-feature-b feature-b
+
+# Start Codex in different directories
+cd ../my-project-feature-a && codex
+cd ../my-project-feature-b && codex</code></pre>
+
+            <h2>Scripting Codex</h2>
+
+            <h3>Non-Interactive Execution</h3>
+            <pre><code># Execute a single task
+codex exec "Fix CI failure"
+
+# Quiet mode
+codex exec --quiet "Update dependencies"
+
+# Combined with shell scripts
+for file in src/**/*.test.ts; do
+  codex exec "Check test coverage of $file"
+done</code></pre>
+
+            <h3>CI/CD Integration</h3>
+            <pre><code># .github/workflows/codex-review.yml
+name: AI Code Review
+on: [pull_request]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Codex Review
+        run: |
+          npm i -g @openai/codex
+          codex exec "/review" --quiet</code></pre>
+
+            <h2>Multi-Agent Workflow</h2>
+
+            <h3>Enable Experimental Features</h3>
+            <pre><code>/experimental</code></pre>
+
+            <h3>Workflow Example</h3>
+            <p>The main Agent focuses on core functionality, while sub-Agents handle:</p>
+            <ul>
+                <li>Writing test cases</li>
+                <li>Documentation updates</li>
+                <li>Dependency checks</li>
+                <li>Performance analysis</li>
+            </ul>
+
+            <h3>Switch Agent</h3>
+            <pre><code>/agent  # Select and switch to another thread</code></pre>
+
+            <h2>Voice Input</h2>
+            <p>The Codex app supports voice input. Click the microphone icon or use a keyboard shortcut to start describing your needs by voice.</p>
+
+            <h2>Image Input</h2>
+            <p>Supports drag-and-drop or pasting images:</p>
+            <ul>
+                <li>Design mockups to code</li>
+                <li>Screenshot error analysis</li>
+                <li>UI review</li>
+            </ul>
+
+            <h2>Web Search</h2>
+            <pre><code># Enable in config.toml
+web_search = "live"  # Or "cached"
+
+# Then ask directly
+> What are the new features of Next.js 14 Server Actions?</code></pre>
+
+            <h2>Performance Optimization</h2>
+
+            <h3>Reduce Token Consumption</h3>
+            <ul>
+                <li>Regularly use <code>/compact</code></li>
+                <li>Avoid including large files unless necessary</li>
+                <li>Use specific rather than broad requests</li>
+            </ul>
+
+            <h3>Improve Response Speed</h3>
+            <ul>
+                <li>Use low/minimal reasoning for simple tasks</li>
+                <li>Use <code>--quiet</code> for batch processing</li>
+                <li>Pre-warm frequently used context</li>
+            </ul>
+            </div>
         </main>
     </div>
 

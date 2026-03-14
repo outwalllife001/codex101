@@ -210,3 +210,8 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.feature-card, .module-card, .example-card, .path-item').forEach(el => {
     observer.observe(el);
 });
+
+// Syntax highlighting (called here at end of body so DOM is ready)
+if (typeof hljs !== 'undefined') {
+    hljs.highlightAll();
+}

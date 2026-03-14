@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -67,13 +66,14 @@
     </div>
 
     <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
-        <a href="index.html" style="color: var(--color-primary);" data-i18n="ex_back">← 返回案例列表</a>
+        <div class="lang-content" lang="zh">
+        <a href="index.html" style="color: var(--color-primary);">← 返回案例列表</a>
 
-        <h1 style="margin: 1rem 0;" data-i18n="ex_1_title">快速搭建 React 项目</h1>
+        <h1 style="margin: 1rem 0;">快速搭建 React 项目</h1>
 
         <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-            <span class="example-difficulty" data-i18n="ex_diff_easy">初级</span>
-            <span class="example-time" data-i18n="ex_time_10">10 分钟</span>
+            <span class="example-difficulty">初级</span>
+            <span class="example-time">10 分钟</span>
         </div>
 
         <h2>目标</h2>
@@ -108,7 +108,7 @@
         <pre><code>cd my-app
 npm run dev</code></pre>
 
-        <h2>生成的项目结构</p>
+        <h2>生成的项目结构</h2>
 
         <pre><code>my-app/
 ├── src/
@@ -129,10 +129,10 @@ npm run dev</code></pre>
         <h2>关键学习点</h2>
 
         <ul>
-            <li>✅ 一次提示完成多步骤任务</li>
-            <li>✅ 自动处理依赖安装</li>
-            <li>✅ 生成标准项目结构</li>
-            <li>✅ 遵循最佳实践（hooks、类型定义）</li>
+            <li>一次提示完成多步骤任务</li>
+            <li>自动处理依赖安装</li>
+            <li>生成标准项目结构</li>
+            <li>遵循最佳实践（hooks、类型定义）</li>
         </ul>
 
         <h2>扩展练习</h2>
@@ -140,6 +140,83 @@ npm run dev</code></pre>
         <p>继续向 Codex 提问：</p>
 
         <pre><code>> 添加一个待办事项功能，包含添加、完成、删除功能</code></pre>
+        </div>
+
+        <div class="lang-content" lang="en" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Back to Examples</a>
+
+        <h1 style="margin: 1rem 0;">Build a React Project</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty">Beginner</span>
+            <span class="example-time">10 min</span>
+        </div>
+
+        <h2>Goal</h2>
+        <p>Use Codex to create a React + TypeScript + Vite project from scratch, including routing, state management, and basic UI.</p>
+
+        <h2>Step 1: Initialize the Project</h2>
+
+        <p>Launch Codex and enter:</p>
+
+        <pre><code>> Create a React + TypeScript + Vite project named my-app.
+> Configure routing with React Router, including a home page, about page, and 404 page.
+> Set up styling with Tailwind CSS.
+> Add global state management (using Zustand).</code></pre>
+
+        <h2>Step 2: Wait for Execution</h2>
+
+        <p>Codex will:</p>
+
+        <ol>
+            <li>Run <code>npm create vite@latest</code></li>
+            <li>Install dependencies (react-router-dom, zustand, tailwindcss)</li>
+            <li>Configure Tailwind</li>
+            <li>Create routing files</li>
+            <li>Create page components</li>
+            <li>Set up Zustand store</li>
+        </ol>
+
+        <h2>Step 3: Verify the Result</h2>
+
+        <p>After Codex finishes, run:</p>
+
+        <pre><code>cd my-app
+npm run dev</code></pre>
+
+        <h2>Generated Project Structure</h2>
+
+        <pre><code>my-app/
+├── src/
+│   ├── components/      # Shared components
+│   ├── pages/          # Page components
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   └── NotFound.tsx
+│   ├── store/          # Zustand store
+│   │   └── index.ts
+│   ├── App.tsx         # Routing config
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.js
+└── vite.config.ts</code></pre>
+
+        <h2>Key Takeaways</h2>
+
+        <ul>
+            <li>Complete multi-step tasks with a single prompt</li>
+            <li>Automatic dependency installation</li>
+            <li>Generates standard project structure</li>
+            <li>Follows best practices (hooks, type definitions)</li>
+        </ul>
+
+        <h2>Extension Exercise</h2>
+
+        <p>Continue asking Codex:</p>
+
+        <pre><code>> Add a to-do list feature with add, complete, and delete functionality</code></pre>
+        </div>
 
     </div>
 

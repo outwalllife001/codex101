@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -82,9 +81,10 @@
         </aside>
 
         <main class="guide-content">
-            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span>MCP Integration</span></nav>
+            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span data-i18n="sidebar_mcp">MCP Integration</span></nav>
+            <div class="lang-content" lang="zh">
             <h1>MCP 集成指南</h1>
-            
+
             <p>Model Context Protocol (MCP) 将模型连接到工具和上下文。使用它让 Codex 访问第三方文档或开发者工具。</p>
 
             <h2>什么是 MCP？</h2>
@@ -242,6 +242,169 @@ codex mcp login <server-name></code></pre>
                 <li>定义工具接口</li>
                 <li>打包发布</li>
             </ol>
+            </div>
+
+            <div class="lang-content" lang="en" hidden>
+            <h1>MCP Integration Guide</h1>
+
+            <p>Model Context Protocol (MCP) connects models to tools and context. Use it to let Codex access third-party documentation or developer tools.</p>
+
+            <h2>What is MCP?</h2>
+            <p>MCP is an open standard protocol that allows AI models to access external tools and data sources in a standardized way. It is like a "USB-C" interface for AI applications.</p>
+
+            <h2>MCP Server Types</h2>
+
+            <h3>STDIO Servers</h3>
+            <p>Servers that run as local processes (started via commands):</p>
+            <ul>
+                <li>Configured using environment variables</li>
+                <li>Suitable for local tool integration</li>
+            </ul>
+
+            <h3>Streamable HTTP Servers</h3>
+            <p>Servers accessed via network addresses:</p>
+            <ul>
+                <li>Bearer token authentication</li>
+                <li>OAuth authentication</li>
+                <li>Suitable for cloud service integration</li>
+            </ul>
+
+            <h2>Configuring MCP</h2>
+            <p>Codex stores MCP configuration in <code>config.toml</code>.</p>
+
+            <h3>Method 1: Using CLI</h3>
+            <pre><code># Add MCP server
+codex mcp add <server-name> --env VAR1=VALUE1 --env VAR2=VALUE2 -- <stdio-command>
+
+# Example: Add Context7
+codex mcp add context7 -- npx -y @upstash/context7-mcp
+
+# Add Playwright
+codex mcp add playwright npx @playwright/mcp@latest
+
+# View all commands
+codex mcp --help</code></pre>
+
+            <h3>Method 2: Manually Edit config.toml</h3>
+
+            <h4>STDIO Server Example</h4>
+            <pre><code>[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.context7.env]
+MY_ENV_VAR = "MY_ENV_VALUE"</code></pre>
+
+            <h4>HTTP Server Example</h4>
+            <pre><code>[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+bearer_token_env_var = "FIGMA_OAUTH_TOKEN"
+http_headers = { "X-Figma-Region" = "us-east-1" }
+
+[mcp_servers.chrome_devtools]
+url = "http://localhost:3000/mcp"
+enabled_tools = ["open", "screenshot"]
+disabled_tools = ["close"]
+startup_timeout_sec = 20
+tool_timeout_sec = 45</code></pre>
+
+            <h2>Common MCP Servers</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Server</th>
+                        <th>Purpose</th>
+                        <th>Install Command</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Context7</td>
+                        <td>Developer documentation search</td>
+                        <td><code>codex mcp add context7 -- npx -y @upstash/context7-mcp</code></td>
+                    </tr>
+                    <tr>
+                        <td>Playwright</td>
+                        <td>Browser automation</td>
+                        <td><code>codex mcp add playwright npx @playwright/mcp@latest</code></td>
+                    </tr>
+                    <tr>
+                        <td>Chrome DevTools</td>
+                        <td>Chrome debugging</td>
+                        <td>HTTP server</code></td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td>PR/Issue management</td>
+                        <td><code>codex mcp add github --env GITHUB_TOKEN=xxx -- npx -y @modelcontextprotocol/server-github</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sentry</td>
+                        <td>Error logging</td>
+                        <td>HTTP server</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Using MCP Tools</h2>
+
+            <h3>View Configured Tools</h3>
+            <pre><code>/mcp</code></pre>
+
+            <h3>Natural Language Invocation</h3>
+            <pre><code>> Search for the latest Next.js App Router documentation
+> Take a screenshot of https://example.com
+> View the latest GitHub Issues</code></pre>
+
+            <h2>Advanced Configuration</h2>
+
+            <h3>Tool Whitelist/Blacklist</h3>
+            <pre><code>[mcp_servers.myserver]
+enabled_tools = ["tool1", "tool2"]
+disabled_tools = ["dangerous_tool"]</code></pre>
+
+            <h3>Timeout Settings</h3>
+            <pre><code>startup_timeout_sec = 10   # Startup timeout
+tool_timeout_sec = 60       # Tool execution timeout</code></pre>
+
+            <h3>OAuth Configuration</h3>
+            <pre><code># Configure callback port
+mcp_oauth_callback_port = 5555
+
+# Or custom callback URL
+mcp_oauth_callback_url = "https://devbox.example.internal/callback"
+
+# Login
+codex mcp login <server-name></code></pre>
+
+            <h2>Troubleshooting</h2>
+
+            <h3>Check Connection Status</h3>
+            <pre><code>/mcp</code></pre>
+            <p>Expected output:</p>
+            <pre><code>Connected MCP Servers:
+  ✓ context7 - Ready
+  ✓ playwright - Ready
+  ✗ github - Error: Connection refused</code></pre>
+
+            <h3>Common Issues</h3>
+            <ul>
+                <li>Server not started: Check if the command is correct</li>
+                <li>Authentication failed: Verify token or re-login</li>
+                <li>Tools not showing: Restart Codex or check configuration</li>
+            </ul>
+
+            <h2>Creating Custom MCP Servers</h2>
+            <p>Refer to the <a href="https://modelcontextprotocol.io" target="_blank">MCP official documentation</a> to create your own server.</p>
+
+            <p>Basic structure:</p>
+            <ol>
+                <li>Implement the MCP protocol</li>
+                <li>Define tool interfaces</li>
+                <li>Package and publish</li>
+            </ol>
+            </div>
         </main>
     </div>
 

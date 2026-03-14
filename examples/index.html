@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -67,98 +66,196 @@
     </div>
 
     <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
-        <h1 style="text-align: center; margin-bottom: 3rem;" data-i18n="examples_title">实战案例库</h1>
+        <div class="lang-content" lang="zh">
+        <h1 style="text-align: center; margin-bottom: 3rem;">实战案例库</h1>
 
         <div class="examples-grid">
             <!-- 初级案例 -->
             <div class="example-card">
                 <div class="example-header">
-                    <span class="example-difficulty" data-i18n="ex_diff_easy">初级</span>
-                    <span class="example-time" data-i18n="ex_time_10">10 分钟</span>
+                    <span class="example-difficulty">初级</span>
+                    <span class="example-time">10 分钟</span>
                 </div>
-                <h3 data-i18n="ex_1_title">快速搭建 React 项目</h3>
-                <p data-i18n="ex_1_desc">使用 Codex 从零开始创建一个完整的 React 应用，包含路由、状态管理和样式。</p>
+                <h3>快速搭建 React 项目</h3>
+                <p>使用 Codex 从零开始创建一个完整的 React 应用，包含路由、状态管理和样式。</p>
                 <div class="example-tags">
                     <span class="tag">React</span>
                     <span class="tag">TypeScript</span>
                     <span class="tag">Vite</span>
                 </div>
-                <a href="react-setup.html" class="example-link" data-i18n="ex_details">查看详情 →</a>
+                <a href="react-setup.html" class="example-link">查看详情 →</a>
             </div>
 
             <div class="example-card">
                 <div class="example-header">
-                    <span class="example-difficulty" data-i18n="ex_diff_easy">初级</span>
-                    <span class="example-time" data-i18n="ex_time_15">15 分钟</span>
+                    <span class="example-difficulty">初级</span>
+                    <span class="example-time">15 分钟</span>
                 </div>
-                <h3 data-i18n="ex_5_title">创建 CLI 工具</h3>
-                <p data-i18n="ex_5_desc">开发一个命令行工具，支持参数解析、配置文件读取和日志输出。</p>
+                <h3>创建 CLI 工具</h3>
+                <p>开发一个命令行工具，支持参数解析、配置文件读取和日志输出。</p>
                 <div class="example-tags">
                     <span class="tag">Node.js</span>
                     <span class="tag">CLI</span>
                 </div>
-                <a href="#" class="example-link" data-i18n="ex_details">查看详情 →</a>
+                <a href="#" class="example-link">查看详情 →</a>
             </div>
 
             <!-- 中级案例 -->
             <div class="example-card">
                 <div class="example-header">
-                    <span class="example-difficulty" style="background: #f59e0b;" data-i18n="ex_diff_medium">中级</span>
-                    <span class="example-time" data-i18n="ex_time_30">30 分钟</span>
+                    <span class="example-difficulty" style="background: #f59e0b;">中级</span>
+                    <span class="example-time">30 分钟</span>
                 </div>
-                <h3 data-i18n="ex_2_title">API 后端开发</h3>
-                <p data-i18n="ex_2_desc">使用 Node.js + Express 构建 RESTful API，包含认证、数据库操作和测试。</p>
+                <h3>API 后端开发</h3>
+                <p>使用 Node.js + Express 构建 RESTful API，包含认证、数据库操作和测试。</p>
                 <div class="example-tags">
                     <span class="tag">Express</span>
                     <span class="tag">MongoDB</span>
                     <span class="tag">JWT</span>
                 </div>
-                <a href="api-backend.html" class="example-link" data-i18n="ex_details">查看详情 →</a>
+                <a href="api-backend.html" class="example-link">查看详情 →</a>
             </div>
 
             <div class="example-card">
                 <div class="example-header">
-                    <span class="example-difficulty" style="background: #f59e0b;" data-i18n="ex_diff_medium">中级</span>
-                    <span class="example-time" data-i18n="ex_time_45">45 分钟</span>
+                    <span class="example-difficulty" style="background: #f59e0b;">中级</span>
+                    <span class="example-time">45 分钟</span>
                 </div>
-                <h3 data-i18n="ex_6_title">数据库迁移脚本</h3>
-                <p data-i18n="ex_6_desc">编写数据迁移脚本，处理 schema 变更、数据转换和回滚逻辑。</p>
+                <h3>数据库迁移脚本</h3>
+                <p>编写数据迁移脚本，处理 schema 变更、数据转换和回滚逻辑。</p>
                 <div class="example-tags">
                     <span class="tag">PostgreSQL</span>
                     <span class="tag">Migration</span>
                 </div>
-                <a href="#" class="example-link" data-i18n="ex_details">查看详情 →</a>
+                <a href="#" class="example-link">查看详情 →</a>
             </div>
 
             <!-- 高级案例 -->
             <div class="example-card">
                 <div class="example-header">
-                    <span class="example-difficulty" style="background: #ef4444;" data-i18n="ex_diff_hard">高级</span>
-                    <span class="example-time" data-i18n="ex_time_60">1 小时</span>
+                    <span class="example-difficulty" style="background: #ef4444;">高级</span>
+                    <span class="example-time">1 小时</span>
                 </div>
-                <h3 data-i18n="ex_3_title">代码重构与优化</h3>
-                <p data-i18n="ex_3_desc">对遗留代码库进行大规模重构，优化性能，添加类型安全和测试覆盖。</p>
+                <h3>代码重构与优化</h3>
+                <p>对遗留代码库进行大规模重构，优化性能，添加类型安全和测试覆盖。</p>
                 <div class="example-tags">
                     <span class="tag">Refactoring</span>
                     <span class="tag">TypeScript</span>
                     <span class="tag">Testing</span>
                 </div>
-                <a href="refactoring.html" class="example-link" data-i18n="ex_details">查看详情 →</a>
+                <a href="refactoring.html" class="example-link">查看详情 →</a>
             </div>
 
             <div class="example-card">
                 <div class="example-header">
-                    <span class="example-difficulty" style="background: #ef4444;" data-i18n="ex_diff_hard">高级</span>
-                    <span class="example-time" data-i18n="ex_time_120">2 小时</span>
+                    <span class="example-difficulty" style="background: #ef4444;">高级</span>
+                    <span class="example-time">2 小时</span>
                 </div>
-                <h3 data-i18n="ex_4_title">多 Agent 协作开发</h3>
-                <p data-i18n="ex_4_desc">使用多个 Codex Agent 并行处理复杂任务，实现高效的团队协作模式。</p>
+                <h3>多 Agent 协作开发</h3>
+                <p>使用多个 Codex Agent 并行处理复杂任务，实现高效的团队协作模式。</p>
                 <div class="example-tags">
                     <span class="tag">Multi-Agent</span>
                     <span class="tag">Parallel</span>
                 </div>
-                <a href="multi-agent.html" class="example-link" data-i18n="ex_details">查看详情 →</a>
+                <a href="multi-agent.html" class="example-link">查看详情 →</a>
             </div>
+        </div>
+        </div>
+
+        <div class="lang-content" lang="en" hidden>
+        <h1 style="text-align: center; margin-bottom: 3rem;">Real-World Examples</h1>
+
+        <div class="examples-grid">
+            <!-- Beginner Examples -->
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-difficulty">Beginner</span>
+                    <span class="example-time">10 min</span>
+                </div>
+                <h3>Build a React Project</h3>
+                <p>Use Codex to create a complete React app from scratch with routing, state management, and styling.</p>
+                <div class="example-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Vite</span>
+                </div>
+                <a href="react-setup.html" class="example-link">Details →</a>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-difficulty">Beginner</span>
+                    <span class="example-time">15 min</span>
+                </div>
+                <h3>Build a CLI Tool</h3>
+                <p>Develop a command-line tool with argument parsing, config file reading, and log output.</p>
+                <div class="example-tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">CLI</span>
+                </div>
+                <a href="#" class="example-link">Details →</a>
+            </div>
+
+            <!-- Intermediate Examples -->
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-difficulty" style="background: #f59e0b;">Intermediate</span>
+                    <span class="example-time">30 min</span>
+                </div>
+                <h3>API Backend Development</h3>
+                <p>Build a RESTful API with Node.js + Express, including authentication, database operations, and tests.</p>
+                <div class="example-tags">
+                    <span class="tag">Express</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">JWT</span>
+                </div>
+                <a href="api-backend.html" class="example-link">Details →</a>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-difficulty" style="background: #f59e0b;">Intermediate</span>
+                    <span class="example-time">45 min</span>
+                </div>
+                <h3>Database Migration Scripts</h3>
+                <p>Write data migration scripts to handle schema changes, data transformation, and rollback logic.</p>
+                <div class="example-tags">
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Migration</span>
+                </div>
+                <a href="#" class="example-link">Details →</a>
+            </div>
+
+            <!-- Advanced Examples -->
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-difficulty" style="background: #ef4444;">Advanced</span>
+                    <span class="example-time">1 hour</span>
+                </div>
+                <h3>Code Refactoring & Optimization</h3>
+                <p>Large-scale refactoring of a legacy codebase, performance optimization, adding type safety and test coverage.</p>
+                <div class="example-tags">
+                    <span class="tag">Refactoring</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Testing</span>
+                </div>
+                <a href="refactoring.html" class="example-link">Details →</a>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-difficulty" style="background: #ef4444;">Advanced</span>
+                    <span class="example-time">2 hours</span>
+                </div>
+                <h3>Multi-Agent Collaborative Development</h3>
+                <p>Use multiple Codex Agents to handle complex tasks in parallel for efficient team collaboration.</p>
+                <div class="example-tags">
+                    <span class="tag">Multi-Agent</span>
+                    <span class="tag">Parallel</span>
+                </div>
+                <a href="multi-agent.html" class="example-link">Details →</a>
+            </div>
+        </div>
         </div>
     </div>
 

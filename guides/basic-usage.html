@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -82,9 +81,10 @@
         </aside>
 
         <main class="guide-content">
-            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span>Basic Usage</span></nav>
+            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span data-i18n="sidebar_basic">Basic Usage</span></nav>
+            <div class="lang-content" lang="zh">
             <h1>基础用法</h1>
-            
+
             <p>本节介绍 Codex CLI 的基本操作，帮助你快速上手使用 Codex 进行 AI 辅助编程。</p>
 
             <h2>启动 Codex</h2>
@@ -106,7 +106,7 @@
             </ol>
 
             <h2>常用操作模式</h2>
-            
+
             <h3>1. 代码生成</h3>
             <pre><code>> 写一个函数，接收日期字符串，返回该日期是星期几</code></pre>
 
@@ -128,7 +128,7 @@
             </ul>
 
             <h2>上下文管理</h2>
-            
+
             <h3>查看状态</h3>
             <pre><code>/status</code></pre>
 
@@ -148,6 +148,75 @@
                 <li>了解 <a href="agents-md.html">AGENTS.md</a> 定制项目配置</li>
                 <li>查看 <a href="../examples/">实战案例</a> 获取灵感</li>
             </ul>
+            </div>
+
+            <div class="lang-content" lang="en" hidden>
+            <h1>Basic Usage</h1>
+
+            <p>This section introduces the basic operations of Codex CLI, helping you quickly get started with AI-assisted programming using Codex.</p>
+
+            <h2>Launch Codex</h2>
+            <p>Run in your project directory:</p>
+            <pre><code>codex</code></pre>
+            <p>This will launch the interactive TUI (Text User Interface).</p>
+
+            <h2>Your First Task</h2>
+            <p>Once inside Codex, describe what you want to do in natural language:</p>
+            <pre><code>> Create a simple HTTP server that listens on port 3000 and returns "Hello World"</code></pre>
+
+            <h2>Understanding the Response</h2>
+            <p>Codex will:</p>
+            <ol>
+                <li>Analyze your request</li>
+                <li>Propose an execution plan (listing files to create/modify)</li>
+                <li>Wait for your confirmation (press Enter)</li>
+                <li>Execute and display the results</li>
+            </ol>
+
+            <h2>Common Operation Modes</h2>
+
+            <h3>1. Code Generation</h3>
+            <pre><code>> Write a function that takes a date string and returns the day of the week</code></pre>
+
+            <h3>2. Code Explanation</h3>
+            <pre><code>> Explain what this file does @src/utils/helper.ts</code></pre>
+
+            <h3>3. Code Refactoring</h3>
+            <pre><code>> Refactor this callback function to use async/await</code></pre>
+
+            <h3>4. Bug Fixing</h3>
+            <pre><code>> This test is failing, please fix it: @tests/auth.test.ts</code></pre>
+
+            <h2>File References</h2>
+            <p>Use the <code>@</code> symbol to reference files or directories:</p>
+            <ul>
+                <li><code>@filename.ts</code> - Reference a single file</li>
+                <li><code>@src/</code> - Reference an entire directory</li>
+                <li><code>@README.md @package.json</code> - Reference multiple files</li>
+            </ul>
+
+            <h2>Context Management</h2>
+
+            <h3>Check Status</h3>
+            <pre><code>/status</code></pre>
+
+            <h3>Compact Context (Long Sessions)</h3>
+            <pre><code>/compact</code></pre>
+
+            <h3>Start a New Session</h3>
+            <pre><code>/new</code></pre>
+
+            <h2>Exit Codex</h2>
+            <pre><code>/quit</code></pre>
+            <p>Or press <code>Ctrl+C</code></p>
+
+            <h2>Next Steps</h2>
+            <ul>
+                <li>Learn <a href="slash-commands.html">Slash Commands</a> to improve efficiency</li>
+                <li>Explore <a href="agents-md.html">AGENTS.md</a> to customize project configuration</li>
+                <li>Check out <a href="../examples/">Practical Examples</a> for inspiration</li>
+            </ul>
+            </div>
         </main>
     </div>
 

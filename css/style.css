@@ -1280,3 +1280,10 @@ th {
 [data-theme="light"] .nav-links.active {
     background: rgba(248, 250, 252, 0.98);
 }
+
+/* ============================================
+   Language Content Blocks
+   ============================================ */
+.lang-content[hidden] {
+    display: none !important;
+}

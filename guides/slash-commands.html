@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -82,9 +81,10 @@
         </aside>
 
         <main class="guide-content">
-            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span>Slash Commands</span></nav>
+            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span data-i18n="sidebar_slash">Slash Commands</span></nav>
+            <div class="lang-content" lang="zh">
             <h1>Slash 命令完整参考</h1>
-            
+
             <p>
                 Slash 命令是 Codex CLI 中快速控制会话的方式。在交互式 TUI 中输入 <code>/</code> 即可打开命令列表。
                 本页面列出了所有 24+ 个内置命令及其使用场景。
@@ -370,6 +370,297 @@ prompt = "审查此代码的安全漏洞，重点关注输入验证和认证"</c
             <pre><code>/test
 /docs
 /security</code></pre>
+            </div>
+
+            <div class="lang-content" lang="en" hidden>
+            <h1>Slash Commands Complete Reference</h1>
+
+            <p>
+                Slash commands are the way to quickly control sessions in Codex CLI. Type <code>/</code> in the interactive TUI to open the command list.
+                This page lists all 24+ built-in commands and their use cases.
+            </p>
+
+            <h2>Common Workflow</h2>
+            <pre><code>/status          # Check current configuration
+/model          # Switch model
+/permissions    # Set permissions
+/mention <file>  # Reference key files
+/plan           # Create execution plan
+/review         # Code review
+/diff           # View changes
+/compact        # Compress context</code></pre>
+
+            <h2>Session Control Commands</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/new</code></td>
+                            <td>Start new session</td>
+                            <td>Clear context while staying in the same CLI process</td>
+                        </tr>
+                        <tr>
+                            <td><code>/resume</code></td>
+                            <td>Resume previous session</td>
+                            <td>Open a picker showing recent session list</td>
+                        </tr>
+                        <tr>
+                            <td><code>/fork</code></td>
+                            <td>Clone current session</td>
+                            <td>Copy conversation to a new thread, try alternatives without losing progress</td>
+                        </tr>
+                        <tr>
+                            <td><code>/quit</code> / <code>/exit</code></td>
+                            <td>Exit CLI</td>
+                            <td>Completely exit Codex CLI</td>
+                        </tr>
+                        <tr>
+                            <td><code>/compact</code></td>
+                            <td>Compress context</td>
+                            <td>Summarize conversation to free up token space, avoid hitting context limits</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Model and Style Commands</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/model</code></td>
+                            <td>Switch model and reasoning level</td>
+                            <td>Interactive selection, can switch mid-session</td>
+                        </tr>
+                        <tr>
+                            <td><code>/personality</code></td>
+                            <td>Change communication style</td>
+                            <td>Options: friendly / pragmatic / none</td>
+                        </tr>
+                        <tr>
+                            <td><code>/plan</code></td>
+                            <td>Enter planning mode</td>
+                            <td>Codex drafts a plan before execution, suitable for complex tasks</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Permission and Status Commands</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/permissions</code></td>
+                            <td>Adjust authorization mode</td>
+                            <td>Switch between Auto / Read Only / Full Access</td>
+                        </tr>
+                        <tr>
+                            <td><code>/status</code></td>
+                            <td>View session info</td>
+                            <td>Display model, token usage, and account details</td>
+                        </tr>
+                        <tr>
+                            <td><code>/statusline</code></td>
+                            <td>Customize status bar</td>
+                            <td>Interactively adjust the bottom status bar display</td>
+                        </tr>
+                        <tr>
+                            <td><code>/debug-config</code></td>
+                            <td>Debug configuration</td>
+                            <td>Print the full config loading chain and policy diagnostics</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Code and Review Commands</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/review</code></td>
+                            <td>Code review</td>
+                            <td>Review changes in working directory, or compare against base branch for PR-style review</td>
+                        </tr>
+                        <tr>
+                            <td><code>/diff</code></td>
+                            <td>View Git diff</td>
+                            <td>Show Git diff, including untracked files</td>
+                        </tr>
+                        <tr>
+                            <td><code>/undo</code></td>
+                            <td>Undo recent action</td>
+                            <td>Roll back Codex's most recent edit or command execution</td>
+                        </tr>
+                        <tr>
+                            <td><code>/mention</code></td>
+                            <td>Reference files</td>
+                            <td>Attach specific files or folders to the conversation as context</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Tools and Integration Commands</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/mcp</code></td>
+                            <td>List MCP tools</td>
+                            <td>View configured Model Context Protocol servers and tools</td>
+                        </tr>
+                        <tr>
+                            <td><code>/apps</code></td>
+                            <td>Browse apps</td>
+                            <td>Browse ChatGPT apps (connectors) and insert into prompts</td>
+                        </tr>
+                        <tr>
+                            <td><code>/agent</code></td>
+                            <td>Switch Agent thread</td>
+                            <td>Switch between multiple Agents running in parallel</td>
+                        </tr>
+                        <tr>
+                            <td><code>/skills</code></td>
+                            <td>List skills</td>
+                            <td>View available skills or invoke a specific skill</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Utility Commands</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/init</code></td>
+                            <td>Initialize AGENTS.md</td>
+                            <td>Generate an AGENTS.md scaffold file in the current directory</td>
+                        </tr>
+                        <tr>
+                            <td><code>/clear</code></td>
+                            <td>Clear screen</td>
+                            <td>Clear the terminal and start a new chat</td>
+                        </tr>
+                        <tr>
+                            <td><code>/copy</code></td>
+                            <td>Copy output</td>
+                            <td>Copy Codex's latest full output or plan text</td>
+                        </tr>
+                        <tr>
+                            <td><code>/feedback</code></td>
+                            <td>Send feedback</td>
+                            <td>Send logs or diagnostic information to Codex maintainers</td>
+                        </tr>
+                        <tr>
+                            <td><code>/logout</code></td>
+                            <td>Log out</td>
+                            <td>Clear local credentials, useful on shared machines</td>
+                        </tr>
+                        <tr>
+                            <td><code>/ps</code></td>
+                            <td>View background terminals</td>
+                            <td>View experimental background terminals and their recent output</td>
+                        </tr>
+                        <tr>
+                            <td><code>/experimental</code></td>
+                            <td>Toggle experimental features</td>
+                            <td>Enable experimental features such as sub-Agents</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Usage Tips</h2>
+
+            <h3>1. Use /fork for Comparing Approaches</h3>
+            <p>
+                The <code>/fork</code> command is very useful. When you're implementing a feature and want to try a different approach,
+                use fork to preserve your current progress while trying an alternative in a new thread.
+            </p>
+
+            <h3>2. Use /plan Before Complex Tasks</h3>
+            <p>
+                For complex tasks like "refactor the entire authentication module", first use <code>/plan</code> to let Codex outline the steps.
+                Review and approve the plan before executing -- this is safer and avoids wasting effort on the wrong approach.
+            </p>
+
+            <h3>3. Use /compact Regularly</h3>
+            <p>
+                Don't wait for context limit errors before using <code>/compact</code>. Compress regularly during long sessions
+                to maintain conversation clarity while preserving key information.
+            </p>
+
+            <h3>4. Use /debug-config to Troubleshoot</h3>
+            <p>
+                When configuration settings don't seem to take effect, <code>/debug-config</code> can show which files Codex loaded
+                and which values override others, which is very helpful for troubleshooting.
+            </p>
+
+            <h2>Custom Commands</h2>
+            <p>You can define custom Slash commands in <code>~/.codex/config.toml</code>:</p>
+
+            <pre><code>[[custom_commands]]
+name = "test"
+prompt = "Run the test suite and summarize failed tests"
+
+[[custom_commands]]
+name = "docs"
+prompt = "Update the documentation for the currently edited function"
+
+[[custom_commands]]
+name = "security"
+prompt = "Review this code for security vulnerabilities, focusing on input validation and authentication"</code></pre>
+
+            <p>Once added, you can use them directly in Codex:</p>
+            <pre><code>/test
+/docs
+/security</code></pre>
+            </div>
 
         </main>
     </div>

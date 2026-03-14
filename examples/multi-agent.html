@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -67,13 +66,14 @@
     </div>
 
     <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
-        <a href="index.html" style="color: var(--color-primary);" data-i18n="ex_back">← 返回案例列表</a>
+        <div class="lang-content" lang="zh">
+        <a href="index.html" style="color: var(--color-primary);">← 返回案例列表</a>
 
-        <h1 style="margin: 1rem 0;" data-i18n="ex_4_title">多 Agent 协作开发</h1>
+        <h1 style="margin: 1rem 0;">多 Agent 协作开发</h1>
 
         <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-            <span class="example-difficulty" style="background: #ef4444;" data-i18n="ex_diff_hard">高级</span>
-            <span class="example-time" data-i18n="ex_time_120">2 小时</span>
+            <span class="example-difficulty" style="background: #ef4444;">高级</span>
+            <span class="example-time">2 小时</span>
         </div>
 
         <h2>场景</h2>
@@ -163,11 +163,116 @@
         <h2>最佳实践</h2>
 
         <ul>
-            <li>✅ 主 Agent 先定义接口和数据结构</li>
-            <li>✅ 子 Agent 并行工作时避免冲突文件</li>
-            <li>✅ 定期同步进度</li>
-            <li>✅ 最后统一进行代码审查</li>
+            <li>主 Agent 先定义接口和数据结构</li>
+            <li>子 Agent 并行工作时避免冲突文件</li>
+            <li>定期同步进度</li>
+            <li>最后统一进行代码审查</li>
         </ul>
+        </div>
+
+        <div class="lang-content" lang="en" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Back to Examples</a>
+
+        <h1 style="margin: 1rem 0;">Multi-Agent Collaborative Development</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">Advanced</span>
+            <span class="example-time">2 hours</span>
+        </div>
+
+        <h2>Scenario</h2>
+        <p>Build a complete SaaS application including frontend, backend, documentation, and tests. Use multiple Agents to handle different modules in parallel.</p>
+
+        <h2>Enable Experimental Features</h2>
+
+        <pre><code>/experimental</code></pre>
+
+        <h2>Task Breakdown</h2>
+
+        <h3>Main Agent - Core Functionality</h3>
+        <pre><code>> Create the project scaffolding, including:
+> 1. Project directory structure
+> 2. Shared type definitions
+> 3. Development environment configuration
+> 4. CI/CD configuration files</code></pre>
+
+        <h3>Sub Agent 1 - Backend API</h3>
+        <pre><code># In a new thread
+> Develop user authentication API (register, login, JWT)
+> Use Node.js + Express + TypeScript
+> Include complete unit tests</code></pre>
+
+        <h3>Sub Agent 2 - Frontend UI</h3>
+        <pre><code># In a new thread
+> Create a React frontend application
+> Implement login/registration pages
+> Style the UI with Tailwind CSS</code></pre>
+
+        <h3>Sub Agent 3 - Documentation</h3>
+        <pre><code># In a new thread
+> Write API documentation (OpenAPI/Swagger)
+> Create README and deployment guide</code></pre>
+
+        <h2>Switching and Managing Agents</h2>
+
+        <pre><code># View all threads
+/agent
+
+# Switch to backend thread
+/agent 1
+
+# Check progress
+> How's the progress? Any blockers?
+
+# Switch to frontend thread
+/agent 2
+
+# Pre-merge review
+/review</code></pre>
+
+        <h2>Collaboration Model</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>Responsibility</th>
+                    <th>Output</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Main Agent</td>
+                    <td>Architecture, Coordination</td>
+                    <td>Project scaffold, Type definitions</td>
+                </tr>
+                <tr>
+                    <td>Backend Agent</td>
+                    <td>API Development</td>
+                    <td>Routes, Controllers, Services</td>
+                </tr>
+                <tr>
+                    <td>Frontend Agent</td>
+                    <td>UI Development</td>
+                    <td>Components, Pages, Hooks</td>
+                </tr>
+                <tr>
+                    <td>Docs Agent</td>
+                    <td>Documentation</td>
+                    <td>README, API docs, Guides</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Best Practices</h2>
+
+        <ul>
+            <li>Have the main Agent define interfaces and data structures first</li>
+            <li>Avoid file conflicts when sub Agents work in parallel</li>
+            <li>Sync progress regularly</li>
+            <li>Conduct a unified code review at the end</li>
+        </ul>
+        </div>
 
     </div>
 

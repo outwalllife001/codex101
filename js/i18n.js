@@ -657,12 +657,42 @@ function applyTranslations() {
         langSelect.value = currentLang;
     }
 
+    // Toggle lang-content blocks (for guide/example pages)
+    updateLangContent();
+
     // Store preference
     localStorage.setItem('codex-lang', currentLang);
 
     // Update HTML lang attribute
     const langMap = { zh: 'zh-CN', en: 'en', ja: 'ja', es: 'es' };
     document.documentElement.lang = langMap[currentLang] || 'en';
+}
+
+// Show/hide language-specific content blocks
+function updateLangContent() {
+    var langBlocks = document.querySelectorAll('.lang-content');
+    if (langBlocks.length === 0) return;
+
+    // Check which languages are available on this page
+    var available = {};
+    langBlocks.forEach(function(block) { available[block.lang] = true; });
+
+    // Fallback chain: currentLang -> en -> zh -> first available
+    var showLang = available[currentLang] ? currentLang
+        : available['en'] ? 'en'
+        : available['zh'] ? 'zh'
+        : langBlocks[0].lang;
+
+    langBlocks.forEach(function(block) {
+        block.hidden = (block.lang !== showLang);
+    });
+
+    // Re-highlight code blocks in the now-visible content
+    if (typeof hljs !== 'undefined') {
+        document.querySelectorAll('.lang-content:not([hidden]) pre code').forEach(function(block) {
+            hljs.highlightElement(block);
+        });
+    }
 }
 
 // Switch to specific language

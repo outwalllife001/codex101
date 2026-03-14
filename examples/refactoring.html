@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -67,13 +66,14 @@
     </div>
 
     <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
-        <a href="index.html" style="color: var(--color-primary);" data-i18n="ex_back">← 返回案例列表</a>
+        <div class="lang-content" lang="zh">
+        <a href="index.html" style="color: var(--color-primary);">← 返回案例列表</a>
 
-        <h1 style="margin: 1rem 0;" data-i18n="ex_3_title">代码重构与优化</h1>
+        <h1 style="margin: 1rem 0;">代码重构与优化</h1>
 
         <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-            <span class="example-difficulty" style="background: #ef4444;" data-i18n="ex_diff_hard">高级</span>
-            <span class="example-time" data-i18n="ex_time_60">1 小时</span>
+            <span class="example-difficulty" style="background: #ef4444;">高级</span>
+            <span class="example-time">1 小时</span>
         </div>
 
         <h2>场景</h2>
@@ -129,11 +129,82 @@
         <h2>关键技巧</h2>
 
         <ul>
-            <li>✅ 使用 <code>/plan</code> 制定详细计划</li>
-            <li>✅ 分批迁移，一次一个模块</li>
-            <li>✅ 频繁使用 <code>/diff</code> 查看变更</li>
-            <li>✅ 完成后进行全面 <code>/review</code></li>
+            <li>使用 <code>/plan</code> 制定详细计划</li>
+            <li>分批迁移，一次一个模块</li>
+            <li>频繁使用 <code>/diff</code> 查看变更</li>
+            <li>完成后进行全面 <code>/review</code></li>
         </ul>
+        </div>
+
+        <div class="lang-content" lang="en" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Back to Examples</a>
+
+        <h1 style="margin: 1rem 0;">Code Refactoring & Optimization</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">Advanced</span>
+            <span class="example-time">1 hour</span>
+        </div>
+
+        <h2>Scenario</h2>
+        <p>You've inherited a legacy project and need to migrate it from JavaScript to TypeScript, optimize performance, and add test coverage.</p>
+
+        <h2>Step 1: Create a Checkpoint</h2>
+
+        <pre><code>git add -A && git commit -m "checkpoint: before refactoring"</code></pre>
+
+        <h2>Step 2: Analyze and Plan</h2>
+
+        <pre><code>/plan
+
+Analyze all JavaScript files under @src/ directory, create a detailed TypeScript migration plan including:
+1. File migration order (by dependency)
+2. Type definitions to add
+3. Potential type safety issues
+4. Code patterns that need refactoring</code></pre>
+
+        <h2>Step 3: Incremental Migration</h2>
+
+        <h3>Migrate Utility Functions</h3>
+        <pre><code>> Convert utility functions under @src/utils/ to TypeScript
+> Add complete type definitions
+> Ensure all functions have return type annotations</code></pre>
+
+        <h3>Migrate Data Layer</h3>
+        <pre><code>> Convert @src/models/ and @src/services/ to TypeScript
+> Define all data interfaces
+> Use strict type checking</code></pre>
+
+        <h3>Migrate UI Components</h3>
+        <pre><code>> Convert @src/components/ to TypeScript React components
+> Define interfaces for Props
+> Fix any type errors</code></pre>
+
+        <h2>Step 4: Performance Optimization</h2>
+
+        <pre><code>> Analyze performance issues in @src/components/List.tsx
+> Optimize rendering with useMemo and useCallback
+> Implement virtual scrolling for large data lists</code></pre>
+
+        <h2>Step 5: Add Tests</h2>
+
+        <pre><code>> Write unit tests for core business logic
+> Add React component tests (React Testing Library)
+> Ensure test coverage reaches 80% or above</code></pre>
+
+        <h2>Step 6: Code Review</h2>
+
+        <pre><code>/review</code></pre>
+
+        <h2>Key Tips</h2>
+
+        <ul>
+            <li>Use <code>/plan</code> to create a detailed plan</li>
+            <li>Migrate in batches, one module at a time</li>
+            <li>Frequently use <code>/diff</code> to review changes</li>
+            <li>Conduct a thorough <code>/review</code> when done</li>
+        </ul>
+        </div>
 
     </div>
 

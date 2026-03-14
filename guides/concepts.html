@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -82,9 +81,10 @@
         </aside>
 
         <main class="guide-content">
-            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span>Core Concepts</span></nav>
+            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span data-i18n="sidebar_concepts">Core Concepts</span></nav>
+            <div class="lang-content" lang="zh">
             <h1>核心概念</h1>
-            
+
             <p>理解 Codex 的核心概念是高效使用它的关键。本页面介绍 Agent 模式、审批系统、工作流等基础概念。</p>
 
             <h2>什么是 Codex？</h2>
@@ -92,7 +92,7 @@
                 OpenAI Codex 是一个 AI 编程助手，它基于 GPT-5 系列模型，专门用于软件工程任务。
                 Codex 不仅仅是一个代码生成器，它是一个<strong>Agent（智能体）</strong>，能够：
             </p>
-            
+
             <ul>
                 <li>阅读和理解你的代码库</li>
                 <li>创建和编辑文件</li>
@@ -233,6 +233,161 @@
 
             <div class="callout">
                 <strong>提示</strong>: 多 Agent 功能目前处于实验阶段，使用 <code>/experimental</code> 启用。
+            </div>
+            </div>
+
+            <div class="lang-content" lang="en" hidden>
+            <h1>Core Concepts</h1>
+
+            <p>Understanding the core concepts of Codex is key to using it efficiently. This page covers fundamental concepts such as Agent mode, the approval system, and workflows.</p>
+
+            <h2>What is Codex?</h2>
+            <p>
+                OpenAI Codex is an AI programming assistant built on the GPT-5 series of models, designed specifically for software engineering tasks.
+                Codex is not just a code generator -- it is an <strong>Agent</strong> capable of:
+            </p>
+
+            <ul>
+                <li>Reading and understanding your codebase</li>
+                <li>Creating and editing files</li>
+                <li>Running commands and tests</li>
+                <li>Performing code reviews</li>
+                <li>Safely executing code in a sandbox environment</li>
+            </ul>
+
+            <h2>Working Modes</h2>
+
+            <h3>Agent Mode (Default)</h3>
+            <p>
+                In Agent mode, Codex can read files, run commands, and write code. It will ask for your approval before performing operations that require it.
+                This is the most commonly used mode and is suitable for most development tasks.
+            </p>
+
+            <h3>Read Only Mode</h3>
+            <p>
+                Read Only mode keeps Codex in a consultative state. It can browse files but will not make any changes or run commands
+                until you approve a plan. Suitable for exploring codebases or situations requiring caution.
+            </p>
+
+            <h3>Full Access Mode</h3>
+            <p>
+                Full Access mode grants Codex full permissions to work on your machine, including network access, without asking.
+                <strong>Use with caution</strong> -- only when you trust the repository and the task.
+            </p>
+
+            <div class="callout">
+                <strong>Switch Modes</strong>: Use the <code>/permissions</code> command to switch modes during a session.
+            </div>
+
+            <h2>Approval System</h2>
+            <p>Codex has a three-tier approval policy to control what it can do:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Description</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Auto (Recommended)</strong></td>
+                        <td>Codex can read files, edit, and run commands within the working directory. Out-of-scope operations will prompt for approval</td>
+                        <td>Daily development</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Read Only</strong></td>
+                        <td>Can only browse files, will not make changes or run commands</td>
+                        <td>Exploring, learning a codebase</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Full Access</strong></td>
+                        <td>Full permissions, including network access</td>
+                        <td>Trusted repositories only</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Sandbox Mode</h2>
+            <p>Codex uses sandboxing to restrict file system access:</p>
+
+            <ul>
+                <li><strong>read-only</strong>: Can only read the working directory (default)</li>
+                <li><strong>workspace-write</strong>: Can write to the working directory</li>
+                <li><strong>danger-full-access</strong>: No sandbox restrictions (extremely dangerous)</li>
+            </ul>
+
+            <h2>Thread Management</h2>
+            <p>Codex uses threads to organize work:</p>
+
+            <h3>Single Thread Principle</h3>
+            <p><strong>One thread focuses on one task</strong>. If the work is still about the same issue, it's better to stay in the same thread
+            because it retains the reasoning trace. Only fork when the work truly branches.</p>
+
+            <h3>Common Operations</h3>
+            <ul>
+                <li><code>/new</code>: Start a new session</li>
+                <li><code>/fork</code>: Clone the current session (keeps the original session, tries a new approach in a new thread)</li>
+                <li><code>/resume</code>: Resume a previous session</li>
+                <li><code>/compact</code>: Compact the conversation to free up tokens</li>
+            </ul>
+
+            <h2>Context Management</h2>
+            <p>A Codex session is not just a simple chat history -- it is a working thread that accumulates context, decisions, and actions over time.</p>
+
+            <h3>Context Hierarchy</h3>
+            <ol>
+                <li><strong>System Instructions</strong>: The foundational behavior guidelines for Codex</li>
+                <li><strong>AGENTS.md</strong>: Project-level configuration, located in <code>~/.codex/</code> or the project root</li>
+                <li><strong>Session History</strong>: The conversation log of the current thread</li>
+                <li><strong>@Mentioned Files</strong>: Specific file context added using <code>/mention</code></li>
+            </ol>
+
+            <h2>Model Selection</h2>
+            <p>Codex supports multiple models. Use the <code>/model</code> command to switch:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Features</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>gpt-5.4</td>
+                        <td>Latest general-purpose model</td>
+                        <td>Most tasks</td>
+                    </tr>
+                    <tr>
+                        <td>gpt-5.3-codex</td>
+                        <td>Specifically optimized for coding</td>
+                        <td>Complex programming tasks</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Reasoning Effort</h3>
+            <ul>
+                <li><strong>minimal/low</strong>: Quick tasks</li>
+                <li><strong>medium</strong>: Balance between intelligence and speed (recommended)</li>
+                <li><strong>high/xhigh</strong>: Complex debugging and deep reasoning</li>
+            </ul>
+
+            <h2>Multi-Agent Workflows</h2>
+            <p>Codex supports parallel multi-agent workflows for handling complex tasks:</p>
+
+            <ul>
+                <li>The main Agent focuses on the core problem</li>
+                <li>Sub-agents handle peripheral tasks such as exploration, testing, or classification</li>
+                <li>Use <code>/agent</code> to switch between Agent threads</li>
+            </ul>
+
+            <div class="callout">
+                <strong>Tip</strong>: The multi-agent feature is currently experimental. Enable it with <code>/experimental</code>.
+            </div>
             </div>
 
         </main>

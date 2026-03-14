@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -82,9 +81,10 @@
         </aside>
 
         <main class="guide-content">
-            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span>Skills Extension</span></nav>
+            <nav class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb_home">Home</a> <span class="separator">/</span> <a href="../index.html#guides" data-i18n="breadcrumb_guides">Guides</a> <span class="separator">/</span> <span data-i18n="sidebar_skills">Skills Extension</span></nav>
+            <div class="lang-content" lang="zh">
             <h1>Skills 扩展</h1>
-            
+
             <p>Skills 让 Codex 能够执行特定任务的工作流。一个 Skill 打包了指令、资源和可选脚本，使 Codex 能够可靠地完成特定任务。</p>
 
             <h2>什么是 Skill？</h2>
@@ -126,7 +126,7 @@ description: 扫描代码库查找安全漏洞，包括 SQL 注入、XSS、硬�
 - 修复建议</code></pre>
 
             <h2>使用 Skills</h2>
-            
+
             <h3>显式调用</h3>
             <pre><code>$security-audit</code></pre>
             <p>或</p>
@@ -138,7 +138,7 @@ description: 扫描代码库查找安全漏洞，包括 SQL 注入、XSS、硬�
             <pre><code>> 扫描一下代码的安全问题</code></pre>
 
             <h2>安装 Skills</h2>
-            
+
             <h3>使用内置安装器</h3>
             <pre><code>$skill-installer linear</code></pre>
 
@@ -151,7 +151,7 @@ description: 扫描代码库查找安全漏洞，包括 SQL 注入、XSS、硬�
             </ol>
 
             <h2>创建自定义 Skill</h2>
-            
+
             <h3>步骤 1：使用创建器</h3>
             <pre><code>$skill-creator</code></pre>
             <p>创建器会询问：</p>
@@ -229,6 +229,157 @@ enabled = false</code></pre>
                 <li>编写明确的输入输出说明</li>
                 <li>测试触发描述确保匹配正确</li>
             </ul>
+            </div>
+
+            <div class="lang-content" lang="en" hidden>
+            <h1>Skills Extension</h1>
+
+            <p>Skills enable Codex to execute task-specific workflows. A Skill packages instructions, resources, and optional scripts, allowing Codex to reliably complete specific tasks.</p>
+
+            <h2>What Is a Skill?</h2>
+            <p>A Skill is Codex's extension mechanism that allows you to:</p>
+            <ul>
+                <li>Encapsulate instructions for repetitive tasks</li>
+                <li>Define standardized workflows</li>
+                <li>Share best practices with your team</li>
+                <li>Connect external tools and services</li>
+            </ul>
+
+            <h2>Skill Structure</h2>
+            <pre><code>my-skill/
+├── SKILL.md          # Required: instructions and metadata
+├── scripts/          # Optional: executable code
+├── references/       # Optional: documentation
+├── assets/           # Optional: templates, resources
+└── agents/
+    └── openai.yaml   # Optional: UI configuration</code></pre>
+
+            <h2>SKILL.md Format</h2>
+            <pre><code>---
+name: security-audit
+description: Scan the codebase for security vulnerabilities including SQL injection, XSS, hardcoded secrets
+---
+
+# Security Audit
+
+Please scan the current codebase for the following vulnerabilities:
+
+1. SQL injection risks
+2. Hardcoded secrets or tokens
+3. XSS vulnerabilities
+4. Insecure dependencies
+
+Generate a Markdown report containing:
+- Issue severity (Critical/High/Medium/Low)
+- File location and code snippets
+- Fix recommendations</code></pre>
+
+            <h2>Using Skills</h2>
+
+            <h3>Explicit Invocation</h3>
+            <pre><code>$security-audit</code></pre>
+            <p>Or</p>
+            <pre><code>/skills
+# Then select from the list</code></pre>
+
+            <h3>Implicit Invocation</h3>
+            <p>Codex can automatically select a Skill based on the task description:</p>
+            <pre><code>> Scan the code for security issues</code></pre>
+
+            <h2>Installing Skills</h2>
+
+            <h3>Using the Built-in Installer</h3>
+            <pre><code>$skill-installer linear</code></pre>
+
+            <h3>Skill Discovery Locations</h3>
+            <p>Codex scans for Skills in the following locations:</p>
+            <ol>
+                <li>The repository's <code>.agents/skills/</code> directory</li>
+                <li>User directory <code>~/.codex/skills/</code></li>
+                <li>System directory (admin configuration)</li>
+            </ol>
+
+            <h2>Creating Custom Skills</h2>
+
+            <h3>Step 1: Use the Creator</h3>
+            <pre><code>$skill-creator</code></pre>
+            <p>The creator will ask:</p>
+            <ul>
+                <li>What the Skill does</li>
+                <li>When it should be triggered</li>
+                <li>Instructions only or includes scripts</li>
+            </ul>
+
+            <h3>Step 2: Manual Creation</h3>
+            <pre><code>mkdir -p ~/.codex/skills/my-skill
+cd ~/.codex/skills/my-skill
+cat > SKILL.md << 'EOF'
+---
+name: my-skill
+description: Describe when the Skill should be triggered
+---
+
+# My Skill
+
+Instruction content...
+EOF</code></pre>
+
+            <h2>Common Built-in Skills</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>$skill-creator</code></td>
+                        <td>Create new Skills</td>
+                    </tr>
+                    <tr>
+                        <td><code>$skill-installer</code></td>
+                        <td>Install community Skills</td>
+                    </tr>
+                    <tr>
+                        <td><code>$linear</code></td>
+                        <td>Project management integration</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Configuring UI Metadata</h2>
+            <p>Configure in <code>agents/openai.yaml</code>:</p>
+            <pre><code>interface:
+  display_name: "Security Audit"
+  short_description: "Scan code for security vulnerabilities"
+  icon_small: "./assets/shield.svg"
+  brand_color: "#ef4444"
+  default_prompt: "Please scan the codebase for security issues"
+
+policy:
+  allow_implicit_invocation: true
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "securityScanner"</code></pre>
+
+            <h2>Disabling a Skill</h2>
+            <p>In <code>~/.codex/config.toml</code>:</p>
+            <pre><code>[[skills.config]]
+path = "/path/to/skill/SKILL.md"
+enabled = false</code></pre>
+
+            <h2>Best Practices</h2>
+            <ul>
+                <li>Each Skill should focus on a single task</li>
+                <li>Prefer instructions over scripts</li>
+                <li>Write clear input/output specifications</li>
+                <li>Test trigger descriptions to ensure correct matching</li>
+            </ul>
+            </div>
+
         </main>
     </div>
 

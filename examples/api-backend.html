@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
@@ -67,13 +66,14 @@
     </div>
 
     <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
-        <a href="index.html" style="color: var(--color-primary);" data-i18n="ex_back">← 返回案例列表</a>
+        <div class="lang-content" lang="zh">
+        <a href="index.html" style="color: var(--color-primary);">← 返回案例列表</a>
 
-        <h1 style="margin: 1rem 0;" data-i18n="ex_2_title">API 后端开发</h1>
+        <h1 style="margin: 1rem 0;">API 后端开发</h1>
 
         <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-            <span class="example-difficulty" style="background: #f59e0b;" data-i18n="ex_diff_medium">中级</span>
-            <span class="example-time" data-i18n="ex_time_30">30 分钟</span>
+            <span class="example-difficulty" style="background: #f59e0b;">中级</span>
+            <span class="example-time">30 分钟</span>
         </div>
 
         <h2>目标</h2>
@@ -140,7 +140,7 @@ export const authMiddleware = (
   if (!token) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
-  
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
     req.user = decoded;
@@ -158,11 +158,111 @@ npm run dev</code></pre>
         <h2>学习收获</h2>
 
         <ul>
-            <li>✅ 结构化提示获得完整实现</li>
-            <li>✅ 自动生成类型安全的代码</li>
-            <li>✅ 遵循分层架构模式</li>
-            <li>✅ 包含测试最佳实践</li>
+            <li>结构化提示获得完整实现</li>
+            <li>自动生成类型安全的代码</li>
+            <li>遵循分层架构模式</li>
+            <li>包含测试最佳实践</li>
         </ul>
+        </div>
+
+        <div class="lang-content" lang="en" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Back to Examples</a>
+
+        <h1 style="margin: 1rem 0;">API Backend Development</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #f59e0b;">Intermediate</span>
+            <span class="example-time">30 min</span>
+        </div>
+
+        <h2>Goal</h2>
+        <p>Build a complete RESTful API with user authentication, CRUD operations, data validation, and testing.</p>
+
+        <h2>Prompt</h2>
+
+        <pre><code>Create a Node.js + Express + TypeScript API with the following requirements:
+
+1. User Authentication:
+   - POST /auth/register - User registration
+   - POST /auth/login - User login
+   - POST /auth/refresh - Token refresh
+   - Use JWT for authentication
+
+2. User Management API:
+   - GET /users - Get user list (requires auth, supports pagination)
+   - GET /users/:id - Get a single user
+   - PUT /users/:id - Update user info
+   - DELETE /users/:id - Delete user
+
+3. Technical Requirements:
+   - Use Prisma ORM with SQLite
+   - Use Zod for request validation
+   - Unified error handling
+   - Request logging
+   - Complete unit tests (Jest)
+
+4. Project Structure:
+   - src/routes/ - Route definitions
+   - src/controllers/ - Controller logic
+   - src/middleware/ - Middleware
+   - src/services/ - Business logic
+   - src/utils/ - Utility functions</code></pre>
+
+        <h2>Codex Execution Flow</h2>
+
+        <ol>
+            <li>Initialize project structure</li>
+            <li>Configure TypeScript and development tools</li>
+            <li>Set up Prisma and database models</li>
+            <li>Implement authentication middleware</li>
+            <li>Create routes and controllers</li>
+            <li>Write test cases</li>
+        </ol>
+
+        <h2>Key Code Snippet</h2>
+
+        <h3>Authentication Middleware</h3>
+        <pre><code>// src/middleware/auth.ts
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
+export interface AuthRequest extends Request {
+  user?: { id: string; email: string };
+}
+
+export const authMiddleware = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+};</code></pre>
+
+        <h2>Verification</h2>
+
+        <pre><code>npm run test
+npm run dev</code></pre>
+
+        <h2>Key Takeaways</h2>
+
+        <ul>
+            <li>Structured prompts yield complete implementations</li>
+            <li>Automatically generates type-safe code</li>
+            <li>Follows layered architecture patterns</li>
+            <li>Includes testing best practices</li>
+        </ul>
+        </div>
 
     </div>
 
