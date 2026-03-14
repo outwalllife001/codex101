@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础用法 - Codex 学院</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="../index.html#examples">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="guide-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">学习导航</div>
+            <ul class="sidebar-nav">
+                <li><a href="installation.html">安装与配置</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="basic-usage.html" class="active">基础用法</a></li>
+                <li><a href="slash-commands.html">Slash 命令</a></li>
+                <li><a href="agents-md.html">AGENTS.md</a></li>
+                <li><a href="skills.html">Skills 扩展</a></li>
+                <li><a href="mcp.html">MCP 集成</a></li>
+                <li><a href="advanced.html">高级技巧</a></li>
+            </ul>
+        </aside>
+
+        <main class="guide-content">
+            <h1>基础用法</h1>
+            
+            <p>本节介绍 Codex CLI 的基本操作，帮助你快速上手使用 Codex 进行 AI 辅助编程。</p>
+
+            <h2>启动 Codex</h2>
+            <p>在项目目录中运行：</p>
+            <pre><code>codex</code></pre>
+            <p>这将启动交互式 TUI（文本用户界面）。</p>
+
+            <h2>第一个任务</h2>
+            <p>进入 Codex 后，直接用自然语言描述你想做的事情：</p>
+            <pre><code>> 创建一个简单的 HTTP 服务器，监听 3000 端口，返回 "Hello World"</code></pre>
+
+            <h2>理解响应</h2>
+            <p>Codex 会：</p>
+            <ol>
+                <li>分析你的请求</li>
+                <li>提出执行计划（列出要创建/修改的文件）</li>
+                <li>等待你确认（按 Enter）</li>
+                <li>执行并显示结果</li>
+            </ol>
+
+            <h2>常用操作模式</h2>
+            
+            <h3>1. 代码生成</h3>
+            <pre><code>> 写一个函数，接收日期字符串，返回该日期是星期几</code></pre>
+
+            <h3>2. 代码解释</h3>
+            <pre><code>> 解释这个文件的作用 @src/utils/helper.ts</code></pre>
+
+            <h3>3. 代码重构</h3>
+            <pre><code>> 将这个回调函数重构为 async/await 形式</code></pre>
+
+            <h3>4. 错误修复</h3>
+            <pre><code>> 这个测试失败了，请修复：@tests/auth.test.ts</code></pre>
+
+            <h2>文件引用</h2>
+            <p>使用 <code>@</code> 符号引用文件或目录：</p>
+            <ul>
+                <li><code>@filename.ts</code> - 引用单个文件</li>
+                <li><code>@src/</code> - 引用整个目录</li>
+                <li><code>@README.md @package.json</code> - 引用多个文件</li>
+            </ul>
+
+            <h2>上下文管理</h2>
+            
+            <h3>查看状态</h3>
+            <pre><code>/status</code></pre>
+
+            <h3>压缩上下文（长会话）</h3>
+            <pre><code>/compact</code></pre>
+
+            <h3>开始新会话</h3>
+            <pre><code>/new</code></pre>
+
+            <h2>退出 Codex</h2>
+            <pre><code>/quit</code></pre>
+            <p>或按 <code>Ctrl+C</code></p>
+
+            <h2>下一步</h2>
+            <ul>
+                <li>学习 <a href="slash-commands.html">Slash 命令</a> 提高效率</li>
+                <li>了解 <a href="agents-md.html">AGENTS.md</a> 定制项目配置</li>
+                <li>查看 <a href="../examples/">实战案例</a> 获取灵感</li>
+            </ul>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

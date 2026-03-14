@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGENTS.md - Codex 学院</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="../index.html#examples">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="guide-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">学习导航</div>
+            <ul class="sidebar-nav">
+                <li><a href="installation.html">安装与配置</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="basic-usage.html">基础用法</a></li>
+                <li><a href="slash-commands.html">Slash 命令</a></li>
+                <li><a href="agents-md.html" class="active">AGENTS.md</a></li>
+                <li><a href="skills.html">Skills 扩展</a></li>
+                <li><a href="mcp.html">MCP 集成</a></li>
+                <li><a href="advanced.html">高级技巧</a></li>
+            </ul>
+        </aside>
+
+        <main class="guide-content">
+            <h1>AGENTS.md 完全指南</h1>
+            
+            <p>
+                <code>AGENTS.md</code> 是 Codex 的"README for Agents"，它让 Codex 了解如何在特定仓库中工作。
+                这是提高 Codex 效率和一致性的最重要配置。
+            </p>
+
+            <h2>为什么需要 AGENTS.md？</h2>
+            <p>当提示模式有效后，下一步是停止手动重复它。这就是 AGENTS.md 的作用。</p>
+            
+            <p>一个好的 AGENTS.md 帮助 Codex：</p>
+            <ul>
+                <li>理解仓库结构和重要目录</li>
+                <li>知道如何运行、构建和测试项目</li>
+                <li>遵循团队的工程规范和 PR 期望</li>
+                <li>了解约束和禁止事项</li>
+                <li>明白"完成"意味着什么以及如何验证工作</li>
+            </ul>
+
+            <h2>层级结构</h2>
+            <p>Codex 会在以下位置查找 AGENTS.md（按优先级排序）：</p>
+
+            <ol>
+                <li><strong>当前目录</strong>: 最接近工作文件的 AGENTS.md</li>
+                <li><strong>项目根目录</strong>: 仓库级别的共享标准</li>
+                <li><strong>~/.codex/</strong>: 个人默认配置</li>
+            </ol>
+
+            <div class="callout">
+                <strong>优先级规则</strong>: 更具体的文件（离当前目录更近）会覆盖更通用的配置。
+            </div>
+
+            <h2>快速开始</h2>
+            <p>使用 <code>/init</code> 命令快速生成 AGENTS.md 脚手架：</p>
+            <pre><code>codex> /init</code></pre>
+
+            <h2>完整模板</h2>
+            <pre><code># AGENTS.md - [项目名称]
+
+## 项目概述
+
+[简要描述项目的目的和技术栈]
+
+## 目录结构
+
+```
+.
+├── src/           # 源代码
+├── tests/         # 测试文件
+├── docs/          # 文档
+├── config/        # 配置文件
+└── scripts/       # 工具脚本
+```
+
+## 技术栈
+
+- **框架**: [React/Vue/Express 等]
+- **语言**: [TypeScript/Python/Go 等]
+- **构建工具**: [Vite/Webpack/esbuild 等]
+- **测试框架**: [Jest/Vitest/Pytest 等]
+
+## 常用命令
+
+### 开发
+```bash
+# 启动开发服务器
+npm run dev
+
+# 构建项目
+npm run build
+
+# 类型检查
+npm run typecheck
+```
+
+### 测试
+```bash
+# 运行所有测试
+npm test
+
+# 运行特定测试文件
+npm test -- path/to/test
+
+# 带覆盖率报告
+npm run test:coverage
+```
+
+### 代码质量
+```bash
+# 运行 linter
+npm run lint
+
+# 自动修复问题
+npm run lint:fix
+
+# 格式化代码
+npm run format
+```
+
+## 代码规范
+
+### 命名约定
+- 组件使用 PascalCase: <code>MyComponent.tsx</code>
+- 工具函数使用 camelCase: <code>formatDate.ts</code>
+- 常量使用 UPPER_SNAKE_CASE
+
+### 文件组织
+- 每个组件一个文件夹，包含 <code>index.tsx</code> 和 <code>styles.css</code>
+- 共享类型放在 <code>src/types/</code>
+- 工具函数放在 <code>src/utils/</code>
+
+### 导入顺序
+1. 外部依赖
+2. 内部模块
+3. 相对路径导入
+4. 类型导入
+
+## 约束与禁止事项
+
+- ❌ 不要使用 <code>any</code> 类型
+- ❌ 不要提交 console.log
+- ❌ 不要在组件中直接调用 API
+- ✅ 所有函数必须有返回类型注解
+- ✅ 所有组件必须有 PropTypes 或接口定义
+
+## PR 期望
+
+- 提交前运行完整的测试套件
+- 确保代码通过 lint 检查
+- 添加相关的单元测试
+- 更新相关文档
+
+## 完成定义
+
+任务完成的标准：
+1. 代码实现完成
+2. 测试通过（新增功能要有测试覆盖）
+3. 类型检查通过
+4. Lint 检查通过
+5. 相关文档已更新
+
+## 调试指南
+
+### 常见问题
+- 启动失败：检查 .env 文件是否配置正确
+- 测试失败：确认数据库连接是否正常
+- 构建失败：检查是否有未解决的类型错误
+
+### 日志位置
+- 应用日志: <code>logs/app.log</code>
+- 错误日志: <code>logs/error.log</code>
+</code></pre>
+
+            <h2>最佳实践</h2>
+
+            <h3>1. 保持简洁</h3>
+            <p>简短准确的 AGENTS.md 比充满模糊规则的长文件更有用。从基础开始，只在注意到重复错误时才添加新规则。</p>
+
+            <h3>2. 基于实际摩擦</h3>
+            <p>当 Codex 犯同样的错误两次时，询问它进行回顾并更新 AGENTS.md。指导应始终基于实际的摩擦。</p>
+
+            <h3>3. 引用其他文件</h3>
+            <p>如果 AGENTS.md 变得太大，保持主文件简洁，并引用任务特定的 markdown 文件：</p>
+            <pre><code>## 代码审查
+参见: <a href="./docs/code_review.md">./docs/code_review.md</a>
+
+## 架构决策
+参见: <a href="./docs/architecture.md">./docs/architecture.md</a>
+</code></pre>
+
+            <h3>4. 与团队共享</h3>
+            <p>将 AGENTS.md 提交到版本控制，确保所有开发者和 Agent 共享相同的流程。</p>
+
+            <h2>针对技术栈的示例</h2>
+
+            <h3>React + TypeScript</h3>
+            <pre><code>## 技术栈
+- React 18 with hooks
+- TypeScript (严格模式)
+- Vite for build
+- Tailwind CSS for styling
+- React Query for data fetching
+- Zustand for state management
+
+## 组件规范
+- 使用函数组件和 hooks
+- Props 接口必须以 'Props' 结尾
+- 使用 named exports
+- 样式使用 Tailwind classes
+
+## 数据获取
+- 所有 API 调用必须通过 React Query
+- 使用自定义 hooks 封装数据逻辑
+- 错误处理使用 ErrorBoundary
+</code></pre>
+
+            <h3>Python + FastAPI</h3>
+            <pre><code>## 技术栈
+- Python 3.11+
+- FastAPI
+- Pydantic for validation
+- SQLAlchemy for ORM
+- pytest for testing
+
+## 项目结构
+- 路由放在 routers/ 目录
+- 模型放在 models/ 目录
+-  schemas 放在 schemas/ 目录
+- 测试放在 tests/ 目录，镜像 src 结构
+
+## 代码规范
+- 使用 type hints  everywhere
+- 使用 Pydantic models 进行请求/响应验证
+- 数据库操作使用依赖注入
+- 异步函数使用 async/await
+</code></pre>
+
+            <h2>故障排查</h2>
+
+            <p>如果 Codex 似乎没有遵循 AGENTS.md：</p>
+
+            <ol>
+                <li>确认文件位置正确（使用 <code>/debug-config</code> 查看加载的配置）</li>
+                <li>检查文件格式（应为有效的 Markdown）</li>
+                <li>确保规则清晰明确</li>
+                <li>尝试将关键规则放在文件前面</li>
+            </ol>
+
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

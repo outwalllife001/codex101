@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">Codex Academy - Complete OpenAI Codex Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .lang-switcher {
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        .lang-switcher:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#quickstart" data-i18n="nav_quickstart">Quick Start</a></li>
+                <li><a href="#concepts" data-i18n="nav_concepts">Concepts</a></li>
+                <li><a href="#guides" data-i18n="nav_guides">Guides</a></li>
+                <li><a href="#examples" data-i18n="nav_examples">Examples</a></li>
+                <li><button class="lang-switcher" data-i18n="lang_switch">English</button></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge" data-i18n="hero_badge">OpenAI Codex Complete Guide</div>
+                <h1 data-i18n="hero_title">Master AI Coding Assistant<br><span class="gradient-text">From Beginner to Pro</span></h1>
+                <p class="hero-description" data-i18n="hero_desc">
+                    Systematically learn OpenAI Codex CLI and IDE extension. Master AI-assisted programming best practices and boost development efficiency by 10x.
+                </p>
+                <div class="hero-actions">
+                    <a href="#quickstart" class="btn btn-primary">
+                        <span data-i18n="btn_start">Start Learning</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="examples/" class="btn btn-secondary" data-i18n="btn_examples">Browse Examples</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label" data-i18n="stat_cases">Real Examples</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label" data-i18n="stat_modules">Modules</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24+</span>
+                        <span class="stat-label" data-i18n="stat_commands">Slash Commands</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title" data-i18n="features_title">Why Codex?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 data-i18n="feat_1_title">Rapid Development</h3>
+                    <p data-i18n="feat_1_desc">Describe requirements in natural language, Codex generates code automatically. From idea to implementation in minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 data-i18n="feat_2_title">Local Privacy</h3>
+                    <p data-i18n="feat_2_desc">CLI version runs entirely locally. Code never uploads to cloud, ensuring enterprise-grade privacy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 data-i18n="feat_3_title">Multi-Agent</h3>
+                    <p data-i18n="feat_3_desc">Supports parallel multi-agent workflows. Break complex tasks into subtasks and process simultaneously.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 data-i18n="feat_4_title">Highly Configurable</h3>
+                    <p data-i18n="feat_4_desc">Customize with AGENTS.md, Skills, and MCP extensions. Build your own AI coding assistant.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="learning-path" id="quickstart">
+        <div class="container">
+            <h2 class="section-title" data-i18n="path_title">Learning Path</h2>
+            <div class="path-container">
+                <div class="path-line"></div>
+                
+                <div class="path-item" data-step="1">
+                    <div class="path-marker">1</div>
+                    <div class="path-content">
+                        <h3 data-i18n="step_1_title">Getting Started</h3>
+                        <p data-i18n="step_1_desc">Install Codex CLI, understand basic interactions, complete your first AI-assisted programming task.</p>
+                        <a href="guides/installation.html" class="path-link" data-i18n="btn_go">Go →</a>
+                    </div>
+                </div>
+                
+                <div class="path-item" data-step="2">
+                    <div class="path-marker">2</div>
+                    <div class="path-content">
+                        <h3 data-i18n="step_2_title">Core Concepts</h3>
+                        <p data-i18n="step_2_desc">Deep dive into Agent mode, Approval system, AGENTS.md configuration, and core mechanisms.</p>
+                        <a href="guides/concepts.html" class="path-link" data-i18n="btn_learn">Learn →</a>
+                    </div>
+                </div>
+                
+                <div class="path-item" data-step="3">
+                    <div class="path-marker">3</div>
+                    <div class="path-content">
+                        <h3 data-i18n="step_3_title">Advanced Skills</h3>
+                        <p data-i18n="step_3_desc">Master Slash commands, Skills extensions, MCP integration, and other advanced features.</p>
+                        <a href="guides/advanced.html" class="path-link" data-i18n="btn_explore">Explore →</a>
+                    </div>
+                </div>
+                
+                <div class="path-item" data-step="4">
+                    <div class="path-marker">4</div>
+                    <div class="path-content">
+                        <h3 data-i18n="step_4_title">Real Projects</h3>
+                        <p data-i18n="step_4_desc">Learn to efficiently use Codex in production through real-world project examples.</p>
+                        <a href="examples/" class="path-link" data-i18n="btn_practice">Practice →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules" id="concepts">
+        <div class="container">
+            <h2 class="section-title" data-i18n="modules_title">Core Modules</h2>
+            <div class="modules-grid">
+                <a href="guides/installation.html" class="module-card">
+                    <span class="module-tag" data-i18n="mod_tag_basic">Basic</span>
+                    <h3 data-i18n="mod_install">Installation</h3>
+                    <p data-i18n="mod_install_desc">Install CLI and IDE extensions, detailed configuration reference</p>
+                    <ul class="module-list">
+                        <li>npm / Homebrew Install</li>
+                        <li>config.toml Setup</li>
+                        <li>Authentication</li>
+                    </ul>
+                </a>
+                
+                <a href="guides/basic-usage.html" class="module-card">
+                    <span class="module-tag" data-i18n="mod_tag_basic">Basic</span>
+                    <h3 data-i18n="mod_basic">Basic Usage</h3>
+                    <p data-i18n="mod_basic_desc">Interactive TUI operations, basic commands and workflows</p>
+                    <ul class="module-list">
+                        <li>Interactive Sessions</li>
+                        <li>File Operations</li>
+                        <li>Code Generation</li>
+                    </ul>
+                </a>
+                
+                <a href="guides/slash-commands.html" class="module-card">
+                    <span class="module-tag" data-i18n="mod_tag_advanced">Advanced</span>
+                    <h3 data-i18n="mod_slash">Slash Commands</h3>
+                    <p data-i18n="mod_slash_desc">Complete reference for 24+ built-in commands and use cases</p>
+                    <ul class="module-list">
+                        <li>Session Control</li>
+                        <li>Code Review</li>
+                        <li>Model Switching</li>
+                    </ul>
+                </a>
+                
+                <a href="guides/agents-md.html" class="module-card">
+                    <span class="module-tag" data-i18n="mod_tag_core">Core</span>
+                    <h3 data-i18n="mod_agents">AGENTS.md</h3>
+                    <p data-i18n="mod_agents_desc">Project-level configuration guide to customize Codex behavior</p>
+                    <ul class="module-list">
+                        <li>Configuration Structure</li>
+                        <li>Best Practices</li>
+                        <li>Team Collaboration</li>
+                    </ul>
+                </a>
+                
+                <a href="guides/skills.html" class="module-card">
+                    <span class="module-tag" data-i18n="mod_tag_advanced">Advanced</span>
+                    <h3 data-i18n="mod_skills">Skills Extension</h3>
+                    <p data-i18n="mod_skills_desc">Create and use Skills to extend Codex capabilities</p>
+                    <ul class="module-list">
+                        <li>Skill Structure</li>
+                        <li>Create Custom Skills</li>
+                        <li>Share Skills</li>
+                    </ul>
+                </a>
+                
+                <a href="guides/mcp.html" class="module-card">
+                    <span class="module-tag" data-i18n="mod_tag_pro">Pro</span>
+                    <h3 data-i18n="mod_mcp">MCP Integration</h3>
+                    <p data-i18n="mod_mcp_desc">Model Context Protocol configuration and usage</p>
+                    <ul class="module-list">
+                        <li>MCP Server Setup</li>
+                        <li>Common MCP Tools</li>
+                        <li>Custom MCP Servers</li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="examples-preview" id="examples">
+        <div class="container">
+            <h2 class="section-title" data-i18n="examples_title">Real-World Examples</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <span class="example-difficulty" data-i18n="ex_diff_easy">Beginner</span>
+                        <span class="example-time">10 min</span>
+                    </div>
+                    <h3 data-i18n="ex_1_title">Build React Project</h3>
+                    <p data-i18n="ex_1_desc">Use Codex to create a complete React app from scratch with routing, state management, and styling.</p>
+                    <a href="examples/react-setup.html" class="example-link">Details →</a>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <span class="example-difficulty" style="background: #f59e0b;" data-i18n="ex_diff_medium">Intermediate</span>
+                        <span class="example-time">30 min</span>
+                    </div>
+                    <h3 data-i18n="ex_2_title">API Backend Development</h3>
+                    <p data-i18n="ex_2_desc">Build RESTful API with Node.js + Express, including auth, database operations, and tests.</p>
+                    <a href="examples/api-backend.html" class="example-link">Details →</a>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <span class="example-difficulty" style="background: #ef4444;" data-i18n="ex_diff_hard">Advanced</span>
+                        <span class="example-time">1 hour</span>
+                    </div>
+                    <h3 data-i18n="ex_3_title">Code Refactoring</h3>
+                    <p data-i18n="ex_3_desc">Large-scale refactoring of legacy codebase, performance optimization, type safety, and test coverage.</p>
+                    <a href="examples/refactoring.html" class="example-link">Details →</a>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <span class="example-difficulty" style="background: #ef4444;" data-i18n="ex_diff_hard">Advanced</span>
+                        <span class="example-time">2 hours</span>
+                    </div>
+                    <h3 data-i18n="ex_4_title">Multi-Agent Collaboration</h3>
+                    <p data-i18n="ex_4_desc">Use multiple Codex Agents to handle complex tasks in parallel for efficient team collaboration.</p>
+                    <a href="examples/multi-agent.html" class="example-link">Details →</a>
+                </div>
+            </div>
+            <div class="examples-cta">
+                <a href="examples/" class="btn btn-outline" data-i18n="btn_all_examples">View All 50+ Examples</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="resources" id="resources">
+        <div class="container">
+            <h2 class="section-title" data-i18n="resources_title">Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📄</div>
+                    <h3 data-i18n="res_1_title">AGENTS.md Template</h3>
+                    <p data-i18n="res_1_desc">Ready-to-use project configuration template</p>
+                    <a href="downloads/agents-md-template.md" download class="resource-link" data-i18n="btn_download">Download</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">⚙️</div>
+                    <h3 data-i18n="res_2_title">config.toml Example</h3>
+                    <p data-i18n="res_2_desc">Complete configuration file example with comments</p>
+                    <a href="downloads/config-example.toml" download class="resource-link" data-i18n="btn_download">Download</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <h3 data-i18n="res_3_title">Skills Example Pack</h3>
+                    <p data-i18n="res_3_desc">Common Skills collection, ready to use</p>
+                    <a href="downloads/skills-examples.zip" download class="resource-link" data-i18n="btn_download">Download</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📚</div>
+                    <h3 data-i18n="res_4_title">Cheatsheet PDF</h3>
+                    <p data-i18n="res_4_desc">Quick reference for all commands and configurations</p>
+                    <a href="downloads/codex-cheatsheet.pdf" download class="resource-link" data-i18n="btn_download">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="best-practices">
+        <div class="container">
+            <h2 class="section-title" data-i18n="bp_title">Best Practices</h2>
+            <div class="practices-grid">
+                <div class="practice-item">
+                    <span class="practice-icon">✓</span>
+                    <p data-i18n="bp_1">Use /plan command before complex tasks</p>
+                </div>
+                <div class="practice-item">
+                    <span class="practice-icon">✓</span>
+                    <p data-i18n="bp_2">Create custom AGENTS.md for each project</p>
+                </div>
+                <div class="practice-item">
+                    <span class="practice-icon">✓</span>
+                    <p data-i18n="bp_3">Regularly use /compact to free up context</p>
+                </div>
+                <div class="practice-item">
+                    <span class="practice-icon">✓</span>
+                    <p data-i18n="bp_4">Create custom Skills for repetitive tasks</p>
+                </div>
+                <div class="practice-item">
+                    <span class="practice-icon">✓</span>
+                    <p data-i18n="bp_5">Use /review for code review</p>
+                </div>
+                <div class="practice-item">
+                    <span class="practice-icon">✓</span>
+                    <p data-i18n="bp_6">One thread per task to avoid context bloat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-icon">◈</span>
+                    <span class="logo-text">Codex Academy</span>
+                    <p>Systematic OpenAI Codex learning resources to master AI-assisted programming.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer_learn">Learn</h4>
+                    <ul>
+                        <li><a href="guides/installation.html">Installation</a></li>
+                        <li><a href="guides/concepts.html">Core Concepts</a></li>
+                        <li><a href="examples/">Examples</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer_resources">Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/openai/codex" target="_blank">Official Repo</a></li>
+                        <li><a href="https://developers.openai.com/codex" target="_blank">Official Docs</a></li>
+                        <li><a href="guides/faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer_copyright">© 2026 Codex Academy. Based on OpenAI Codex official docs.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安装指南 - Codex 学院</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="../index.html#examples">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="guide-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">学习导航</div>
+            <ul class="sidebar-nav">
+                <li><a href="installation.html" class="active">安装与配置</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="basic-usage.html">基础用法</a></li>
+                <li><a href="slash-commands.html">Slash 命令</a></li>
+                <li><a href="agents-md.html">AGENTS.md</a></li>
+                <li><a href="skills.html">Skills 扩展</a></li>
+                <li><a href="mcp.html">MCP 集成</a></li>
+                <li><a href="advanced.html">高级技巧</a></li>
+                <li><a href="best-practices.html">最佳实践</a></li>
+            </ul>
+        </aside>
+
+        <main class="guide-content">
+            <h1>安装与配置</h1>
+            
+            <p>
+                OpenAI Codex 提供多种使用方式：命令行界面 (CLI)、IDE 扩展（VS Code、Cursor、Windsurf）以及 Web 应用。
+                本指南将帮助你完成 Codex CLI 的安装和配置。
+            </p>
+
+            <h2>系统要求</h2>
+            <ul>
+                <li><strong>操作系统</strong>: macOS (Apple Silicon 或 Intel), Linux (x86_64 或 arm64)</li>
+                <li><strong>Node.js</strong>: v18.0.0 或更高版本（用于 npm 安装）</li>
+                <li><strong>Git</strong>: 用于代码版本控制</li>
+            </ul>
+
+            <div class="callout">
+                <strong>注意</strong>: Windows 支持目前处于实验阶段。建议在 WSL (Windows Subsystem for Linux) 中使用 Codex CLI。
+            </div>
+
+            <h2>安装方法</h2>
+
+            <h3>方法 1: 使用 npm 安装（推荐）</h3>
+            <p>全局安装 Codex CLI：</p>
+            <pre><code>npm install -g @openai/codex</code></pre>
+
+            <h3>方法 2: 使用 Homebrew 安装（macOS）</h3>
+            <pre><code>brew install --cask codex</code></pre>
+
+            <h3>方法 3: 下载二进制文件</h3>
+            <p>从 <a href="https://github.com/openai/codex/releases" target="_blank">GitHub Releases</a> 下载适合你平台的二进制文件：</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>架构</th>
+                        <th>文件名</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>macOS</td>
+                        <td>Apple Silicon</td>
+                        <td><code>codex-aarch64-apple-darwin.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>macOS</td>
+                        <td>Intel</td>
+                        <td><code>codex-x86_64-apple-darwin.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>Linux</td>
+                        <td>x86_64</td>
+                        <td><code>codex-x86_64-unknown-linux-musl.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>Linux</td>
+                        <td>ARM64</td>
+                        <td><code>codex-aarch64-unknown-linux-musl.tar.gz</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>首次运行</h2>
+            <p>安装完成后，在终端中运行：</p>
+            <pre><code>codex</code></pre>
+
+            <p>首次启动时，Codex 会提示你登录。你可以选择以下两种方式：</p>
+
+            <h3>方式 1: 使用 ChatGPT 账号登录</h3>
+            <p>推荐使用此方式，它将使用你现有的 ChatGPT Plus/Pro/Business 订阅。</p>
+            <ol>
+                <li>运行 <code>codex</code></li>
+                <li>选择 "Sign in with ChatGPT"</li>
+                <li>在浏览器中完成授权</li>
+                <li>返回终端，开始工作</li>
+            </ol>
+
+            <h3>方式 2: 使用 API Key</h3>
+            <p>如果你更喜欢按量付费，可以使用 OpenAI API Key：</p>
+            <ol>
+                <li>在 <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI 平台</a> 创建 API Key</li>
+                <li>运行 <code>codex</code></li>
+                <li>选择 "Sign in with API Key"</li>
+                <li>输入你的 API Key</li>
+            </ol>
+
+            <div class="callout warning">
+                <strong>重要提示</strong>: 使用 API Key 时某些功能（如云线程）可能不可用。
+            </div>
+
+            <h2>配置文件</h2>
+            <p>Codex 的配置存储在 <code>~/.codex/config.toml</code> 文件中。你可以手动编辑或使用命令行配置。</p>
+
+            <h3>基本配置示例</h3>
+            <pre><code># 核心模型设置
+model = "gpt-5.4"
+model_provider = "openai"
+
+# 推理力度: minimal | low | medium | high | xhigh
+model_reasoning_effort = "medium"
+
+# 审批策略
+approval_policy = "on-request"
+
+# 沙箱模式: read-only | workspace-write | danger-full-access
+sandbox_mode = "read-only"
+
+# Web 搜索模式: disabled | cached | live
+web_search = "cached"
+
+# 文件打开器: vscode | vscode-insiders | windsurf | cursor | none
+file_opener = "vscode"</code></pre>
+
+            <h2>验证安装</h2>
+            <p>运行以下命令验证安装是否成功：</p>
+            <pre><code># 检查版本
+codex --version
+
+# 查看帮助
+codex --help
+
+# 检查会话状态（在交互模式下）
+/status</code></pre>
+
+            <h2>升级 Codex</h2>
+            <p>保持 Codex 更新以获得最新功能和修复：</p>
+            <pre><code># npm 安装方式
+npm i -g @openai/codex@latest
+
+# Homebrew 安装方式
+brew upgrade codex</code></pre>
+
+            <h2>下一步</h2>
+            <p>安装完成后，你可以：</p>
+            <ul>
+                <li>阅读 <a href="concepts.html">核心概念</a> 了解 Codex 的工作原理</li>
+                <li>查看 <a href="basic-usage.html">基础用法</a> 学习基本操作</li>
+                <li>浏览 <a href="../examples/">实战案例</a> 开始你的第一个项目</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

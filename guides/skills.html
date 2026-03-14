@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills 扩展 - Codex 学院</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="../index.html#examples">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="guide-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">学习导航</div>
+            <ul class="sidebar-nav">
+                <li><a href="installation.html">安装与配置</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="basic-usage.html">基础用法</a></li>
+                <li><a href="slash-commands.html">Slash 命令</a></li>
+                <li><a href="agents-md.html">AGENTS.md</a></li>
+                <li><a href="skills.html" class="active">Skills 扩展</a></li>
+                <li><a href="mcp.html">MCP 集成</a></li>
+                <li><a href="advanced.html">高级技巧</a></li>
+            </ul>
+        </aside>
+
+        <main class="guide-content">
+            <h1>Skills 扩展</h1>
+            
+            <p>Skills 让 Codex 能够执行特定任务的工作流。一个 Skill 打包了指令、资源和可选脚本，使 Codex 能够可靠地完成特定任务。</p>
+
+            <h2>什么是 Skill？</h2>
+            <p>Skill 是 Codex 的扩展机制，它允许你：</p>
+            <ul>
+                <li>封装重复任务的指令</li>
+                <li>定义标准化的工作流</li>
+                <li>与团队共享最佳实践</li>
+                <li>连接外部工具和服务</li>
+            </ul>
+
+            <h2>Skill 结构</h2>
+            <pre><code>my-skill/
+├── SKILL.md          # 必需：指令和元数据
+├── scripts/          # 可选：可执行代码
+├── references/       # 可选：文档
+├── assets/           # 可选：模板、资源
+└── agents/
+    └── openai.yaml   # 可选：UI 配置</code></pre>
+
+            <h2>SKILL.md 格式</h2>
+            <pre><code>---
+name: security-audit
+description: 扫描代码库查找安全漏洞，包括 SQL 注入、XSS、硬编码密钥
+---
+
+# Security Audit
+
+请扫描当前代码库，查找以下漏洞：
+
+1. SQL 注入风险
+2. 硬编码的密钥或 token
+3. XSS 漏洞
+4. 不安全的依赖
+
+生成 Markdown 格式的报告，包含：
+- 问题严重程度（Critical/High/Medium/Low）
+- 文件位置和代码片段
+- 修复建议</code></pre>
+
+            <h2>使用 Skills</h2>
+            
+            <h3>显式调用</h3>
+            <pre><code>$security-audit</code></pre>
+            <p>或</p>
+            <pre><code>/skills
+# 然后从列表中选择</code></pre>
+
+            <h3>隐式调用</h3>
+            <p>Codex 可以根据任务描述自动选择 Skill：</p>
+            <pre><code>> 扫描一下代码的安全问题</code></pre>
+
+            <h2>安装 Skills</h2>
+            
+            <h3>使用内置安装器</h3>
+            <pre><code>$skill-installer linear</code></pre>
+
+            <h3>Skill 发现位置</h3>
+            <p>Codex 从以下位置扫描 Skills：</p>
+            <ol>
+                <li>仓库的 <code>.agents/skills/</code> 目录</li>
+                <li>用户目录 <code>~/.codex/skills/</code></li>
+                <li>系统目录（管理员配置）</li>
+            </ol>
+
+            <h2>创建自定义 Skill</h2>
+            
+            <h3>步骤 1：使用创建器</h3>
+            <pre><code>$skill-creator</code></pre>
+            <p>创建器会询问：</p>
+            <ul>
+                <li>Skill 的作用</li>
+                <li>何时应该触发</li>
+                <li>纯指令还是包含脚本</li>
+            </ul>
+
+            <h3>步骤 2：手动创建</h3>
+            <pre><code>mkdir -p ~/.codex/skills/my-skill
+cd ~/.codex/skills/my-skill
+cat > SKILL.md << 'EOF'
+---
+name: my-skill
+description: 描述 Skill 应该何时触发
+---
+
+# My Skill
+
+指令内容...
+EOF</code></pre>
+
+            <h2>常用内置 Skills</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>用途</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>$skill-creator</code></td>
+                        <td>创建新 Skill</td>
+                    </tr>
+                    <tr>
+                        <td><code>$skill-installer</code></td>
+                        <td>安装社区 Skills</td>
+                    </tr>
+                    <tr>
+                        <td><code>$linear</code></td>
+                        <td>项目管理集成</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>配置 UI 元数据</h2>
+            <p>在 <code>agents/openai.yaml</code> 中配置：</p>
+            <pre><code>interface:
+  display_name: "安全审计"
+  short_description: "扫描代码安全漏洞"
+  icon_small: "./assets/shield.svg"
+  brand_color: "#ef4444"
+  default_prompt: "请扫描代码库的安全问题"
+
+policy:
+  allow_implicit_invocation: true
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "securityScanner"</code></pre>
+
+            <h2>禁用 Skill</h2>
+            <p>在 <code>~/.codex/config.toml</code> 中：</p>
+            <pre><code>[[skills.config]]
+path = "/path/to/skill/SKILL.md"
+enabled = false</code></pre>
+
+            <h2>最佳实践</h2>
+            <ul>
+                <li>每个 Skill 专注于一个任务</li>
+                <li>优先使用指令而非脚本</li>
+                <li>编写明确的输入输出说明</li>
+                <li>测试触发描述确保匹配正确</li>
+            </ul>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

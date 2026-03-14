@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 项目搭建 - 实战案例</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="index.html">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
+        <a href="index.html" style="color: var(--color-primary);">← 返回案例列表</a>
+
+        <h1 style="margin: 1rem 0;">快速搭建 React 项目</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty">初级</span>
+            <span class="example-time">10 分钟</span>
+        </div>
+
+        <h2>目标</h2>
+        <p>使用 Codex 从零创建一个 React + TypeScript + Vite 项目，包含路由、状态管理和基础 UI。</p>
+
+        <h2>步骤 1：初始化项目</h2>
+
+        <p>启动 Codex 并输入：</p>
+
+        <pre><code>> 创建一个 React + TypeScript + Vite 项目，项目名为 my-app。
+> 使用 React Router 配置路由，包含首页、关于页和 404 页面。
+> 使用 Tailwind CSS 进行样式设置。
+> 添加一个全局状态管理（使用 Zustand）。</code></pre>
+
+        <h2>步骤 2：等待执行</h2>
+
+        <p>Codex 会：</p>
+
+        <ol>
+            <li>运行 <code>npm create vite@latest</code></li>
+            <li>安装依赖（react-router-dom, zustand, tailwindcss）</li>
+            <li>配置 Tailwind</li>
+            <li>创建路由文件</li>
+            <li>创建页面组件</li>
+            <li>设置 Zustand store</li>
+        </ol>
+
+        <h2>步骤 3：验证结果</h2>
+
+        <p>Codex 完成后，运行：</p>
+
+        <pre><code>cd my-app
+npm run dev</code></pre>
+
+        <h2>生成的项目结构</p>
+
+        <pre><code>my-app/
+├── src/
+│   ├── components/      # 共享组件
+│   ├── pages/          # 页面组件
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   └── NotFound.tsx
+│   ├── store/          # Zustand store
+│   │   └── index.ts
+│   ├── App.tsx         # 路由配置
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.js
+└── vite.config.ts</code></pre>
+
+        <h2>关键学习点</h2>
+
+        <ul>
+            <li>✅ 一次提示完成多步骤任务</li>
+            <li>✅ 自动处理依赖安装</li>
+            <li>✅ 生成标准项目结构</li>
+            <li>✅ 遵循最佳实践（hooks、类型定义）</li>
+        </ul>
+
+        <h2>扩展练习</h2>
+
+        <p>继续向 Codex 提问：</p>
+
+        <pre><code>> 添加一个待办事项功能，包含添加、完成、删除功能</code></pre>
+
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

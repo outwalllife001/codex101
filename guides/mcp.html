@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP 集成 - Codex 学院</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="../index.html#examples">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="guide-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">学习导航</div>
+            <ul class="sidebar-nav">
+                <li><a href="installation.html">安装与配置</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="basic-usage.html">基础用法</a></li>
+                <li><a href="slash-commands.html">Slash 命令</a></li>
+                <li><a href="agents-md.html">AGENTS.md</a></li>
+                <li><a href="skills.html">Skills 扩展</a></li>
+                <li><a href="mcp.html" class="active">MCP 集成</a></li>
+                <li><a href="advanced.html">高级技巧</a></li>
+            </ul>
+        </aside>
+
+        <main class="guide-content">
+            <h1>MCP 集成指南</h1>
+            
+            <p>Model Context Protocol (MCP) 将模型连接到工具和上下文。使用它让 Codex 访问第三方文档或开发者工具。</p>
+
+            <h2>什么是 MCP？</h2>
+            <p>MCP 是一种开放标准协议，允许 AI 模型通过标准化的方式访问外部工具和数据源。它类似于 AI 应用的"USB-C"接口。</p>
+
+            <h2>MCP 服务器类型</h2>
+
+            <h3>STDIO 服务器</h3>
+            <p>作为本地进程运行的服务器（通过命令启动）：</p>
+            <ul>
+                <li>使用环境变量配置</li>
+                <li>适合本地工具集成</li>
+            </ul>
+
+            <h3>Streamable HTTP 服务器</h3>
+            <p>通过网络地址访问的服务器：</p>
+            <ul>
+                <li>Bearer token 认证</li>
+                <li>OAuth 认证</li>
+                <li>适合云服务集成</li>
+            </ul>
+
+            <h2>配置 MCP</h2>
+            <p>Codex 将 MCP 配置存储在 <code>config.toml</code> 中。</p>
+
+            <h3>方法 1：使用 CLI</h3>
+            <pre><code># 添加 MCP 服务器
+codex mcp add <server-name> --env VAR1=VALUE1 --env VAR2=VALUE2 -- <stdio-command>
+
+# 示例：添加 Context7
+codex mcp add context7 -- npx -y @upstash/context7-mcp
+
+# 添加 Playwright
+codex mcp add playwright npx @playwright/mcp@latest
+
+# 查看所有命令
+codex mcp --help</code></pre>
+
+            <h3>方法 2：手动编辑 config.toml</h3>
+
+            <h4>STDIO 服务器示例</h4>
+            <pre><code>[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.context7.env]
+MY_ENV_VAR = "MY_ENV_VALUE"</code></pre>
+
+            <h4>HTTP 服务器示例</h4>
+            <pre><code>[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+bearer_token_env_var = "FIGMA_OAUTH_TOKEN"
+http_headers = { "X-Figma-Region" = "us-east-1" }
+
+[mcp_servers.chrome_devtools]
+url = "http://localhost:3000/mcp"
+enabled_tools = ["open", "screenshot"]
+disabled_tools = ["close"]
+startup_timeout_sec = 20
+tool_timeout_sec = 45</code></pre>
+
+            <h2>常用 MCP 服务器</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>服务器</th>
+                        <th>用途</th>
+                        <th>安装命令</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Context7</td>
+                        <td>开发者文档搜索</td>
+                        <td><code>codex mcp add context7 -- npx -y @upstash/context7-mcp</code></td>
+                    </tr>
+                    <tr>
+                        <td>Playwright</td>
+                        <td>浏览器自动化</td>
+                        <td><code>codex mcp add playwright npx @playwright/mcp@latest</code></td>
+                    </tr>
+                    <tr>
+                        <td>Chrome DevTools</td>
+                        <td>Chrome 调试</td>
+                        <td>HTTP 服务器</code></td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td>PR/Issue 管理</td>
+                        <td><code>codex mcp add github --env GITHUB_TOKEN=xxx -- npx -y @modelcontextprotocol/server-github</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sentry</td>
+                        <td>错误日志</td>
+                        <td>HTTP 服务器</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>使用 MCP 工具</h2>
+
+            <h3>查看已配置的工具</h3>
+            <pre><code>/mcp</code></pre>
+
+            <h3>自然语言调用</h3>
+            <pre><code>> 搜索 Next.js App Router 的最新文档
+> 给 https://example.com 截个图
+> 查看最新的 GitHub Issue</code></pre>
+
+            <h2>高级配置</h2>
+
+            <h3>工具白名单/黑名单</h3>
+            <pre><code>[mcp_servers.myserver]
+enabled_tools = ["tool1", "tool2"]
+disabled_tools = ["dangerous_tool"]</code></pre>
+
+            <h3>超时设置</h3>
+            <pre><code>startup_timeout_sec = 10   # 启动超时
+tool_timeout_sec = 60       # 工具执行超时</code></pre>
+
+            <h3>OAuth 配置</h3>
+            <pre><code># 配置回调端口
+mcp_oauth_callback_port = 5555
+
+# 或自定义回调 URL
+mcp_oauth_callback_url = "https://devbox.example.internal/callback"
+
+# 登录
+codex mcp login <server-name></code></pre>
+
+            <h2>故障排查</h2>
+
+            <h3>检查连接状态</h3>
+            <pre><code>/mcp</code></pre>
+            <p>预期输出：</p>
+            <pre><code>Connected MCP Servers:
+  ✓ context7 - Ready
+  ✓ playwright - Ready
+  ✗ github - Error: Connection refused</code></pre>
+
+            <h3>常见问题</h3>
+            <ul>
+                <li>服务器未启动：检查命令是否正确</li>
+                <li>认证失败：验证 token 或重新登录</li>
+                <li>工具未显示：重启 Codex 或检查配置</li>
+            </ul>
+
+            <h2>创建自定义 MCP 服务器</h2>
+            <p>参考 <a href="https://modelcontextprotocol.io" target="_blank">MCP 官方文档</a> 创建自己的服务器。</p>
+
+            <p>基本结构：</p>
+            <ol>
+                <li>实现 MCP 协议</li>
+                <li>定义工具接口</li>
+                <li>打包发布</li>
+            </ol>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高级技巧 - Codex 学院</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="../index.html#examples">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="guide-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">学习导航</div>
+            <ul class="sidebar-nav">
+                <li><a href="installation.html">安装与配置</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="basic-usage.html">基础用法</a></li>
+                <li><a href="slash-commands.html">Slash 命令</a></li>
+                <li><a href="agents-md.html">AGENTS.md</a></li>
+                <li><a href="skills.html">Skills 扩展</a></li>
+                <li><a href="mcp.html">MCP 集成</a></li>
+                <li><a href="advanced.html" class="active">高级技巧</a></li>
+            </ul>
+        </aside>
+
+        <main class="guide-content">
+            <h1>高级技巧</h1>
+
+            <h2>提示词工程</h2>
+
+            <h3>四大要素框架</h3>
+            <p>有效的提示应包含四个要素：</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>要素</th>
+                        <th>说明</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>目标</strong></td>
+                        <td>你想改变或构建什么？</td>
+                        <td>"添加用户认证功能"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>上下文</strong></td>
+                        <td>哪些文件、错误相关？</td>
+                        <td>"@auth.ts @user.ts"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>约束</strong></td>
+                        <td>应遵循的标准？</td>
+                        <td>"使用 JWT，不要 session"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>完成标准</strong></td>
+                        <td>什么条件下算完成？</td>
+                        <td>"测试通过，能登录注册"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>示例提示</h3>
+            <pre><code>目标：重构认证模块，支持 JWT token 刷新
+上下文：@src/auth/ 目录下的所有文件
+约束：
+- 使用纯 JWT，不要 session
+- 保持向后兼容
+- 添加 rate limiting
+完成标准：
+- 所有现有测试通过
+- 新增 token 刷新测试
+- 手动测试登录流程正常</code></pre>
+
+            <h2>规划模式</h2>
+
+            <h3>何时使用 /plan</h3>
+            <ul>
+                <li>涉及多个文件的修改</li>
+                <li>需要修改架构或接口</li>
+                <li>不确定最佳实现方案</li>
+                <li>任务可能耗时较长</li>
+            </ul>
+
+            <h3>使用流程</h3>
+            <pre><code>/plan
+# 或带初始描述
+/plan 重构数据库访问层，添加连接池</code></pre>
+
+            <h2>Git 工作流集成</h2>
+
+            <h3>使用 Git Checkpoints</h3>
+            <p>Codex 可能大幅修改代码库，建议：</p>
+            <ol>
+                <li>开始任务前创建 checkpoint：</pre><code>git add -A && git commit -m "checkpoint: before codex auth refactor"</code></li>
+                <li>任务完成后 review diff</li>
+                <li>必要时可以回滚：<pre><code>git reset --hard HEAD~1</code></li>
+            </ol>
+
+            <h3>使用 Git Worktrees</h3>
+            <p>当需要在同一代码库上运行多个 Codex 线程时：</p>
+            <pre><code># 创建 worktree
+git worktree add ../my-project-feature-a feature-a
+git worktree add ../my-project-feature-b feature-b
+
+# 在不同目录启动 Codex
+cd ../my-project-feature-a && codex
+cd ../my-project-feature-b && codex</code></pre>
+
+            <h2>脚本化 Codex</h2>
+
+            <h3>非交互式执行</h3>
+            <pre><code># 执行单个任务
+codex exec "修复 CI 失败"
+
+# 安静模式
+codex exec --quiet "更新依赖"
+
+# 结合 shell 脚本
+for file in src/**/*.test.ts; do
+  codex exec "检查 $file 的测试覆盖率"
+done</code></pre>
+
+            <h3>CI/CD 集成</h3>
+            <pre><code># .github/workflows/codex-review.yml
+name: AI Code Review
+on: [pull_request]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Codex Review
+        run: |
+          npm i -g @openai/codex
+          codex exec "/review" --quiet</code></pre>
+
+            <h2>多 Agent 工作流</h2>
+
+            <h3>启用实验性功能</h3>
+            <pre><code>/experimental</code></pre>
+
+            <h3>工作流示例</h3>
+            <p>主 Agent 专注于核心功能，子 Agent 处理：</p>
+            <ul>
+                <li>编写测试用例</li>
+                <li>文档更新</li>
+                <li>依赖检查</li>
+                <li>性能分析</li>
+            </ul>
+
+            <h3>切换 Agent</h3>
+            <pre><code>/agent  # 选择并切换到其他线程</code></pre>
+
+            <h2>语音输入</h3>
+            <p>Codex 应用支持语音输入。点击麦克风图标或使用快捷键开始语音描述你的需求。</p>
+
+            <h2>图像输入</h2>
+            <p>支持拖放或粘贴图像：</p>
+            <ul>
+                <li>设计稿转代码</li>
+                <li>截图报错分析</li>
+                <li>UI 审查</li>
+            </ul>
+
+            <h2>Web 搜索</h2>
+            <pre><code># 在 config.toml 中启用
+web_search = "live"  # 或 "cached"
+
+# 然后直接询问
+> Next.js 14 的 Server Actions 有什么新特性？</code></pre>
+
+            <h2>性能优化</h2>
+
+            <h3>减少 Token 消耗</h3>
+            <ul>
+                <li>定期使用 <code>/compact</code></li>
+                <li>避免包含大文件除非必要</li>
+                <li>使用特定而非宽泛的请求</li>
+            </ul>
+
+            <h3>提高响应速度</h3>
+            <ul>
+                <li>简单任务用 low/minimal 推理</li>
+                <li>使用 <code>--quiet</code> 批量处理</li>
+                <li>预热常用上下文</li>
+            </ul>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

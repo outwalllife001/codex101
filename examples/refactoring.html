@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码重构 - 实战案例</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="index.html">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
+        <a href="index.html" style="color: var(--color-primary);">← 返回案例列表</a>
+
+        <h1 style="margin: 1rem 0;">代码重构与优化</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">高级</span>
+            <span class="example-time">1 小时</span>
+        </div>
+
+        <h2>场景</h2>
+        <p>你接手了一个遗留项目，需要将其从 JavaScript 迁移到 TypeScript，优化性能，并添加测试覆盖。</p>
+
+        <h2>步骤 1：创建 Checkpoint</h2>
+
+        <pre><code>git add -A && git commit -m "checkpoint: before refactoring"</code></pre>
+
+        <h2>步骤 2：分析和规划</h2>
+
+        <pre><code>/plan
+
+分析 @src/ 目录下的所有 JavaScript 文件，创建一个详细的 TypeScript 迁移计划，包括：
+1. 文件迁移顺序（按依赖关系）
+2. 需要添加的类型定义
+3. 潜在的类型安全问题
+4. 需要重构的代码模式</code></pre>
+
+        <h2>步骤 3：渐进式迁移</h2>
+
+        <h3>迁移工具函数</h3>
+        <pre><code>> 将 @src/utils/ 下的工具函数转换为 TypeScript
+> 添加完整的类型定义
+> 确保所有函数都有返回类型注解</code></pre>
+
+        <h3>迁移数据层</h3>
+        <pre><code>> 将 @src/models/ 和 @src/services/ 转换为 TypeScript
+> 定义所有数据接口
+> 使用严格类型检查</code></pre>
+
+        <h3>迁移 UI 组件</h3>
+        <pre><code>> 将 @src/components/ 转换为 TypeScript React 组件
+> 为 Props 定义接口
+> 修复任何类型错误</code></pre>
+
+        <h2>步骤 4：性能优化</h2>
+
+        <pre><code>> 分析 @src/components/List.tsx 的性能问题
+> 优化渲染，添加 useMemo 和 useCallback
+> 实现虚拟滚动处理大数据列表</code></pre>
+
+        <h2>步骤 5：添加测试</h2>
+
+        <pre><code>> 为核心业务逻辑编写单元测试
+> 添加 React 组件测试（React Testing Library）
+> 确保测试覆盖率达到 80% 以上</code></pre>
+
+        <h2>步骤 6：代码审查</h2>
+
+        <pre><code>/review</code></pre>
+
+        <h2>关键技巧</h2>
+
+        <ul>
+            <li>✅ 使用 <code>/plan</code> 制定详细计划</li>
+            <li>✅ 分批迁移，一次一个模块</li>
+            <li>✅ 频繁使用 <code>/diff</code> 查看变更</li>
+            <li>✅ 完成后进行全面 <code>/review</code></li>
+        </ul>
+
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

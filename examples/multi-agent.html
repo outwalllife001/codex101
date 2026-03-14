@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多 Agent 协作 - 实战案例</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="index.html">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
+        <a href="index.html" style="color: var(--color-primary);">← 返回案例列表</a>
+
+        <h1 style="margin: 1rem 0;">多 Agent 协作开发</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">高级</span>
+            <span class="example-time">2 小时</span>
+        </div>
+
+        <h2>场景</h2>
+        <p>开发一个完整的 SaaS 应用，包含前端、后端、文档和测试。使用多个 Agent 并行处理不同模块。</p>
+
+        <h2>启用实验性功能</h2>
+
+        <pre><code>/experimental</code></pre>
+
+        <h2>任务分解</h2>
+
+        <h3>主 Agent - 核心功能</h3>
+        <pre><code>> 创建项目基础架构，包含：
+> 1. 项目目录结构
+> 2. 共享类型定义
+> 3. 开发环境配置
+> 4. CI/CD 配置文件</code></pre>
+
+        <h3>子 Agent 1 - 后端 API</h3>
+        <pre><code># 在新线程中
+> 开发用户认证 API（注册、登录、JWT）
+> 使用 Node.js + Express + TypeScript
+> 包含完整的单元测试</code></pre>
+
+        <h3>子 Agent 2 - 前端界面</h3>
+        <pre><code># 在新线程中
+> 创建 React 前端应用
+> 实现登录/注册页面
+> 使用 Tailwind CSS 美化界面</code></pre>
+
+        <h3>子 Agent 3 - 文档</h3>
+        <pre><code># 在新线程中
+> 编写 API 文档（OpenAPI/Swagger）
+> 创建 README 和部署指南</code></pre>
+
+        <h2>切换和管理 Agent</h2>
+
+        <pre><code># 查看所有线程
+/agent
+
+# 切换到后端线程
+/agent 1
+
+# 检查进度
+> 进度如何？有什么阻塞吗？
+
+# 切换到前端线程
+/agent 2
+
+# 合并前审查
+/review</code></pre>
+
+        <h2>协作模式</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>职责</th>
+                    <th>输出</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>主 Agent</td>
+                    <td>架构、协调</td>
+                    <td>项目骨架、类型定义</td>
+                </tr>
+                <tr>
+                    <td>后端 Agent</td>
+                    <td>API 开发</td>
+                    <td>Routes, Controllers, Services</td>
+                </tr>
+                <tr>
+                    <td>前端 Agent</td>
+                    <td>UI 开发</td>
+                    <td>Components, Pages, Hooks</td>
+                </tr>
+                <tr>
+                    <td>文档 Agent</td>
+                    <td>文档编写</td>
+                    <td>README, API docs, Guides</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>最佳实践</h2>
+
+        <ul>
+            <li>✅ 主 Agent 先定义接口和数据结构</li>
+            <li>✅ 子 Agent 并行工作时避免冲突文件</li>
+            <li>✅ 定期同步进度</li>
+            <li>✅ 最后统一进行代码审查</li>
+        </ul>
+
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

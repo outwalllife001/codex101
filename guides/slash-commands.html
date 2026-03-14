@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slash 命令 - Codex 学院</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">Codex Academy</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#quickstart">快速开始</a></li>
+                <li><a href="../index.html#concepts">核心概念</a></li>
+                <li><a href="../index.html#guides">使用指南</a></li>
+                <li><a href="../index.html#examples">实战案例</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="guide-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">学习导航</div>
+            <ul class="sidebar-nav">
+                <li><a href="installation.html">安装与配置</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="basic-usage.html">基础用法</a></li>
+                <li><a href="slash-commands.html" class="active">Slash 命令</a></li>
+                <li><a href="agents-md.html">AGENTS.md</a></li>
+                <li><a href="skills.html">Skills 扩展</a></li>
+                <li><a href="mcp.html">MCP 集成</a></li>
+                <li><a href="advanced.html">高级技巧</a></li>
+            </ul>
+        </aside>
+
+        <main class="guide-content">
+            <h1>Slash 命令完整参考</h1>
+            
+            <p>
+                Slash 命令是 Codex CLI 中快速控制会话的方式。在交互式 TUI 中输入 <code>/</code> 即可打开命令列表。
+                本页面列出了所有 24+ 个内置命令及其使用场景。
+            </p>
+
+            <h2>高频使用流程</h2>
+            <pre><code>/status          # 检查当前配置
+/model          # 切换模型
+/permissions    # 设置权限
+/mention <文件>  # 引用关键文件
+/plan           # 制定执行计划
+/review         # 代码审查
+/diff           # 查看变更
+/compact        # 压缩上下文</code></pre>
+
+            <h2>会话控制命令</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>命令</th>
+                            <th>用途</th>
+                            <th>使用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/new</code></td>
+                            <td>开始新会话</td>
+                            <td>清理上下文，保持在同一 CLI 进程中</td>
+                        </tr>
+                        <tr>
+                            <td><code>/resume</code></td>
+                            <td>恢复历史会话</td>
+                            <td>打开选择器显示最近的会话列表</td>
+                        </tr>
+                        <tr>
+                            <td><code>/fork</code></td>
+                            <td>克隆当前会话</td>
+                            <td>复制对话到新线程，尝试替代方案不丢失进度</td>
+                        </tr>
+                        <tr>
+                            <td><code>/quit</code> / <code>/exit</code></td>
+                            <td>退出 CLI</td>
+                            <td>完全退出 Codex CLI</td>
+                        </tr>
+                        <tr>
+                            <td><code>/compact</code></td>
+                            <td>压缩上下文</td>
+                            <td>总结对话以释放 token 空间，避免达到上下文限制</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>模型和样式命令</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>命令</th>
+                            <th>用途</th>
+                            <th>使用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/model</code></td>
+                            <td>切换模型和推理级别</td>
+                            <td>交互式选择，可在会话中途切换</td>
+                        </tr>
+                        <tr>
+                            <td><code>/personality</code></td>
+                            <td>更改沟通风格</td>
+                            <td>可选: friendly / pragmatic / none</td>
+                        </tr>
+                        <tr>
+                            <td><code>/plan</code></td>
+                            <td>进入规划模式</td>
+                            <td>Codex 在执行前起草计划，适合复杂任务</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>权限和状态命令</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>命令</th>
+                            <th>用途</th>
+                            <th>使用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/permissions</code></td>
+                            <td>调整授权模式</td>
+                            <td>在 Auto / Read Only / Full Access 之间切换</td>
+                        </tr>
+                        <tr>
+                            <td><code>/status</code></td>
+                            <td>查看会话信息</td>
+                            <td>显示模型、token 使用量和账户详情</td>
+                        </tr>
+                        <tr>
+                            <td><code>/statusline</code></td>
+                            <td>自定义状态栏</td>
+                            <td>交互式调整底部状态栏显示内容</td>
+                        </tr>
+                        <tr>
+                            <td><code>/debug-config</code></td>
+                            <td>调试配置</td>
+                            <td>打印完整的配置加载链和策略诊断</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>代码和审查命令</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>命令</th>
+                            <th>用途</th>
+                            <th>使用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/review</code></td>
+                            <td>代码审查</td>
+                            <td>审查工作目录的变更，或对比基础分支进行 PR 式审查</td>
+                        </tr>
+                        <tr>
+                            <td><code>/diff</code></td>
+                            <td>查看 Git diff</td>
+                            <td>显示 Git diff，包括未跟踪的文件</td>
+                        </tr>
+                        <tr>
+                            <td><code>/undo</code></td>
+                            <td>撤销最近操作</td>
+                            <td>回滚 Codex 最近的一次编辑或命令执行</td>
+                        </tr>
+                        <tr>
+                            <td><code>/mention</code></td>
+                            <td>引用文件</td>
+                            <td>将特定文件或文件夹附加到对话中作为上下文</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>工具和集成命令</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>命令</th>
+                            <th>用途</th>
+                            <th>使用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/mcp</code></td>
+                            <td>列出 MCP 工具</td>
+                            <td>查看配置的 Model Context Protocol 服务器和工具</td>
+                        </tr>
+                        <tr>
+                            <td><code>/apps</code></td>
+                            <td>浏览应用</td>
+                            <td>浏览 ChatGPT 应用(连接器)并插入到提示中</td>
+                        </tr>
+                        <tr>
+                            <td><code>/agent</code></td>
+                            <td>切换 Agent 线程</td>
+                            <td>在并行运行的多个 Agent 之间切换</td>
+                        </tr>
+                        <tr>
+                            <td><code>/skills</code></td>
+                            <td>列出技能</td>
+                            <td>查看可用技能或调用特定技能</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>实用命令</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>命令</th>
+                            <th>用途</th>
+                            <th>使用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/init</code></td>
+                            <td>初始化 AGENTS.md</td>
+                            <td>在当前目录生成 AGENTS.md 脚手架文件</td>
+                        </tr>
+                        <tr>
+                            <td><code>/clear</code></td>
+                            <td>清屏</td>
+                            <td>清空终端并开始新的聊天</td>
+                        </tr>
+                        <tr>
+                            <td><code>/copy</code></td>
+                            <td>复制输出</td>
+                            <td>复制 Codex 最新的完整输出或计划文本</td>
+                        </tr>
+                        <tr>
+                            <td><code>/feedback</code></td>
+                            <td>发送反馈</td>
+                            <td>向 Codex 维护者发送日志或诊断信息</td>
+                        </tr>
+                        <tr>
+                            <td><code>/logout</code></td>
+                            <td>登出</td>
+                            <td>清除本地凭证，在使用共享机器时有用</td>
+                        </tr>
+                        <tr>
+                            <td><code>/ps</code></td>
+                            <td>查看后台终端</td>
+                            <td>查看实验性后台终端及其最近输出</td>
+                        </tr>
+                        <tr>
+                            <td><code>/experimental</code></td>
+                            <td>切换实验性功能</td>
+                            <td>启用子 Agent 等实验性功能</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>使用技巧</h2>
+
+            <h3>1. 使用 /fork 进行方案对比</h3>
+            <p>
+                <code>/fork</code> 命令非常实用。当你实现功能时想尝试另一种方案，
+                使用 fork 可以保留当前进度，同时在新线程中尝试替代方案。
+            </p>
+
+            <h3>2. 复杂任务前使用 /plan</h3>
+            <p>
+                对于"重构整个认证模块"这样的复杂任务，先用 <code>/plan</code> 让 Codex  outlining 步骤。
+                审查并批准计划后再执行，这样更安全，避免浪费精力在错误的方法上。
+            </p>
+
+            <h3>3. 定期使用 /compact</h3>
+            <p>
+                不要等到上下文限制错误才使用 <code>/compact</code>。在长会话中定期压缩，
+                可以保持对话的清晰度，同时保留关键信息。
+            </p>
+
+            <h3>4. 使用 /debug-config 排查问题</h3>
+            <p>
+                当配置设置似乎没有生效时，<code>/debug-config</code> 可以显示 Codex 加载了哪些文件，
+                以及哪些值覆盖了其他值，非常有助于故障排查。
+            </p>
+
+            <h2>自定义命令</h2>
+            <p>你可以在 <code>~/.codex/config.toml</code> 中定义自定义 Slash 命令：</p>
+
+            <pre><code>[[custom_commands]]
+name = "test"
+prompt = "运行测试套件并总结失败的测试"
+
+[[custom_commands]]
+name = "docs"
+prompt = "更新当前编辑函数的文档"
+
+[[custom_commands]]
+name = "security"
+prompt = "审查此代码的安全漏洞，重点关注输入验证和认证"</code></pre>
+
+            <p>添加后，你可以直接在 Codex 中使用：</p>
+            <pre><code>/test
+/docs
+/security</code></pre>
+
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
