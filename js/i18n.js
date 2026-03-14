@@ -1,14 +1,18 @@
 /**
- * Codex Academy - Language Switcher
+ * Codex Academy - Internationalization System
  * Supports: Chinese (zh) / English (en) / Japanese (ja) / Spanish (es)
  */
 
 const i18n = {
     zh: {
+        // Page
+        page_title: "Codex Academy - OpenAI Codex 完全指南",
+        // Nav
         nav_quickstart: "快速开始",
         nav_concepts: "核心概念",
         nav_guides: "使用指南",
         nav_examples: "实战案例",
+        // Hero
         hero_badge: "OpenAI Codex 完全指南",
         hero_title_1: "掌握 AI 编程助手",
         hero_title_2: "从入门到精通",
@@ -18,6 +22,7 @@ const i18n = {
         stat_cases: "实战案例",
         stat_modules: "学习模块",
         stat_commands: "Slash 命令",
+        // Features
         features_title: "为什么选择 Codex？",
         feat_1_title: "极速开发",
         feat_1_desc: "自然语言描述需求，Codex 自动生成代码。从想法到实现只需几分钟。",
@@ -27,6 +32,7 @@ const i18n = {
         feat_3_desc: "支持并行多 Agent 工作流，复杂任务分解为子任务同时处理。",
         feat_4_title: "高度可配置",
         feat_4_desc: "通过 AGENTS.md、Skills 和 MCP 扩展，打造专属的 AI 编程助手。",
+        // Learning Path
         path_title: "学习路径",
         step_1_title: "基础入门",
         step_1_desc: "安装 Codex CLI，了解基本交互方式，完成第一个 AI 辅助编程任务。",
@@ -40,6 +46,7 @@ const i18n = {
         btn_learn: "学习 →",
         btn_explore: "探索 →",
         btn_practice: "实战 →",
+        // Modules
         modules_title: "核心学习模块",
         mod_tag_basic: "基础",
         mod_tag_core: "核心",
@@ -57,12 +64,34 @@ const i18n = {
         mod_skills_desc: "创建和使用 Skills 扩展 Codex 能力",
         mod_mcp: "MCP 集成",
         mod_mcp_desc: "Model Context Protocol 配置和使用",
+        // Module list items
+        mod_install_li_1: "npm / Homebrew 安装",
+        mod_install_li_2: "config.toml 配置",
+        mod_install_li_3: "身份认证",
+        mod_basic_li_1: "交互式会话",
+        mod_basic_li_2: "文件操作",
+        mod_basic_li_3: "代码生成",
+        mod_slash_li_1: "会话控制",
+        mod_slash_li_2: "代码审查",
+        mod_slash_li_3: "模型切换",
+        mod_agents_li_1: "配置结构",
+        mod_agents_li_2: "最佳实践",
+        mod_agents_li_3: "团队协作",
+        mod_skills_li_1: "Skill 结构",
+        mod_skills_li_2: "创建自定义 Skill",
+        mod_skills_li_3: "分享 Skill",
+        mod_mcp_li_1: "MCP 服务器配置",
+        mod_mcp_li_2: "常用 MCP 工具",
+        mod_mcp_li_3: "自定义 MCP 服务器",
+        // Examples
         examples_title: "实战案例",
         ex_diff_easy: "初级",
         ex_diff_medium: "中级",
         ex_diff_hard: "高级",
         ex_time_10: "10 分钟",
+        ex_time_15: "15 分钟",
         ex_time_30: "30 分钟",
+        ex_time_45: "45 分钟",
         ex_time_60: "1 小时",
         ex_time_120: "2 小时",
         ex_1_title: "快速搭建 React 项目",
@@ -73,7 +102,14 @@ const i18n = {
         ex_3_desc: "对遗留代码库进行大规模重构，优化性能，添加类型安全和测试覆盖。",
         ex_4_title: "多 Agent 协作开发",
         ex_4_desc: "使用多个 Codex Agent 并行处理复杂任务，实现高效的团队协作模式。",
+        ex_5_title: "创建 CLI 工具",
+        ex_5_desc: "开发一个命令行工具，支持参数解析、配置文件读取和日志输出。",
+        ex_6_title: "数据库迁移脚本",
+        ex_6_desc: "编写数据迁移脚本，处理 schema 变更、数据转换和回滚逻辑。",
+        ex_details: "查看详情 →",
+        ex_back: "← 返回案例列表",
         btn_all_examples: "查看全部案例",
+        // Resources
         resources_title: "资源下载",
         res_1_title: "AGENTS.md 模板",
         res_1_desc: "开箱即用的项目配置文件模板",
@@ -85,6 +121,7 @@ const i18n = {
         res_4_desc: "所有命令和配置的快速参考",
         btn_download: "下载",
         btn_coming_soon: "即将推出",
+        // Best Practices
         nav_faq_link: "高级技巧",
         bp_title: "最佳实践速览",
         bp_1: "使用 /plan 命令在复杂任务前制定计划",
@@ -93,15 +130,41 @@ const i18n = {
         bp_4: "为重复任务创建自定义 Skills",
         bp_5: "使用 /review 进行代码审查",
         bp_6: "一个线程专注一个任务，避免上下文膨胀",
+        // Footer
         footer_learn: "学习",
         footer_resources: "资源",
+        footer_brand_desc: "系统化的 OpenAI Codex 学习资源，助你掌握 AI 辅助编程。",
+        footer_link_install: "安装与配置",
+        footer_link_concepts: "核心概念",
+        footer_link_examples: "实战案例",
+        footer_link_repo: "官方仓库",
+        footer_link_docs: "官方文档",
         footer_copyright: "© 2026 Codex Academy. 基于 OpenAI Codex 官方文档整理。",
+        // Sidebar (guide pages)
+        sidebar_title: "学习导航",
+        sidebar_install: "安装与配置",
+        sidebar_concepts: "核心概念",
+        sidebar_basic: "基础用法",
+        sidebar_slash: "Slash 命令",
+        sidebar_agents: "AGENTS.md",
+        sidebar_skills: "Skills 扩展",
+        sidebar_mcp: "MCP 集成",
+        sidebar_advanced: "高级技巧",
+        sidebar_best: "最佳实践",
+        // Breadcrumb
+        breadcrumb_home: "首页",
+        breadcrumb_guides: "指南",
+        breadcrumb_examples: "案例",
+        // Search
         search_placeholder: "搜索页面...",
         search_hint: "按 ESC 关闭",
+        search_no_results: "未找到结果",
+        // Language
         lang_name: "中文"
     },
-    
+
     en: {
+        page_title: "Codex Academy - Complete OpenAI Codex Guide",
         nav_quickstart: "Quick Start",
         nav_concepts: "Concepts",
         nav_guides: "Guides",
@@ -154,12 +217,32 @@ const i18n = {
         mod_skills_desc: "Create and use Skills to extend Codex capabilities",
         mod_mcp: "MCP Integration",
         mod_mcp_desc: "Model Context Protocol configuration and usage",
+        mod_install_li_1: "npm / Homebrew Install",
+        mod_install_li_2: "config.toml Setup",
+        mod_install_li_3: "Authentication",
+        mod_basic_li_1: "Interactive Sessions",
+        mod_basic_li_2: "File Operations",
+        mod_basic_li_3: "Code Generation",
+        mod_slash_li_1: "Session Control",
+        mod_slash_li_2: "Code Review",
+        mod_slash_li_3: "Model Switching",
+        mod_agents_li_1: "Configuration Structure",
+        mod_agents_li_2: "Best Practices",
+        mod_agents_li_3: "Team Collaboration",
+        mod_skills_li_1: "Skill Structure",
+        mod_skills_li_2: "Create Custom Skills",
+        mod_skills_li_3: "Share Skills",
+        mod_mcp_li_1: "MCP Server Setup",
+        mod_mcp_li_2: "Common MCP Tools",
+        mod_mcp_li_3: "Custom MCP Servers",
         examples_title: "Real-World Examples",
         ex_diff_easy: "Beginner",
         ex_diff_medium: "Intermediate",
         ex_diff_hard: "Advanced",
         ex_time_10: "10 min",
+        ex_time_15: "15 min",
         ex_time_30: "30 min",
+        ex_time_45: "45 min",
         ex_time_60: "1 hour",
         ex_time_120: "2 hours",
         ex_1_title: "Build React Project",
@@ -170,6 +253,12 @@ const i18n = {
         ex_3_desc: "Large-scale refactoring of legacy codebase, performance optimization, type safety, and test coverage.",
         ex_4_title: "Multi-Agent Collaboration",
         ex_4_desc: "Use multiple Codex Agents to handle complex tasks in parallel for efficient team collaboration.",
+        ex_5_title: "Build CLI Tool",
+        ex_5_desc: "Develop a command-line tool with argument parsing, config file reading, and log output.",
+        ex_6_title: "Database Migration Scripts",
+        ex_6_desc: "Write data migration scripts to handle schema changes, data transformation, and rollback logic.",
+        ex_details: "Details →",
+        ex_back: "← Back to Examples",
         btn_all_examples: "View All Examples",
         resources_title: "Resources",
         res_1_title: "AGENTS.md Template",
@@ -192,13 +281,34 @@ const i18n = {
         bp_6: "One thread per task to avoid context bloat",
         footer_learn: "Learn",
         footer_resources: "Resources",
+        footer_brand_desc: "Systematic OpenAI Codex learning resources to master AI-assisted programming.",
+        footer_link_install: "Installation",
+        footer_link_concepts: "Core Concepts",
+        footer_link_examples: "Examples",
+        footer_link_repo: "Official Repo",
+        footer_link_docs: "Official Docs",
         footer_copyright: "© 2026 Codex Academy. Based on OpenAI Codex official docs.",
+        sidebar_title: "Guide Navigation",
+        sidebar_install: "Installation",
+        sidebar_concepts: "Core Concepts",
+        sidebar_basic: "Basic Usage",
+        sidebar_slash: "Slash Commands",
+        sidebar_agents: "AGENTS.md",
+        sidebar_skills: "Skills Extension",
+        sidebar_mcp: "MCP Integration",
+        sidebar_advanced: "Advanced",
+        sidebar_best: "Best Practices",
+        breadcrumb_home: "Home",
+        breadcrumb_guides: "Guides",
+        breadcrumb_examples: "Examples",
         search_placeholder: "Search pages...",
         search_hint: "Press ESC to close",
+        search_no_results: "No results found",
         lang_name: "English"
     },
-    
+
     ja: {
+        page_title: "Codex Academy - OpenAI Codex 完全ガイド",
         nav_quickstart: "クイックスタート",
         nav_concepts: "基本概念",
         nav_guides: "ガイド",
@@ -251,12 +361,32 @@ const i18n = {
         mod_skills_desc: "Skillsを作成・使用してCodexの機能を拡張",
         mod_mcp: "MCP統合",
         mod_mcp_desc: "Model Context Protocolの設定と使用",
+        mod_install_li_1: "npm / Homebrew インストール",
+        mod_install_li_2: "config.toml 設定",
+        mod_install_li_3: "認証",
+        mod_basic_li_1: "対話型セッション",
+        mod_basic_li_2: "ファイル操作",
+        mod_basic_li_3: "コード生成",
+        mod_slash_li_1: "セッション制御",
+        mod_slash_li_2: "コードレビュー",
+        mod_slash_li_3: "モデル切替",
+        mod_agents_li_1: "設定構造",
+        mod_agents_li_2: "ベストプラクティス",
+        mod_agents_li_3: "チーム協業",
+        mod_skills_li_1: "Skill 構造",
+        mod_skills_li_2: "カスタムSkill作成",
+        mod_skills_li_3: "Skill共有",
+        mod_mcp_li_1: "MCPサーバー設定",
+        mod_mcp_li_2: "よく使うMCPツール",
+        mod_mcp_li_3: "カスタムMCPサーバー",
         examples_title: "実践事例",
         ex_diff_easy: "初級",
         ex_diff_medium: "中級",
         ex_diff_hard: "上級",
         ex_time_10: "10分",
+        ex_time_15: "15分",
         ex_time_30: "30分",
+        ex_time_45: "45分",
         ex_time_60: "1時間",
         ex_time_120: "2時間",
         ex_1_title: "Reactプロジェクトの構築",
@@ -267,6 +397,12 @@ const i18n = {
         ex_3_desc: "レガシーコードベースの大規模リファクタリング、パフォーマンス最適化、型安全性、テストカバレッジ。",
         ex_4_title: "マルチエージェント協業",
         ex_4_desc: "複数のCodexエージェントを使用して複雑なタスクを並列処理し、効率的なチーム協業を実現します。",
+        ex_5_title: "CLIツールの作成",
+        ex_5_desc: "引数解析、設定ファイルの読み込み、ログ出力をサポートするコマンドラインツールを開発します。",
+        ex_6_title: "データベース移行スクリプト",
+        ex_6_desc: "スキーマ変更、データ変換、ロールバックロジックを処理するデータ移行スクリプトを作成します。",
+        ex_details: "詳細 →",
+        ex_back: "← 事例一覧に戻る",
         btn_all_examples: "すべての事例を見る",
         resources_title: "リソース",
         res_1_title: "AGENTS.mdテンプレート",
@@ -289,13 +425,34 @@ const i18n = {
         bp_6: "コンテキスト肥大化を防ぐため、1スレッド1タスク",
         footer_learn: "学習",
         footer_resources: "リソース",
+        footer_brand_desc: "AIアシストプログラミングを習得するための体系的なOpenAI Codex学習リソース。",
+        footer_link_install: "インストール",
+        footer_link_concepts: "基本概念",
+        footer_link_examples: "事例",
+        footer_link_repo: "公式リポジトリ",
+        footer_link_docs: "公式ドキュメント",
         footer_copyright: "© 2026 Codex Academy. OpenAI Codex公式ドキュメントに基づく。",
+        sidebar_title: "ガイドナビ",
+        sidebar_install: "インストールと設定",
+        sidebar_concepts: "基本概念",
+        sidebar_basic: "基本的な使い方",
+        sidebar_slash: "Slashコマンド",
+        sidebar_agents: "AGENTS.md",
+        sidebar_skills: "Skills拡張",
+        sidebar_mcp: "MCP統合",
+        sidebar_advanced: "高度なテクニック",
+        sidebar_best: "ベストプラクティス",
+        breadcrumb_home: "ホーム",
+        breadcrumb_guides: "ガイド",
+        breadcrumb_examples: "事例",
         search_placeholder: "ページを検索...",
         search_hint: "ESCで閉じる",
+        search_no_results: "結果が見つかりません",
         lang_name: "日本語"
     },
-    
+
     es: {
+        page_title: "Codex Academy - Guía Completa de OpenAI Codex",
         nav_quickstart: "Inicio Rápido",
         nav_concepts: "Conceptos",
         nav_guides: "Guías",
@@ -348,12 +505,32 @@ const i18n = {
         mod_skills_desc: "Crea y usa Skills para extender las capacidades de Codex",
         mod_mcp: "Integración MCP",
         mod_mcp_desc: "Configuración y uso del Protocolo de Contexto de Modelo",
+        mod_install_li_1: "Instalación npm / Homebrew",
+        mod_install_li_2: "Configuración config.toml",
+        mod_install_li_3: "Autenticación",
+        mod_basic_li_1: "Sesiones Interactivas",
+        mod_basic_li_2: "Operaciones de Archivos",
+        mod_basic_li_3: "Generación de Código",
+        mod_slash_li_1: "Control de Sesión",
+        mod_slash_li_2: "Revisión de Código",
+        mod_slash_li_3: "Cambio de Modelo",
+        mod_agents_li_1: "Estructura de Configuración",
+        mod_agents_li_2: "Mejores Prácticas",
+        mod_agents_li_3: "Colaboración en Equipo",
+        mod_skills_li_1: "Estructura de Skill",
+        mod_skills_li_2: "Crear Skills Personalizados",
+        mod_skills_li_3: "Compartir Skills",
+        mod_mcp_li_1: "Configuración Servidor MCP",
+        mod_mcp_li_2: "Herramientas MCP Comunes",
+        mod_mcp_li_3: "Servidores MCP Personalizados",
         examples_title: "Ejemplos del Mundo Real",
         ex_diff_easy: "Principiante",
         ex_diff_medium: "Intermedio",
         ex_diff_hard: "Avanzado",
         ex_time_10: "10 min",
+        ex_time_15: "15 min",
         ex_time_30: "30 min",
+        ex_time_45: "45 min",
         ex_time_60: "1 hora",
         ex_time_120: "2 horas",
         ex_1_title: "Construir Proyecto React",
@@ -364,6 +541,12 @@ const i18n = {
         ex_3_desc: "Refactorización a gran escala de código legacy, optimización de rendimiento, seguridad de tipos y cobertura de tests.",
         ex_4_title: "Colaboración Multi-Agente",
         ex_4_desc: "Usa múltiples Agentes Codex para manejar tareas complejas en paralelo para una colaboración de equipo eficiente.",
+        ex_5_title: "Crear Herramienta CLI",
+        ex_5_desc: "Desarrolla una herramienta de línea de comandos con análisis de argumentos, lectura de archivos de configuración y salida de registros.",
+        ex_6_title: "Scripts de Migración de Base de Datos",
+        ex_6_desc: "Escribe scripts de migración de datos para manejar cambios de esquema, transformación de datos y lógica de rollback.",
+        ex_details: "Detalles →",
+        ex_back: "← Volver a Ejemplos",
         btn_all_examples: "Ver Todos los Ejemplos",
         resources_title: "Recursos",
         res_1_title: "Plantilla AGENTS.md",
@@ -386,9 +569,29 @@ const i18n = {
         bp_6: "Un hilo por tarea para evitar sobrecarga de contexto",
         footer_learn: "Aprender",
         footer_resources: "Recursos",
+        footer_brand_desc: "Recursos de aprendizaje sistemáticos de OpenAI Codex para dominar la programación asistida por IA.",
+        footer_link_install: "Instalación",
+        footer_link_concepts: "Conceptos Core",
+        footer_link_examples: "Ejemplos",
+        footer_link_repo: "Repositorio Oficial",
+        footer_link_docs: "Documentación Oficial",
         footer_copyright: "© 2026 Codex Academy. Basado en documentos oficiales de OpenAI Codex.",
+        sidebar_title: "Navegación",
+        sidebar_install: "Instalación",
+        sidebar_concepts: "Conceptos Core",
+        sidebar_basic: "Uso Básico",
+        sidebar_slash: "Comandos Slash",
+        sidebar_agents: "AGENTS.md",
+        sidebar_skills: "Extensión Skills",
+        sidebar_mcp: "Integración MCP",
+        sidebar_advanced: "Avanzado",
+        sidebar_best: "Mejores Prácticas",
+        breadcrumb_home: "Inicio",
+        breadcrumb_guides: "Guías",
+        breadcrumb_examples: "Ejemplos",
         search_placeholder: "Buscar páginas...",
         search_hint: "Presione ESC para cerrar",
+        search_no_results: "No se encontraron resultados",
         lang_name: "Español"
     }
 };
@@ -397,22 +600,33 @@ const i18n = {
 const languages = ['zh', 'en', 'ja', 'es'];
 let currentLangIndex = 0;
 
-// Get stored language or default
+// Detect browser language
+function detectBrowserLang() {
+    const browserLang = navigator.language || navigator.userLanguage || '';
+    const lang = browserLang.split('-')[0].toLowerCase();
+    if (languages.includes(lang)) return lang;
+    return 'zh';
+}
+
+// Get stored language or detect from browser
 function getStoredLang() {
     const stored = localStorage.getItem('codex-lang');
     if (stored && languages.includes(stored)) {
         currentLangIndex = languages.indexOf(stored);
         return stored;
     }
-    return languages[0];
+    const detected = detectBrowserLang();
+    currentLangIndex = languages.indexOf(detected);
+    return detected;
 }
 
 let currentLang = getStoredLang();
 
-// Apply translations
+// Apply translations to all elements with data-i18n
 function applyTranslations() {
     const texts = i18n[currentLang];
-    
+
+    // Translate text content
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (texts[key]) {
@@ -424,23 +638,28 @@ function applyTranslations() {
         }
     });
 
-    // Handle placeholder translations
+    // Translate placeholder attributes
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         if (texts[key]) {
             el.placeholder = texts[key];
         }
     });
-    
-    // Update lang dropdown
+
+    // Update page title
+    if (texts.page_title) {
+        document.title = texts.page_title;
+    }
+
+    // Sync lang dropdown value
     const langSelect = document.querySelector('.lang-select');
     if (langSelect) {
         langSelect.value = currentLang;
     }
-    
+
     // Store preference
     localStorage.setItem('codex-lang', currentLang);
-    
+
     // Update HTML lang attribute
     const langMap = { zh: 'zh-CN', en: 'en', ja: 'ja', es: 'es' };
     document.documentElement.lang = langMap[currentLang] || 'en';
@@ -455,11 +674,11 @@ function switchLanguage(lang) {
     }
 }
 
-// Initialize
+// Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
 
-    // Add change handler to lang dropdown
+    // Bind lang dropdown
     const langSelect = document.querySelector('.lang-select');
     if (langSelect) {
         langSelect.addEventListener('change', (e) => {
