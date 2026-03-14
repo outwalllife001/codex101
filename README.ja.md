@@ -1,4 +1,4 @@
-[中文](README.md) | [English](README.en.md) | [Español](README.es.md)
+[中文](README.zh.md) | [English](README.md) | [Español](README.es.md)
 
 # Codex アカデミー - OpenAI Codex 完全学習ガイド
 
