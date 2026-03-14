@@ -1,6 +1,10 @@
+[English](README.en.md) | [日本語](README.ja.md) | [Español](README.es.md)
+
 # Codex 学院 - OpenAI Codex 完全学习指南
 
 一个系统化的 OpenAI Codex 学习网站，包含从入门到精进的完整内容。
+
+> 本项目是开源项目，欢迎贡献！GitHub 仓库：[outwalllife001/codex101](https://github.com/outwalllife001/codex101)
 
 ## 📚 内容结构
 
@@ -44,6 +48,7 @@
 
 ## 🔗 相关链接
 
+- [Codex 学院 GitHub 仓库](https://github.com/outwalllife001/codex101)
 - [OpenAI Codex 官方文档](https://developers.openai.com/codex)
 - [Codex GitHub 仓库](https://github.com/openai/codex)
 

@@ -73,7 +73,7 @@ const i18n = {
         ex_3_desc: "对遗留代码库进行大规模重构，优化性能，添加类型安全和测试覆盖。",
         ex_4_title: "多 Agent 协作开发",
         ex_4_desc: "使用多个 Codex Agent 并行处理复杂任务，实现高效的团队协作模式。",
-        btn_all_examples: "查看全部 50+ 案例",
+        btn_all_examples: "查看全部案例",
         resources_title: "资源下载",
         res_1_title: "AGENTS.md 模板",
         res_1_desc: "开箱即用的项目配置文件模板",
@@ -84,6 +84,8 @@ const i18n = {
         res_4_title: "速查手册 PDF",
         res_4_desc: "所有命令和配置的快速参考",
         btn_download: "下载",
+        btn_coming_soon: "即将推出",
+        nav_faq_link: "高级技巧",
         bp_title: "最佳实践速览",
         bp_1: "使用 /plan 命令在复杂任务前制定计划",
         bp_2: "为每个项目创建定制的 AGENTS.md",
@@ -94,6 +96,8 @@ const i18n = {
         footer_learn: "学习",
         footer_resources: "资源",
         footer_copyright: "© 2026 Codex Academy. 基于 OpenAI Codex 官方文档整理。",
+        search_placeholder: "搜索页面...",
+        search_hint: "按 ESC 关闭",
         lang_name: "中文"
     },
     
@@ -166,7 +170,7 @@ const i18n = {
         ex_3_desc: "Large-scale refactoring of legacy codebase, performance optimization, type safety, and test coverage.",
         ex_4_title: "Multi-Agent Collaboration",
         ex_4_desc: "Use multiple Codex Agents to handle complex tasks in parallel for efficient team collaboration.",
-        btn_all_examples: "View All 50+ Examples",
+        btn_all_examples: "View All Examples",
         resources_title: "Resources",
         res_1_title: "AGENTS.md Template",
         res_1_desc: "Ready-to-use project configuration template",
@@ -177,6 +181,8 @@ const i18n = {
         res_4_title: "Cheatsheet PDF",
         res_4_desc: "Quick reference for all commands and configurations",
         btn_download: "Download",
+        btn_coming_soon: "Coming Soon",
+        nav_faq_link: "Advanced",
         bp_title: "Best Practices",
         bp_1: "Use /plan command before complex tasks",
         bp_2: "Create custom AGENTS.md for each project",
@@ -187,6 +193,8 @@ const i18n = {
         footer_learn: "Learn",
         footer_resources: "Resources",
         footer_copyright: "© 2026 Codex Academy. Based on OpenAI Codex official docs.",
+        search_placeholder: "Search pages...",
+        search_hint: "Press ESC to close",
         lang_name: "English"
     },
     
@@ -259,7 +267,7 @@ const i18n = {
         ex_3_desc: "レガシーコードベースの大規模リファクタリング、パフォーマンス最適化、型安全性、テストカバレッジ。",
         ex_4_title: "マルチエージェント協業",
         ex_4_desc: "複数のCodexエージェントを使用して複雑なタスクを並列処理し、効率的なチーム協業を実現します。",
-        btn_all_examples: "50以上の事例を見る",
+        btn_all_examples: "すべての事例を見る",
         resources_title: "リソース",
         res_1_title: "AGENTS.mdテンプレート",
         res_1_desc: "すぐに使えるプロジェクト設定テンプレート",
@@ -270,6 +278,8 @@ const i18n = {
         res_4_title: "チートシートPDF",
         res_4_desc: "すべてのコマンドと設定のクイックリファレンス",
         btn_download: "ダウンロード",
+        btn_coming_soon: "近日公開",
+        nav_faq_link: "高度なテクニック",
         bp_title: "ベストプラクティス",
         bp_1: "複雑なタスクの前に/planコマンドを使用",
         bp_2: "各プロジェクトにカスタムAGENTS.mdを作成",
@@ -280,6 +290,8 @@ const i18n = {
         footer_learn: "学習",
         footer_resources: "リソース",
         footer_copyright: "© 2026 Codex Academy. OpenAI Codex公式ドキュメントに基づく。",
+        search_placeholder: "ページを検索...",
+        search_hint: "ESCで閉じる",
         lang_name: "日本語"
     },
     
@@ -352,7 +364,7 @@ const i18n = {
         ex_3_desc: "Refactorización a gran escala de código legacy, optimización de rendimiento, seguridad de tipos y cobertura de tests.",
         ex_4_title: "Colaboración Multi-Agente",
         ex_4_desc: "Usa múltiples Agentes Codex para manejar tareas complejas en paralelo para una colaboración de equipo eficiente.",
-        btn_all_examples: "Ver Todos los 50+ Ejemplos",
+        btn_all_examples: "Ver Todos los Ejemplos",
         resources_title: "Recursos",
         res_1_title: "Plantilla AGENTS.md",
         res_1_desc: "Plantilla de configuración de proyecto lista para usar",
@@ -363,6 +375,8 @@ const i18n = {
         res_4_title: "PDF Guía Rápida",
         res_4_desc: "Referencia rápida para todos los comandos y configuraciones",
         btn_download: "Descargar",
+        btn_coming_soon: "Próximamente",
+        nav_faq_link: "Avanzado",
         bp_title: "Mejores Prácticas",
         bp_1: "Usa el comando /plan antes de tareas complejas",
         bp_2: "Crea AGENTS.md personalizado para cada proyecto",
@@ -373,6 +387,8 @@ const i18n = {
         footer_learn: "Aprender",
         footer_resources: "Recursos",
         footer_copyright: "© 2026 Codex Academy. Basado en documentos oficiales de OpenAI Codex.",
+        search_placeholder: "Buscar páginas...",
+        search_hint: "Presione ESC para cerrar",
         lang_name: "Español"
     }
 };
@@ -407,12 +423,19 @@ function applyTranslations() {
             }
         }
     });
+
+    // Handle placeholder translations
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (texts[key]) {
+            el.placeholder = texts[key];
+        }
+    });
     
-    // Update lang switcher button
-    const langBtn = document.querySelector('.lang-switcher');
-    if (langBtn) {
-        const nextLang = languages[(currentLangIndex + 1) % languages.length];
-        langBtn.textContent = i18n[nextLang].lang_name;
+    // Update lang dropdown
+    const langSelect = document.querySelector('.lang-select');
+    if (langSelect) {
+        langSelect.value = currentLang;
     }
     
     // Store preference
@@ -423,17 +446,24 @@ function applyTranslations() {
     document.documentElement.lang = langMap[currentLang] || 'en';
 }
 
-// Toggle to next language
-function toggleLanguage() {
-    currentLangIndex = (currentLangIndex + 1) % languages.length;
-    currentLang = languages[currentLangIndex];
-    applyTranslations();
+// Switch to specific language
+function switchLanguage(lang) {
+    if (languages.includes(lang)) {
+        currentLangIndex = languages.indexOf(lang);
+        currentLang = lang;
+        applyTranslations();
+    }
 }
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
-    
-    // Add click handler to lang switcher
-    document.querySelector('.lang-switcher')?.addEventListener('click', toggleLanguage);
+
+    // Add change handler to lang dropdown
+    const langSelect = document.querySelector('.lang-select');
+    if (langSelect) {
+        langSelect.addEventListener('change', (e) => {
+            switchLanguage(e.target.value);
+        });
+    }
 });
