@@ -1287,3 +1287,35 @@ th {
 .lang-content[hidden] {
     display: none !important;
 }
+
+.lang-fallback-notice {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin: 0 0 1.25rem;
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.08);
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+}
+
+.lang-fallback-notice strong {
+    color: #fbbf24;
+    font-size: 0.95rem;
+}
+
+.lang-fallback-notice span {
+    line-height: 1.5;
+}
+
+[data-theme="light"] .lang-fallback-notice {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(217, 119, 6, 0.28);
+    color: #92400e;
+}
+
+[data-theme="light"] .lang-fallback-notice strong {
+    color: #b45309;
+}

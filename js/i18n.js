@@ -622,6 +622,71 @@ function getStoredLang() {
 
 let currentLang = getStoredLang();
 
+const languageLabels = {
+    zh: "中文",
+    en: "English",
+    ja: "日本語",
+    es: "Español"
+};
+
+function getFallbackNotice(selectedLang, shownLang, availableLangs) {
+    const available = availableLangs.map(lang => languageLabels[lang] || lang).join(" / ");
+    const selected = languageLabels[selectedLang] || selectedLang;
+    const shown = languageLabels[shownLang] || shownLang;
+
+    if (currentLang === 'zh') {
+        return {
+            title: "当前页面正文已回退显示",
+            body: `这个页面的完整正文目前只提供 ${available}。你选择的是 ${selected}，所以正文显示为 ${shown}。`
+        };
+    }
+    if (currentLang === 'ja') {
+        return {
+            title: "本文はフォールバック表示です",
+            body: `このページの全文は現在 ${available} のみ対応しています。選択中の表示言語は ${selected} のため、本文は ${shown} で表示しています。`
+        };
+    }
+    if (currentLang === 'es') {
+        return {
+            title: "El contenido usa idioma de respaldo",
+            body: `El contenido completo de esta pagina solo esta disponible en ${available}. Has seleccionado ${selected}, por eso el cuerpo se muestra en ${shown}.`
+        };
+    }
+
+    return {
+        title: "Content Language Fallback",
+        body: `This page currently has full body content only in ${available}. You selected ${selected}, so the main content is shown in ${shown}.`
+    };
+}
+
+function updateLangFallbackNotice(showLang, available) {
+    const firstLangBlock = document.querySelector('.lang-content');
+    const container = firstLangBlock?.parentElement;
+    const noticeId = 'langFallbackNotice';
+    const shouldShow = firstLangBlock && currentLang !== showLang;
+    let notice = document.getElementById(noticeId);
+
+    if (!shouldShow || !container) {
+        notice?.remove();
+        return;
+    }
+
+    if (!notice) {
+        notice = document.createElement('div');
+        notice.id = noticeId;
+        notice.className = 'lang-fallback-notice';
+        container.insertBefore(notice, firstLangBlock);
+    }
+
+    const copy = getFallbackNotice(
+        currentLang,
+        showLang,
+        Object.keys(available).filter(lang => available[lang])
+    );
+
+    notice.innerHTML = `<strong>${copy.title}</strong><span>${copy.body}</span>`;
+}
+
 // Apply translations to all elements with data-i18n
 function applyTranslations() {
     const texts = i18n[currentLang];
@@ -671,7 +736,10 @@ function applyTranslations() {
 // Show/hide language-specific content blocks
 function updateLangContent() {
     var langBlocks = document.querySelectorAll('.lang-content');
-    if (langBlocks.length === 0) return;
+    if (langBlocks.length === 0) {
+        updateLangFallbackNotice(null, {});
+        return;
+    }
 
     // Check which languages are available on this page
     var available = {};
@@ -686,6 +754,8 @@ function updateLangContent() {
     langBlocks.forEach(function(block) {
         block.hidden = (block.lang !== showLang);
     });
+
+    updateLangFallbackNotice(showLang, available);
 
     // Re-highlight code blocks in the now-visible content
     if (typeof hljs !== 'undefined') {
