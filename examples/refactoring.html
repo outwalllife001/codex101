@@ -206,6 +206,146 @@ Analyze all JavaScript files under @src/ directory, create a detailed TypeScript
         </ul>
         </div>
 
+        <div class="lang-content" lang="ja" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← 事例一覧に戻る</a>
+
+        <h1 style="margin: 1rem 0;">コードのリファクタリングと最適化</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">上級</span>
+            <span class="example-time">1時間</span>
+        </div>
+
+        <h2>シナリオ</h2>
+        <p>引き継いだレガシープロジェクトを JavaScript から TypeScript に移行し、パフォーマンスを改善しながらテストカバレッジも追加する必要があります。</p>
+
+        <h2>ステップ 1: Checkpoint を作成する</h2>
+
+        <pre><code>git add -A && git commit -m "checkpoint: before refactoring"</code></pre>
+
+        <h2>ステップ 2: 分析と計画</h2>
+
+        <pre><code>/plan
+
+@src/ 配下のすべての JavaScript ファイルを分析し、次を含む詳細な TypeScript 移行計画を作成してください。
+1. ファイル移行順序（依存関係ベース）
+2. 追加すべき型定義
+3. 想定される型安全性の課題
+4. リファクタリングが必要なコードパターン</code></pre>
+
+        <h2>ステップ 3: 段階的に移行する</h2>
+
+        <h3>ユーティリティ関数を移行</h3>
+        <pre><code>> @src/utils/ 配下のユーティリティ関数を TypeScript に変換してください
+> 完全な型定義を追加してください
+> すべての関数に戻り値型の注釈を付けてください</code></pre>
+
+        <h3>データ層を移行</h3>
+        <pre><code>> @src/models/ と @src/services/ を TypeScript に変換してください
+> すべてのデータインターフェースを定義してください
+> 厳密な型チェックを使用してください</code></pre>
+
+        <h3>UI コンポーネントを移行</h3>
+        <pre><code>> @src/components/ を TypeScript React コンポーネントに変換してください
+> Props のインターフェースを定義してください
+> 型エラーを修正してください</code></pre>
+
+        <h2>ステップ 4: パフォーマンス最適化</h2>
+
+        <pre><code>> @src/components/List.tsx のパフォーマンス問題を分析してください
+> useMemo と useCallback を使って描画を最適化してください
+> 大量データ一覧向けに仮想スクロールを実装してください</code></pre>
+
+        <h2>ステップ 5: テストを追加する</h2>
+
+        <pre><code>> コアな業務ロジックの単体テストを書いてください
+> React コンポーネントテスト（React Testing Library）を追加してください
+> テストカバレッジを 80% 以上にしてください</code></pre>
+
+        <h2>ステップ 6: コードレビュー</h2>
+
+        <pre><code>/review</code></pre>
+
+        <h2>重要なコツ</h2>
+
+        <ul>
+            <li><code>/plan</code> で詳細な計画を立てる</li>
+            <li>1 回に 1 モジュールずつ段階的に移行する</li>
+            <li><code>/diff</code> を頻繁に使って差分を確認する</li>
+            <li>最後に包括的な <code>/review</code> を行う</li>
+        </ul>
+        </div>
+
+        <div class="lang-content" lang="es" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Volver a los ejemplos</a>
+
+        <h1 style="margin: 1rem 0;">Refactorizacion y optimizacion de codigo</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">Avanzado</span>
+            <span class="example-time">1 hora</span>
+        </div>
+
+        <h2>Escenario</h2>
+        <p>Has heredado un proyecto legado y necesitas migrarlo de JavaScript a TypeScript, optimizar el rendimiento y agregar cobertura de pruebas.</p>
+
+        <h2>Paso 1: Crear un checkpoint</h2>
+
+        <pre><code>git add -A && git commit -m "checkpoint: before refactoring"</code></pre>
+
+        <h2>Paso 2: Analizar y planificar</h2>
+
+        <pre><code>/plan
+
+Analiza todos los archivos JavaScript dentro de @src/ y crea un plan detallado de migracion a TypeScript que incluya:
+1. El orden de migracion de archivos (segun dependencias)
+2. Las definiciones de tipos que se deben agregar
+3. Posibles problemas de seguridad de tipos
+4. Patrones de codigo que necesitan refactorizacion</code></pre>
+
+        <h2>Paso 3: Migracion gradual</h2>
+
+        <h3>Migrar funciones utilitarias</h3>
+        <pre><code>> Convierte a TypeScript las funciones utilitarias de @src/utils/
+> Agrega definiciones de tipos completas
+> Asegurate de que todas las funciones tengan anotaciones de tipo de retorno</code></pre>
+
+        <h3>Migrar la capa de datos</h3>
+        <pre><code>> Convierte @src/models/ y @src/services/ a TypeScript
+> Define todas las interfaces de datos
+> Usa comprobacion estricta de tipos</code></pre>
+
+        <h3>Migrar componentes UI</h3>
+        <pre><code>> Convierte @src/components/ en componentes React con TypeScript
+> Define interfaces para Props
+> Corrige cualquier error de tipos</code></pre>
+
+        <h2>Paso 4: Optimizacion de rendimiento</h2>
+
+        <pre><code>> Analiza los problemas de rendimiento en @src/components/List.tsx
+> Optimiza el renderizado con useMemo y useCallback
+> Implementa scroll virtual para listas de datos grandes</code></pre>
+
+        <h2>Paso 5: Agregar pruebas</h2>
+
+        <pre><code>> Escribe pruebas unitarias para la logica principal del negocio
+> Agrega pruebas de componentes React (React Testing Library)
+> Asegura una cobertura de pruebas de 80% o superior</code></pre>
+
+        <h2>Paso 6: Revision de codigo</h2>
+
+        <pre><code>/review</code></pre>
+
+        <h2>Consejos clave</h2>
+
+        <ul>
+            <li>Usa <code>/plan</code> para crear un plan detallado</li>
+            <li>Migra por lotes, un modulo a la vez</li>
+            <li>Usa <code>/diff</code> con frecuencia para revisar cambios</li>
+            <li>Haz una revision completa con <code>/review</code> al final</li>
+        </ul>
+        </div>
+
     </div>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">

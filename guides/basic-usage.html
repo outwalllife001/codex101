@@ -217,6 +217,142 @@
                 <li>Check out <a href="../examples/">Practical Examples</a> for inspiration</li>
             </ul>
             </div>
+
+            <div class="lang-content" lang="ja" hidden>
+            <h1>基本的な使い方</h1>
+
+            <p>このセクションでは Codex CLI の基本操作を紹介します。Codex を使った AI 支援プログラミングを素早く始めるための土台になります。</p>
+
+            <h2>Codex を起動する</h2>
+            <p>プロジェクトのディレクトリで次を実行します：</p>
+            <pre><code>codex</code></pre>
+            <p>これで対話型 TUI（Text User Interface）が起動します。</p>
+
+            <h2>最初のタスク</h2>
+            <p>Codex に入ったら、やりたいことを自然言語で説明します：</p>
+            <pre><code>> 3000 番ポートで待ち受けて "Hello World" を返すシンプルな HTTP サーバーを作成して</code></pre>
+
+            <h2>応答の流れを理解する</h2>
+            <p>Codex は次のように動作します：</p>
+            <ol>
+                <li>要求内容を解析する</li>
+                <li>実行プランを提案する（作成・変更するファイルを一覧化）</li>
+                <li>確認を待つ（Enter キーで承認）</li>
+                <li>実行して結果を表示する</li>
+            </ol>
+
+            <h2>代表的な操作モード</h2>
+
+            <h3>1. コード生成</h3>
+            <pre><code>> 日付文字列を受け取って曜日を返す関数を書いて</code></pre>
+
+            <h3>2. コード説明</h3>
+            <pre><code>> このファイルが何をしているか説明して @src/utils/helper.ts</code></pre>
+
+            <h3>3. リファクタリング</h3>
+            <pre><code>> このコールバック関数を async/await に書き換えて</code></pre>
+
+            <h3>4. バグ修正</h3>
+            <pre><code>> このテストが失敗しています。修正してください: @tests/auth.test.ts</code></pre>
+
+            <h2>ファイル参照</h2>
+            <p><code>@</code> 記号を使ってファイルやディレクトリを参照できます：</p>
+            <ul>
+                <li><code>@filename.ts</code> - 単一ファイルを参照</li>
+                <li><code>@src/</code> - ディレクトリ全体を参照</li>
+                <li><code>@README.md @package.json</code> - 複数ファイルを同時に参照</li>
+            </ul>
+
+            <h2>コンテキスト管理</h2>
+
+            <h3>状態確認</h3>
+            <pre><code>/status</code></pre>
+
+            <h3>コンテキスト圧縮（長いセッション向け）</h3>
+            <pre><code>/compact</code></pre>
+
+            <h3>新しいセッションを開始</h3>
+            <pre><code>/new</code></pre>
+
+            <h2>Codex を終了する</h2>
+            <pre><code>/quit</code></pre>
+            <p>または <code>Ctrl+C</code> を押します。</p>
+
+            <h2>次のステップ</h2>
+            <ul>
+                <li><a href="slash-commands.html">Slash コマンド</a> を学んで作業効率を上げる</li>
+                <li><a href="agents-md.html">AGENTS.md</a> を確認してプロジェクト設定をカスタマイズする</li>
+                <li><a href="../examples/">実践例</a> を見て使い方のヒントを得る</li>
+            </ul>
+            </div>
+
+            <div class="lang-content" lang="es" hidden>
+            <h1>Uso Basico</h1>
+
+            <p>Esta seccion presenta las operaciones basicas de Codex CLI y te ayuda a empezar rapidamente con programacion asistida por IA usando Codex.</p>
+
+            <h2>Iniciar Codex</h2>
+            <p>Ejecuta esto dentro del directorio de tu proyecto:</p>
+            <pre><code>codex</code></pre>
+            <p>Esto abrira la TUI interactiva (Text User Interface).</p>
+
+            <h2>Tu primera tarea</h2>
+            <p>Una vez dentro de Codex, describe en lenguaje natural lo que quieres hacer:</p>
+            <pre><code>> Crea un servidor HTTP simple que escuche en el puerto 3000 y devuelva "Hello World"</code></pre>
+
+            <h2>Entender la respuesta</h2>
+            <p>Codex hara lo siguiente:</p>
+            <ol>
+                <li>Analizar tu solicitud</li>
+                <li>Proponer un plan de ejecucion (listando los archivos a crear o modificar)</li>
+                <li>Esperar tu confirmacion (pulsa Enter)</li>
+                <li>Ejecutar y mostrar los resultados</li>
+            </ol>
+
+            <h2>Modos de operacion comunes</h2>
+
+            <h3>1. Generacion de codigo</h3>
+            <pre><code>> Escribe una funcion que reciba una cadena de fecha y devuelva el dia de la semana</code></pre>
+
+            <h3>2. Explicacion de codigo</h3>
+            <pre><code>> Explica que hace este archivo @src/utils/helper.ts</code></pre>
+
+            <h3>3. Refactorizacion de codigo</h3>
+            <pre><code>> Refactoriza esta funcion con callback para usar async/await</code></pre>
+
+            <h3>4. Correccion de errores</h3>
+            <pre><code>> Esta prueba esta fallando, por favor corrigela: @tests/auth.test.ts</code></pre>
+
+            <h2>Referencias de archivos</h2>
+            <p>Usa el simbolo <code>@</code> para referenciar archivos o directorios:</p>
+            <ul>
+                <li><code>@filename.ts</code> - Referenciar un solo archivo</li>
+                <li><code>@src/</code> - Referenciar un directorio completo</li>
+                <li><code>@README.md @package.json</code> - Referenciar varios archivos</li>
+            </ul>
+
+            <h2>Gestion del contexto</h2>
+
+            <h3>Comprobar estado</h3>
+            <pre><code>/status</code></pre>
+
+            <h3>Compactar contexto (sesiones largas)</h3>
+            <pre><code>/compact</code></pre>
+
+            <h3>Iniciar una nueva sesion</h3>
+            <pre><code>/new</code></pre>
+
+            <h2>Salir de Codex</h2>
+            <pre><code>/quit</code></pre>
+            <p>O pulsa <code>Ctrl+C</code>.</p>
+
+            <h2>Siguientes pasos</h2>
+            <ul>
+                <li>Aprende <a href="slash-commands.html">Comandos Slash</a> para mejorar tu eficiencia</li>
+                <li>Explora <a href="agents-md.html">AGENTS.md</a> para personalizar la configuracion del proyecto</li>
+                <li>Revisa <a href="../examples/">Ejemplos practicos</a> para inspirarte</li>
+            </ul>
+            </div>
         </main>
     </div>
 

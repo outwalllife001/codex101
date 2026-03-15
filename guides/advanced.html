@@ -415,6 +415,340 @@ web_search = "live"  # Or "cached"
                 <li>Pre-warm frequently used context</li>
             </ul>
             </div>
+
+            <div class="lang-content" lang="ja" hidden>
+            <h1>高度なテクニック</h1>
+
+            <h2>プロンプト設計</h2>
+
+            <h3>4 要素フレームワーク</h3>
+            <p>効果的なプロンプトには次の 4 要素を含めるとよいです：</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>要素</th>
+                        <th>説明</th>
+                        <th>例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Goal</strong></td>
+                        <td>何を変更・構築したいのか？</td>
+                        <td>"ユーザー認証機能を追加する"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Context</strong></td>
+                        <td>どのファイルやエラーが関係しているか？</td>
+                        <td>"@auth.ts @user.ts"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Constraints</strong></td>
+                        <td>どんな基準に従うべきか？</td>
+                        <td>"JWT を使い、セッションは使わない"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Completion Criteria</strong></td>
+                        <td>どの状態なら完了とみなすか？</td>
+                        <td>"テスト通過、ログインと登録が動く"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>プロンプト例</h3>
+            <pre><code>Goal: Refactor the auth module to support JWT token refresh
+Context: All files under the @src/auth/ directory
+Constraints:
+- Use pure JWT, no sessions
+- Maintain backward compatibility
+- Add rate limiting
+Completion Criteria:
+- All existing tests pass
+- New token refresh tests added
+- Manual testing confirms login flow works</code></pre>
+
+            <h2>Planning Mode</h2>
+
+            <h3>/plan を使う場面</h3>
+            <ul>
+                <li>複数ファイルにまたがる変更</li>
+                <li>アーキテクチャやインターフェースを触る必要がある</li>
+                <li>最適な実装方法に迷っている</li>
+                <li>作業が長くなりそうなとき</li>
+            </ul>
+
+            <h3>利用フロー</h3>
+            <pre><code>/plan
+# Or with an initial description
+/plan Refactor database access layer, add connection pooling</code></pre>
+
+            <h2>Git ワークフローとの統合</h2>
+
+            <h3>Git チェックポイントを使う</h3>
+            <p>Codex がコードベースを大きく変更することもあるため、次の流れをおすすめします：</p>
+            <ol>
+                <li>作業前にチェックポイントを作る：<pre><code>git add -A && git commit -m "checkpoint: before codex auth refactor"</code></li>
+                <li>作業後に差分を確認する</li>
+                <li>必要ならロールバックする：<pre><code>git reset --hard HEAD~1</code></li>
+            </ol>
+
+            <h3>Git Worktree を使う</h3>
+            <p>同じコードベースで複数の Codex スレッドを並行実行したい場合：</p>
+            <pre><code># Create worktrees
+git worktree add ../my-project-feature-a feature-a
+git worktree add ../my-project-feature-b feature-b
+
+# Start Codex in different directories
+cd ../my-project-feature-a && codex
+cd ../my-project-feature-b && codex</code></pre>
+
+            <h2>Codex をスクリプト化する</h2>
+
+            <h3>非対話で実行する</h3>
+            <pre><code># Execute a single task
+codex exec "Fix CI failure"
+
+# Quiet mode
+codex exec --quiet "Update dependencies"
+
+# Combined with shell scripts
+for file in src/**/*.test.ts; do
+  codex exec "Check test coverage of $file"
+done</code></pre>
+
+            <h3>CI/CD 統合</h3>
+            <pre><code># .github/workflows/codex-review.yml
+name: AI Code Review
+on: [pull_request]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Codex Review
+        run: |
+          npm i -g @openai/codex
+          codex exec "/review" --quiet</code></pre>
+
+            <h2>マルチエージェントワークフロー</h2>
+
+            <h3>Experimental 機能を有効化</h3>
+            <pre><code>/experimental</code></pre>
+
+            <h3>ワークフロー例</h3>
+            <p>メイン Agent は中核機能に集中し、サブ Agent は次の作業を担当します：</p>
+            <ul>
+                <li>テストケース作成</li>
+                <li>ドキュメント更新</li>
+                <li>依存関係チェック</li>
+                <li>性能分析</li>
+            </ul>
+
+            <h3>Agent を切り替える</h3>
+            <pre><code>/agent  # Select and switch to another thread</code></pre>
+
+            <h2>音声入力</h2>
+            <p>Codex アプリは音声入力をサポートしています。マイクアイコンをクリックするかキーボードショートカットで開始し、音声で要件を説明できます。</p>
+
+            <h2>画像入力</h2>
+            <p>画像のドラッグ＆ドロップや貼り付けにも対応しています：</p>
+            <ul>
+                <li>デザインモックからコード生成</li>
+                <li>スクリーンショットのエラー解析</li>
+                <li>UI レビュー</li>
+            </ul>
+
+            <h2>Web Search</h2>
+            <pre><code># Enable in config.toml
+web_search = "live"  # Or "cached"
+
+# Then ask directly
+> What are the new features of Next.js 14 Server Actions?</code></pre>
+
+            <h2>パフォーマンス最適化</h2>
+
+            <h3>トークン消費を減らす</h3>
+            <ul>
+                <li><code>/compact</code> を定期的に使う</li>
+                <li>必要ない大きなファイルはむやみに含めない</li>
+                <li>広すぎる依頼より具体的な依頼にする</li>
+            </ul>
+
+            <h3>応答速度を上げる</h3>
+            <ul>
+                <li>単純なタスクでは low/minimal reasoning を使う</li>
+                <li>バッチ処理では <code>--quiet</code> を使う</li>
+                <li>よく使うコンテキストは事前に温めておく</li>
+            </ul>
+            </div>
+
+            <div class="lang-content" lang="es" hidden>
+            <h1>Consejos Avanzados</h1>
+
+            <h2>Ingenieria de prompts</h2>
+
+            <h3>Marco de cuatro elementos</h3>
+            <p>Un prompt eficaz debe contener cuatro elementos:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Descripcion</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Goal</strong></td>
+                        <td>Que quieres cambiar o construir?</td>
+                        <td>"Agregar autenticacion de usuarios"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Context</strong></td>
+                        <td>Que archivos o errores son relevantes?</td>
+                        <td>"@auth.ts @user.ts"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Constraints</strong></td>
+                        <td>Que normas deben seguirse?</td>
+                        <td>"Usar JWT, sin sesiones"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Completion Criteria</strong></td>
+                        <td>En que condiciones se considera terminado?</td>
+                        <td>"Los tests pasan y login/registro funcionan"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Ejemplo de prompt</h3>
+            <pre><code>Goal: Refactor the auth module to support JWT token refresh
+Context: All files under the @src/auth/ directory
+Constraints:
+- Use pure JWT, no sessions
+- Maintain backward compatibility
+- Add rate limiting
+Completion Criteria:
+- All existing tests pass
+- New token refresh tests added
+- Manual testing confirms login flow works</code></pre>
+
+            <h2>Planning mode</h2>
+
+            <h3>Cuando usar /plan</h3>
+            <ul>
+                <li>Cambios que afectan a varios archivos</li>
+                <li>Necesitas modificar arquitectura o interfaces</li>
+                <li>No tienes claro el mejor enfoque de implementacion</li>
+                <li>La tarea puede llevar bastante tiempo</li>
+            </ul>
+
+            <h3>Flujo de uso</h3>
+            <pre><code>/plan
+# Or with an initial description
+/plan Refactor database access layer, add connection pooling</code></pre>
+
+            <h2>Integracion con el flujo de Git</h2>
+
+            <h3>Usar checkpoints de Git</h3>
+            <p>Como Codex puede modificar bastante el codigo, se recomienda:</p>
+            <ol>
+                <li>Crear un checkpoint antes de empezar una tarea:<pre><code>git add -A && git commit -m "checkpoint: before codex auth refactor"</code></li>
+                <li>Revisar el diff cuando termine la tarea</li>
+                <li>Hacer rollback si hace falta:<pre><code>git reset --hard HEAD~1</code></li>
+            </ol>
+
+            <h3>Usar Git Worktrees</h3>
+            <p>Cuando necesites ejecutar varios hilos de Codex sobre la misma base de codigo:</p>
+            <pre><code># Create worktrees
+git worktree add ../my-project-feature-a feature-a
+git worktree add ../my-project-feature-b feature-b
+
+# Start Codex in different directories
+cd ../my-project-feature-a && codex
+cd ../my-project-feature-b && codex</code></pre>
+
+            <h2>Automatizar Codex con scripts</h2>
+
+            <h3>Ejecucion no interactiva</h3>
+            <pre><code># Execute a single task
+codex exec "Fix CI failure"
+
+# Quiet mode
+codex exec --quiet "Update dependencies"
+
+# Combined with shell scripts
+for file in src/**/*.test.ts; do
+  codex exec "Check test coverage of $file"
+done</code></pre>
+
+            <h3>Integracion CI/CD</h3>
+            <pre><code># .github/workflows/codex-review.yml
+name: AI Code Review
+on: [pull_request]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Codex Review
+        run: |
+          npm i -g @openai/codex
+          codex exec "/review" --quiet</code></pre>
+
+            <h2>Flujo multi-agent</h2>
+
+            <h3>Activar funciones experimentales</h3>
+            <pre><code>/experimental</code></pre>
+
+            <h3>Ejemplo de flujo</h3>
+            <p>El Agent principal se centra en la funcionalidad core, mientras que los sub-agents manejan:</p>
+            <ul>
+                <li>Escritura de tests</li>
+                <li>Actualizacion de documentacion</li>
+                <li>Revision de dependencias</li>
+                <li>Analisis de rendimiento</li>
+            </ul>
+
+            <h3>Cambiar de Agent</h3>
+            <pre><code>/agent  # Select and switch to another thread</code></pre>
+
+            <h2>Entrada por voz</h2>
+            <p>La app de Codex admite entrada por voz. Haz clic en el icono del microfono o usa un atajo de teclado para describir tus necesidades con la voz.</p>
+
+            <h2>Entrada de imagen</h2>
+            <p>Tambien admite arrastrar, soltar o pegar imagenes:</p>
+            <ul>
+                <li>Pasar mockups de diseno a codigo</li>
+                <li>Analizar errores a partir de capturas</li>
+                <li>Revisar interfaces</li>
+            </ul>
+
+            <h2>Busqueda web</h2>
+            <pre><code># Enable in config.toml
+web_search = "live"  # Or "cached"
+
+# Then ask directly
+> What are the new features of Next.js 14 Server Actions?</code></pre>
+
+            <h2>Optimizacion de rendimiento</h2>
+
+            <h3>Reducir consumo de tokens</h3>
+            <ul>
+                <li>Usa <code>/compact</code> con regularidad</li>
+                <li>Evita incluir archivos grandes si no son necesarios</li>
+                <li>Haz peticiones especificas en lugar de demasiado amplias</li>
+            </ul>
+
+            <h3>Mejorar la velocidad de respuesta</h3>
+            <ul>
+                <li>Usa razonamiento low/minimal para tareas sencillas</li>
+                <li>Usa <code>--quiet</code> en procesos por lotes</li>
+                <li>Precalienta el contexto que usas con frecuencia</li>
+            </ul>
+            </div>
         </main>
     </div>
 

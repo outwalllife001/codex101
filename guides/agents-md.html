@@ -542,6 +542,466 @@ See: <a href="./docs/architecture.md">./docs/architecture.md</a>
             </ol>
             </div>
 
+            <div class="lang-content" lang="ja" hidden>
+            <h1>AGENTS.md 完全ガイド</h1>
+
+            <p>
+                <code>AGENTS.md</code> は Codex にとっての「Agent 向け README」です。特定のリポジトリでどう振る舞うべきかを Codex に伝えます。
+                Codex の効率と一貫性を高めるうえで、最も重要な設定ファイルです。
+            </p>
+
+            <h2>なぜ AGENTS.md が必要なのか？</h2>
+            <p>うまく機能するプロンプトの型が見つかったら、次の段階はそれを毎回手で繰り返さないことです。その役割を担うのが AGENTS.md です。</p>
+
+            <p>良い AGENTS.md は Codex に次のことを理解させます：</p>
+            <ul>
+                <li>リポジトリ構造と重要なディレクトリ</li>
+                <li>プロジェクトの実行・ビルド・テスト方法</li>
+                <li>チームのエンジニアリング基準と PR の期待値</li>
+                <li>制約事項や禁止事項</li>
+                <li>「完了」とは何か、どう検証するか</li>
+            </ul>
+
+            <h2>階層</h2>
+            <p>Codex は次の場所で AGENTS.md を探します（優先順）：</p>
+
+            <ol>
+                <li><strong>現在のディレクトリ</strong>: 作業ファイルに最も近い AGENTS.md</li>
+                <li><strong>プロジェクトルート</strong>: リポジトリ全体で共有する基準</li>
+                <li><strong>~/.codex/</strong>: 個人のデフォルト設定</li>
+            </ol>
+
+            <div class="callout">
+                <strong>優先ルール</strong>: より具体的なファイル（現在の作業ディレクトリに近いもの）が、より一般的な設定を上書きします。
+            </div>
+
+            <h2>クイックスタート</h2>
+            <p><code>/init</code> コマンドを使うと、AGENTS.md のひな形をすばやく生成できます：</p>
+            <pre><code>codex> /init</code></pre>
+
+            <h2>完全テンプレート</h2>
+            <pre><code># AGENTS.md - [Project Name]
+
+## Project Overview
+
+[Brief description of the project's purpose and tech stack]
+
+## Directory Structure
+
+```
+.
+├── src/           # Source code
+├── tests/         # Test files
+├── docs/          # Documentation
+├── config/        # Configuration files
+└── scripts/       # Utility scripts
+```
+
+## Tech Stack
+
+- **Framework**: [React/Vue/Express etc.]
+- **Language**: [TypeScript/Python/Go etc.]
+- **Build Tool**: [Vite/Webpack/esbuild etc.]
+- **Test Framework**: [Jest/Vitest/Pytest etc.]
+
+## Common Commands
+
+### Development
+```bash
+# Start development server
+npm run dev
+
+# Build project
+npm run build
+
+# Type checking
+npm run typecheck
+```
+
+### Testing
+```bash
+# Run all tests
+npm test
+
+# Run specific test file
+npm test -- path/to/test
+
+# With coverage report
+npm run test:coverage
+```
+
+### Code Quality
+```bash
+# Run linter
+npm run lint
+
+# Auto-fix issues
+npm run lint:fix
+
+# Format code
+npm run format
+```
+
+## Code Standards
+
+### Naming Conventions
+- Components use PascalCase: <code>MyComponent.tsx</code>
+- Utility functions use camelCase: <code>formatDate.ts</code>
+- Constants use UPPER_SNAKE_CASE
+
+### File Organization
+- One folder per component, containing <code>index.tsx</code> and <code>styles.css</code>
+- Shared types go in <code>src/types/</code>
+- Utility functions go in <code>src/utils/</code>
+
+### Import Order
+1. External dependencies
+2. Internal modules
+3. Relative path imports
+4. Type imports
+
+## Constraints and Prohibited Actions
+
+- Do not use the <code>any</code> type
+- Do not commit console.log
+- Do not call APIs directly in components
+- All functions must have return type annotations
+- All components must have PropTypes or interface definitions
+
+## PR Expectations
+
+- Run the full test suite before submitting
+- Ensure code passes lint checks
+- Add relevant unit tests
+- Update related documentation
+
+## Definition of Done
+
+Criteria for task completion:
+1. Code implementation complete
+2. Tests pass (new features must have test coverage)
+3. Type checking passes
+4. Lint checks pass
+5. Related documentation updated
+
+## Debugging Guide
+
+### Common Issues
+- Startup failure: Check if .env file is configured correctly
+- Test failure: Verify database connection is working
+- Build failure: Check for unresolved type errors
+
+### Log Locations
+- Application logs: <code>logs/app.log</code>
+- Error logs: <code>logs/error.log</code>
+</code></pre>
+
+            <h2>ベストプラクティス</h2>
+
+            <h3>1. 簡潔に保つ</h3>
+            <p>曖昧なルールが大量に並んだ長文より、短く正確な AGENTS.md のほうが役立ちます。まずは基本から書き始め、同じミスが繰り返されたときにだけルールを足してください。</p>
+
+            <h3>2. 実際の摩擦を起点にする</h3>
+            <p>Codex が同じ失敗を 2 回したら、レトロスペクティブを行わせて AGENTS.md を更新します。ガイダンスは実際に起きた摩擦をもとに書くべきです。</p>
+
+            <h3>3. 他ファイルを参照する</h3>
+            <p>AGENTS.md が大きくなりすぎたら、メインファイルは簡潔に保ち、タスク別の Markdown を参照するようにします：</p>
+            <pre><code>## Code Review
+See: <a href="./docs/code_review.md">./docs/code_review.md</a>
+
+## Architecture Decisions
+See: <a href="./docs/architecture.md">./docs/architecture.md</a>
+</code></pre>
+
+            <h3>4. チームで共有する</h3>
+            <p>AGENTS.md をバージョン管理に含めれば、開発者と Agent 全員が同じワークフローを共有できます。</p>
+
+            <h2>技術スタック別の例</h2>
+
+            <h3>React + TypeScript</h3>
+            <pre><code>## Tech Stack
+- React 18 with hooks
+- TypeScript (strict mode)
+- Vite for build
+- Tailwind CSS for styling
+- React Query for data fetching
+- Zustand for state management
+
+## Component Standards
+- Use function components and hooks
+- Props interfaces must end with 'Props'
+- Use named exports
+- Use Tailwind classes for styling
+
+## Data Fetching
+- All API calls must go through React Query
+- Use custom hooks to encapsulate data logic
+- Use ErrorBoundary for error handling
+</code></pre>
+
+            <h3>Python + FastAPI</h3>
+            <pre><code>## Tech Stack
+- Python 3.11+
+- FastAPI
+- Pydantic for validation
+- SQLAlchemy for ORM
+- pytest for testing
+
+## Project Structure
+- Routes go in routers/ directory
+- Models go in models/ directory
+- Schemas go in schemas/ directory
+- Tests go in tests/ directory, mirroring src structure
+
+## Code Standards
+- Use type hints everywhere
+- Use Pydantic models for request/response validation
+- Use dependency injection for database operations
+- Use async/await for asynchronous functions
+</code></pre>
+
+            <h2>トラブルシューティング</h2>
+
+            <p>Codex が AGENTS.md に従っていないように見える場合：</p>
+
+            <ol>
+                <li>ファイルの位置が正しいか確認する（<code>/debug-config</code> で読み込まれた設定を確認）</li>
+                <li>ファイル形式が正しいか確認する（有効な Markdown である必要があります）</li>
+                <li>ルールが明確かつ具体的か確認する</li>
+                <li>重要なルールをファイル上部に置いてみる</li>
+            </ol>
+            </div>
+
+            <div class="lang-content" lang="es" hidden>
+            <h1>Guia Completa de AGENTS.md</h1>
+
+            <p>
+                <code>AGENTS.md</code> es el "README para Agents" de Codex: le indica como debe trabajar dentro de un repositorio concreto.
+                Es la configuracion mas importante para mejorar la eficiencia y la consistencia de Codex.
+            </p>
+
+            <h2>Por que necesitas AGENTS.md?</h2>
+            <p>Cuando encuentras un patron de prompting que funciona, el siguiente paso es dejar de repetirlo manualmente. Para eso sirve AGENTS.md.</p>
+
+            <p>Un buen AGENTS.md ayuda a Codex a:</p>
+            <ul>
+                <li>Entender la estructura del repositorio y los directorios importantes</li>
+                <li>Saber como ejecutar, compilar y probar el proyecto</li>
+                <li>Seguir los estandares de ingenieria del equipo y las expectativas de PR</li>
+                <li>Tener presentes las restricciones y acciones prohibidas</li>
+                <li>Entender que significa "terminado" y como verificarlo</li>
+            </ul>
+
+            <h2>Jerarquia</h2>
+            <p>Codex busca AGENTS.md en las siguientes ubicaciones (por prioridad):</p>
+
+            <ol>
+                <li><strong>Directorio actual</strong>: El AGENTS.md mas cercano a los archivos en los que trabajas</li>
+                <li><strong>Raiz del proyecto</strong>: Estandares compartidos a nivel de repositorio</li>
+                <li><strong>~/.codex/</strong>: Configuracion personal por defecto</li>
+            </ol>
+
+            <div class="callout">
+                <strong>Regla de prioridad</strong>: Los archivos mas especificos (mas cercanos al directorio actual) sobrescriben las configuraciones mas generales.
+            </div>
+
+            <h2>Inicio rapido</h2>
+            <p>Usa el comando <code>/init</code> para generar rapidamente una base de AGENTS.md:</p>
+            <pre><code>codex> /init</code></pre>
+
+            <h2>Plantilla completa</h2>
+            <pre><code># AGENTS.md - [Project Name]
+
+## Project Overview
+
+[Brief description of the project's purpose and tech stack]
+
+## Directory Structure
+
+```
+.
+├── src/           # Source code
+├── tests/         # Test files
+├── docs/          # Documentation
+├── config/        # Configuration files
+└── scripts/       # Utility scripts
+```
+
+## Tech Stack
+
+- **Framework**: [React/Vue/Express etc.]
+- **Language**: [TypeScript/Python/Go etc.]
+- **Build Tool**: [Vite/Webpack/esbuild etc.]
+- **Test Framework**: [Jest/Vitest/Pytest etc.]
+
+## Common Commands
+
+### Development
+```bash
+# Start development server
+npm run dev
+
+# Build project
+npm run build
+
+# Type checking
+npm run typecheck
+```
+
+### Testing
+```bash
+# Run all tests
+npm test
+
+# Run specific test file
+npm test -- path/to/test
+
+# With coverage report
+npm run test:coverage
+```
+
+### Code Quality
+```bash
+# Run linter
+npm run lint
+
+# Auto-fix issues
+npm run lint:fix
+
+# Format code
+npm run format
+```
+
+## Code Standards
+
+### Naming Conventions
+- Components use PascalCase: <code>MyComponent.tsx</code>
+- Utility functions use camelCase: <code>formatDate.ts</code>
+- Constants use UPPER_SNAKE_CASE
+
+### File Organization
+- One folder per component, containing <code>index.tsx</code> and <code>styles.css</code>
+- Shared types go in <code>src/types/</code>
+- Utility functions go in <code>src/utils/</code>
+
+### Import Order
+1. External dependencies
+2. Internal modules
+3. Relative path imports
+4. Type imports
+
+## Constraints and Prohibited Actions
+
+- Do not use the <code>any</code> type
+- Do not commit console.log
+- Do not call APIs directly in components
+- All functions must have return type annotations
+- All components must have PropTypes or interface definitions
+
+## PR Expectations
+
+- Run the full test suite before submitting
+- Ensure code passes lint checks
+- Add relevant unit tests
+- Update related documentation
+
+## Definition of Done
+
+Criteria for task completion:
+1. Code implementation complete
+2. Tests pass (new features must have test coverage)
+3. Type checking passes
+4. Lint checks pass
+5. Related documentation updated
+
+## Debugging Guide
+
+### Common Issues
+- Startup failure: Check if .env file is configured correctly
+- Test failure: Verify database connection is working
+- Build failure: Check for unresolved type errors
+
+### Log Locations
+- Application logs: <code>logs/app.log</code>
+- Error logs: <code>logs/error.log</code>
+</code></pre>
+
+            <h2>Buenas practicas</h2>
+
+            <h3>1. Mantenlo conciso</h3>
+            <p>Un AGENTS.md corto y preciso es mas util que un archivo largo lleno de reglas vagas. Empieza por lo basico y solo agrega nuevas reglas cuando veas errores repetidos.</p>
+
+            <h3>2. Basalo en fricciones reales</h3>
+            <p>Cuando Codex cometa el mismo error dos veces, pidelo una retrospectiva y actualiza AGENTS.md. Las indicaciones deben nacer de problemas reales.</p>
+
+            <h3>3. Referencia otros archivos</h3>
+            <p>Si AGENTS.md crece demasiado, manten el archivo principal conciso y referencia otros markdown especificos por tarea:</p>
+            <pre><code>## Code Review
+See: <a href="./docs/code_review.md">./docs/code_review.md</a>
+
+## Architecture Decisions
+See: <a href="./docs/architecture.md">./docs/architecture.md</a>
+</code></pre>
+
+            <h3>4. Compartelo con el equipo</h3>
+            <p>Versionar AGENTS.md permite que todos los desarrolladores y Agents trabajen con el mismo flujo.</p>
+
+            <h2>Ejemplos por stack</h2>
+
+            <h3>React + TypeScript</h3>
+            <pre><code>## Tech Stack
+- React 18 with hooks
+- TypeScript (strict mode)
+- Vite for build
+- Tailwind CSS for styling
+- React Query for data fetching
+- Zustand for state management
+
+## Component Standards
+- Use function components and hooks
+- Props interfaces must end with 'Props'
+- Use named exports
+- Use Tailwind classes for styling
+
+## Data Fetching
+- All API calls must go through React Query
+- Use custom hooks to encapsulate data logic
+- Use ErrorBoundary for error handling
+</code></pre>
+
+            <h3>Python + FastAPI</h3>
+            <pre><code>## Tech Stack
+- Python 3.11+
+- FastAPI
+- Pydantic for validation
+- SQLAlchemy for ORM
+- pytest for testing
+
+## Project Structure
+- Routes go in routers/ directory
+- Models go in models/ directory
+- Schemas go in schemas/ directory
+- Tests go in tests/ directory, mirroring src structure
+
+## Code Standards
+- Use type hints everywhere
+- Use Pydantic models for request/response validation
+- Use dependency injection for database operations
+- Use async/await for asynchronous functions
+</code></pre>
+
+            <h2>Solucion de problemas</h2>
+
+            <p>Si parece que Codex no esta siguiendo AGENTS.md:</p>
+
+            <ol>
+                <li>Verifica que la ubicacion del archivo sea correcta (usa <code>/debug-config</code> para ver que configuraciones se cargaron)</li>
+                <li>Comprueba el formato del archivo (debe ser Markdown valido)</li>
+                <li>Asegurate de que las reglas sean claras y especificas</li>
+                <li>Prueba a mover las reglas clave al inicio del archivo</li>
+            </ol>
+            </div>
+
         </main>
     </div>
 

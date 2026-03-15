@@ -405,6 +405,330 @@ codex mcp login <server-name></code></pre>
                 <li>Package and publish</li>
             </ol>
             </div>
+
+            <div class="lang-content" lang="ja" hidden>
+            <h1>MCP 統合ガイド</h1>
+
+            <p>Model Context Protocol（MCP）は、モデルとツールやコンテキストを接続するための仕組みです。これを使うと、Codex がサードパーティ製ドキュメントや開発者ツールにアクセスできるようになります。</p>
+
+            <h2>MCP とは？</h2>
+            <p>MCP は、AI モデルが外部ツールやデータソースに標準化された方法でアクセスできるようにするオープン標準プロトコルです。AI アプリケーション向けの「USB-C インターフェース」のようなものと考えると分かりやすいです。</p>
+
+            <h2>MCP サーバーの種類</h2>
+
+            <h3>STDIO サーバー</h3>
+            <p>コマンドで起動するローカルプロセスとして動くサーバーです：</p>
+            <ul>
+                <li>環境変数を使って設定する</li>
+                <li>ローカルツール統合に向いている</li>
+            </ul>
+
+            <h3>Streamable HTTP サーバー</h3>
+            <p>ネットワークアドレス経由で利用するサーバーです：</p>
+            <ul>
+                <li>Bearer トークン認証</li>
+                <li>OAuth 認証</li>
+                <li>クラウドサービス統合に向いている</li>
+            </ul>
+
+            <h2>MCP の設定</h2>
+            <p>Codex は MCP の設定を <code>config.toml</code> に保存します。</p>
+
+            <h3>方法 1: CLI を使う</h3>
+            <pre><code># MCP server を追加
+codex mcp add <server-name> --env VAR1=VALUE1 --env VAR2=VALUE2 -- <stdio-command>
+
+# 例: Context7 を追加
+codex mcp add context7 -- npx -y @upstash/context7-mcp
+
+# Playwright を追加
+codex mcp add playwright npx @playwright/mcp@latest
+
+# すべてのコマンドを見る
+codex mcp --help</code></pre>
+
+            <h3>方法 2: config.toml を手動編集する</h3>
+
+            <h4>STDIO サーバーの例</h4>
+            <pre><code>[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.context7.env]
+MY_ENV_VAR = "MY_ENV_VALUE"</code></pre>
+
+            <h4>HTTP サーバーの例</h4>
+            <pre><code>[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+bearer_token_env_var = "FIGMA_OAUTH_TOKEN"
+http_headers = { "X-Figma-Region" = "us-east-1" }
+
+[mcp_servers.chrome_devtools]
+url = "http://localhost:3000/mcp"
+enabled_tools = ["open", "screenshot"]
+disabled_tools = ["close"]
+startup_timeout_sec = 20
+tool_timeout_sec = 45</code></pre>
+
+            <h2>代表的な MCP サーバー</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>サーバー</th>
+                        <th>用途</th>
+                        <th>インストールコマンド</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Context7</td>
+                        <td>開発者向けドキュメント検索</td>
+                        <td><code>codex mcp add context7 -- npx -y @upstash/context7-mcp</code></td>
+                    </tr>
+                    <tr>
+                        <td>Playwright</td>
+                        <td>ブラウザ自動化</td>
+                        <td><code>codex mcp add playwright npx @playwright/mcp@latest</code></td>
+                    </tr>
+                    <tr>
+                        <td>Chrome DevTools</td>
+                        <td>Chrome デバッグ</td>
+                        <td>HTTP server</code></td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td>PR / Issue 管理</td>
+                        <td><code>codex mcp add github --env GITHUB_TOKEN=xxx -- npx -y @modelcontextprotocol/server-github</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sentry</td>
+                        <td>エラーログ確認</td>
+                        <td>HTTP server</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>MCP ツールを使う</h2>
+
+            <h3>設定済みツールを確認</h3>
+            <pre><code>/mcp</code></pre>
+
+            <h3>自然言語で呼び出す</h3>
+            <pre><code>> 最新の Next.js App Router ドキュメントを探して
+> https://example.com のスクリーンショットを撮って
+> GitHub の最新 Issue を見せて</code></pre>
+
+            <h2>高度な設定</h2>
+
+            <h3>ツールの許可・禁止リスト</h3>
+            <pre><code>[mcp_servers.myserver]
+enabled_tools = ["tool1", "tool2"]
+disabled_tools = ["dangerous_tool"]</code></pre>
+
+            <h3>タイムアウト設定</h3>
+            <pre><code>startup_timeout_sec = 10   # 起動タイムアウト
+tool_timeout_sec = 60       # ツール実行タイムアウト</code></pre>
+
+            <h3>OAuth 設定</h3>
+            <pre><code># コールバックポートを設定
+mcp_oauth_callback_port = 5555
+
+# またはカスタム callback URL
+mcp_oauth_callback_url = "https://devbox.example.internal/callback"
+
+# ログイン
+codex mcp login <server-name></code></pre>
+
+            <h2>トラブルシューティング</h2>
+
+            <h3>接続状態を確認</h3>
+            <pre><code>/mcp</code></pre>
+            <p>期待される出力：</p>
+            <pre><code>Connected MCP Servers:
+  ✓ context7 - Ready
+  ✓ playwright - Ready
+  ✗ github - Error: Connection refused</code></pre>
+
+            <h3>よくある問題</h3>
+            <ul>
+                <li>サーバーが起動していない: コマンド設定が正しいか確認する</li>
+                <li>認証失敗: トークンを見直すか再ログインする</li>
+                <li>ツールが表示されない: Codex を再起動するか設定を見直す</li>
+            </ul>
+
+            <h2>カスタム MCP サーバーを作る</h2>
+            <p><a href="https://modelcontextprotocol.io" target="_blank">MCP 公式ドキュメント</a> を参照して、自分専用のサーバーを作成してください。</p>
+
+            <p>基本構成：</p>
+            <ol>
+                <li>MCP プロトコルを実装する</li>
+                <li>ツールのインターフェースを定義する</li>
+                <li>パッケージ化して公開する</li>
+            </ol>
+            </div>
+
+            <div class="lang-content" lang="es" hidden>
+            <h1>Guia de Integracion MCP</h1>
+
+            <p>Model Context Protocol (MCP) conecta modelos con herramientas y contexto. Sirve para que Codex pueda acceder a documentacion de terceros o herramientas de desarrollo.</p>
+
+            <h2>Que es MCP?</h2>
+            <p>MCP es un protocolo abierto y estandar que permite a los modelos de IA acceder a herramientas externas y fuentes de datos de forma uniforme. Es como una interfaz "USB-C" para aplicaciones de IA.</p>
+
+            <h2>Tipos de servidores MCP</h2>
+
+            <h3>Servidores STDIO</h3>
+            <p>Servidores que se ejecutan como procesos locales (arrancados mediante comandos):</p>
+            <ul>
+                <li>Se configuran con variables de entorno</li>
+                <li>Son adecuados para integrar herramientas locales</li>
+            </ul>
+
+            <h3>Servidores HTTP streamable</h3>
+            <p>Servidores accesibles mediante direcciones de red:</p>
+            <ul>
+                <li>Autenticacion con bearer token</li>
+                <li>Autenticacion OAuth</li>
+                <li>Adecuados para integrar servicios en la nube</li>
+            </ul>
+
+            <h2>Configurar MCP</h2>
+            <p>Codex guarda la configuracion MCP en <code>config.toml</code>.</p>
+
+            <h3>Metodo 1: usar la CLI</h3>
+            <pre><code># Agregar un servidor MCP
+codex mcp add <server-name> --env VAR1=VALUE1 --env VAR2=VALUE2 -- <stdio-command>
+
+# Ejemplo: agregar Context7
+codex mcp add context7 -- npx -y @upstash/context7-mcp
+
+# Agregar Playwright
+codex mcp add playwright npx @playwright/mcp@latest
+
+# Ver todos los comandos
+codex mcp --help</code></pre>
+
+            <h3>Metodo 2: editar config.toml manualmente</h3>
+
+            <h4>Ejemplo de servidor STDIO</h4>
+            <pre><code>[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.context7.env]
+MY_ENV_VAR = "MY_ENV_VALUE"</code></pre>
+
+            <h4>Ejemplo de servidor HTTP</h4>
+            <pre><code>[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+bearer_token_env_var = "FIGMA_OAUTH_TOKEN"
+http_headers = { "X-Figma-Region" = "us-east-1" }
+
+[mcp_servers.chrome_devtools]
+url = "http://localhost:3000/mcp"
+enabled_tools = ["open", "screenshot"]
+disabled_tools = ["close"]
+startup_timeout_sec = 20
+tool_timeout_sec = 45</code></pre>
+
+            <h2>Servidores MCP comunes</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Servidor</th>
+                        <th>Proposito</th>
+                        <th>Comando de instalacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Context7</td>
+                        <td>Busqueda de documentacion para desarrolladores</td>
+                        <td><code>codex mcp add context7 -- npx -y @upstash/context7-mcp</code></td>
+                    </tr>
+                    <tr>
+                        <td>Playwright</td>
+                        <td>Automatizacion del navegador</td>
+                        <td><code>codex mcp add playwright npx @playwright/mcp@latest</code></td>
+                    </tr>
+                    <tr>
+                        <td>Chrome DevTools</td>
+                        <td>Depuracion en Chrome</td>
+                        <td>HTTP server</code></td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td>Gestion de PR e Issues</td>
+                        <td><code>codex mcp add github --env GITHUB_TOKEN=xxx -- npx -y @modelcontextprotocol/server-github</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sentry</td>
+                        <td>Registro de errores</td>
+                        <td>HTTP server</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Uso de herramientas MCP</h2>
+
+            <h3>Ver herramientas configuradas</h3>
+            <pre><code>/mcp</code></pre>
+
+            <h3>Invocacion en lenguaje natural</h3>
+            <pre><code>> Busca la documentacion mas reciente de Next.js App Router
+> Toma una captura de pantalla de https://example.com
+> Muestra las ultimas Issues de GitHub</code></pre>
+
+            <h2>Configuracion avanzada</h2>
+
+            <h3>Lista blanca y negra de herramientas</h3>
+            <pre><code>[mcp_servers.myserver]
+enabled_tools = ["tool1", "tool2"]
+disabled_tools = ["dangerous_tool"]</code></pre>
+
+            <h3>Ajustes de timeout</h3>
+            <pre><code>startup_timeout_sec = 10   # Timeout de arranque
+tool_timeout_sec = 60       # Timeout de ejecucion</code></pre>
+
+            <h3>Configuracion OAuth</h3>
+            <pre><code># Configurar puerto de callback
+mcp_oauth_callback_port = 5555
+
+# O una URL de callback personalizada
+mcp_oauth_callback_url = "https://devbox.example.internal/callback"
+
+# Login
+codex mcp login <server-name></code></pre>
+
+            <h2>Solucion de problemas</h2>
+
+            <h3>Comprobar el estado de la conexion</h3>
+            <pre><code>/mcp</code></pre>
+            <p>Salida esperada:</p>
+            <pre><code>Connected MCP Servers:
+  ✓ context7 - Ready
+  ✓ playwright - Ready
+  ✗ github - Error: Connection refused</code></pre>
+
+            <h3>Problemas comunes</h3>
+            <ul>
+                <li>Servidor no iniciado: revisa si el comando es correcto</li>
+                <li>Fallo de autenticacion: verifica el token o vuelve a iniciar sesion</li>
+                <li>Las herramientas no aparecen: reinicia Codex o revisa la configuracion</li>
+            </ul>
+
+            <h2>Crear servidores MCP personalizados</h2>
+            <p>Consulta la <a href="https://modelcontextprotocol.io" target="_blank">documentacion oficial de MCP</a> para crear tu propio servidor.</p>
+
+            <p>Estructura basica:</p>
+            <ol>
+                <li>Implementar el protocolo MCP</li>
+                <li>Definir las interfaces de las herramientas</li>
+                <li>Empaquetar y publicar</li>
+            </ol>
+            </div>
         </main>
     </div>
 

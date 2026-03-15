@@ -274,6 +274,214 @@
         </ul>
         </div>
 
+        <div class="lang-content" lang="ja" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← 事例一覧に戻る</a>
+
+        <h1 style="margin: 1rem 0;">マルチ Agent 協調開発</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">上級</span>
+            <span class="example-time">2時間</span>
+        </div>
+
+        <h2>シナリオ</h2>
+        <p>フロントエンド、バックエンド、ドキュメント、テストを含む完全な SaaS アプリを開発します。複数の Agent を使って別々のモジュールを並列に進めます。</p>
+
+        <h2>実験的機能を有効にする</h2>
+
+        <pre><code>/experimental</code></pre>
+
+        <h2>タスクの分解</h2>
+
+        <h3>メイン Agent - コア機能</h3>
+        <pre><code>> 次を含むプロジェクトの土台を作成してください。
+> 1. プロジェクトのディレクトリ構成
+> 2. 共通の型定義
+> 3. 開発環境の設定
+> 4. CI/CD 設定ファイル</code></pre>
+
+        <h3>サブ Agent 1 - バックエンド API</h3>
+        <pre><code># 新しいスレッドで
+> ユーザー認証 API（登録、ログイン、JWT）を開発してください
+> Node.js + Express + TypeScript を使用してください
+> 完全な単体テストを含めてください</code></pre>
+
+        <h3>サブ Agent 2 - フロントエンド UI</h3>
+        <pre><code># 新しいスレッドで
+> React フロントエンドアプリを作成してください
+> ログイン/登録ページを実装してください
+> Tailwind CSS で UI を整えてください</code></pre>
+
+        <h3>サブ Agent 3 - ドキュメント</h3>
+        <pre><code># 新しいスレッドで
+> API ドキュメント（OpenAPI/Swagger）を書いてください
+> README とデプロイ手順書を作成してください</code></pre>
+
+        <h2>Agent の切り替えと管理</h2>
+
+        <pre><code># すべてのスレッドを表示
+/agent
+
+# バックエンドスレッドへ切り替え
+/agent 1
+
+# 進捗確認
+> 進捗はどうですか？何か詰まっていますか？
+
+# フロントエンドスレッドへ切り替え
+/agent 2
+
+# マージ前レビュー
+/review</code></pre>
+
+        <h2>協調モデル</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>役割</th>
+                    <th>成果物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>メイン Agent</td>
+                    <td>設計、調整</td>
+                    <td>プロジェクト骨格、型定義</td>
+                </tr>
+                <tr>
+                    <td>バックエンド Agent</td>
+                    <td>API 開発</td>
+                    <td>Routes, Controllers, Services</td>
+                </tr>
+                <tr>
+                    <td>フロントエンド Agent</td>
+                    <td>UI 開発</td>
+                    <td>Components, Pages, Hooks</td>
+                </tr>
+                <tr>
+                    <td>ドキュメント Agent</td>
+                    <td>文書作成</td>
+                    <td>README, API docs, Guides</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>ベストプラクティス</h2>
+
+        <ul>
+            <li>まずメイン Agent がインターフェースとデータ構造を定義する</li>
+            <li>サブ Agent を並列で動かす際はファイル競合を避ける</li>
+            <li>定期的に進捗を同期する</li>
+            <li>最後に統一したコードレビューを行う</li>
+        </ul>
+        </div>
+
+        <div class="lang-content" lang="es" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Volver a los ejemplos</a>
+
+        <h1 style="margin: 1rem 0;">Desarrollo colaborativo con multiples Agent</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #ef4444;">Avanzado</span>
+            <span class="example-time">2 horas</span>
+        </div>
+
+        <h2>Escenario</h2>
+        <p>Construye una aplicacion SaaS completa con frontend, backend, documentacion y pruebas. Usa varios Agent para trabajar en paralelo sobre modulos distintos.</p>
+
+        <h2>Activar funciones experimentales</h2>
+
+        <pre><code>/experimental</code></pre>
+
+        <h2>Desglose de tareas</h2>
+
+        <h3>Agent principal - Funcionalidad central</h3>
+        <pre><code>> Crea la base del proyecto, incluyendo:
+> 1. Estructura de directorios del proyecto
+> 2. Definiciones de tipos compartidos
+> 3. Configuracion del entorno de desarrollo
+> 4. Archivos de configuracion de CI/CD</code></pre>
+
+        <h3>Sub Agent 1 - Backend API</h3>
+        <pre><code># En un hilo nuevo
+> Desarrolla la API de autenticacion de usuarios (registro, login, JWT)
+> Usa Node.js + Express + TypeScript
+> Incluye pruebas unitarias completas</code></pre>
+
+        <h3>Sub Agent 2 - Interfaz frontend</h3>
+        <pre><code># En un hilo nuevo
+> Crea una aplicacion frontend con React
+> Implementa las paginas de login y registro
+> Mejora la interfaz con Tailwind CSS</code></pre>
+
+        <h3>Sub Agent 3 - Documentacion</h3>
+        <pre><code># En un hilo nuevo
+> Escribe la documentacion de la API (OpenAPI/Swagger)
+> Crea el README y la guia de despliegue</code></pre>
+
+        <h2>Cambiar y gestionar Agent</h2>
+
+        <pre><code># Ver todos los hilos
+/agent
+
+# Cambiar al hilo del backend
+/agent 1
+
+# Revisar progreso
+> Como va el progreso? Hay algun bloqueo?
+
+# Cambiar al hilo del frontend
+/agent 2
+
+# Revision antes de fusionar
+/review</code></pre>
+
+        <h2>Modelo de colaboracion</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>Responsabilidad</th>
+                    <th>Salida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Agent principal</td>
+                    <td>Arquitectura y coordinacion</td>
+                    <td>Estructura base del proyecto, definiciones de tipos</td>
+                </tr>
+                <tr>
+                    <td>Agent de backend</td>
+                    <td>Desarrollo de API</td>
+                    <td>Routes, Controllers, Services</td>
+                </tr>
+                <tr>
+                    <td>Agent de frontend</td>
+                    <td>Desarrollo de UI</td>
+                    <td>Components, Pages, Hooks</td>
+                </tr>
+                <tr>
+                    <td>Agent de documentacion</td>
+                    <td>Redaccion de documentacion</td>
+                    <td>README, API docs, Guides</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Buenas practicas</h2>
+
+        <ul>
+            <li>Haz que el Agent principal defina primero interfaces y estructuras de datos</li>
+            <li>Evita conflictos de archivos cuando los sub Agent trabajan en paralelo</li>
+            <li>Sincroniza el progreso de forma regular</li>
+            <li>Realiza una revision de codigo unificada al final</li>
+        </ul>
+        </div>
+
     </div>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">

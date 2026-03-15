@@ -264,6 +264,204 @@ npm run dev</code></pre>
         </ul>
         </div>
 
+        <div class="lang-content" lang="ja" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← 事例一覧に戻る</a>
+
+        <h1 style="margin: 1rem 0;">API バックエンド開発</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #f59e0b;">中級</span>
+            <span class="example-time">30分</span>
+        </div>
+
+        <h2>目的</h2>
+        <p>ユーザー認証、CRUD 操作、データ検証、テストを含む完全な RESTful API を構築します。</p>
+
+        <h2>プロンプト</h2>
+
+        <pre><code>次の要件を満たす Node.js + Express + TypeScript API を作成してください。
+
+1. ユーザー認証:
+   - POST /auth/register - ユーザー登録
+   - POST /auth/login - ユーザーログイン
+   - POST /auth/refresh - トークン更新
+   - JWT を用いて認証する
+
+2. ユーザー管理 API:
+   - GET /users - ユーザー一覧を取得（認証必須、ページネーション対応）
+   - GET /users/:id - 単一ユーザーを取得
+   - PUT /users/:id - ユーザー情報を更新
+   - DELETE /users/:id - ユーザーを削除
+
+3. 技術要件:
+   - Prisma ORM と SQLite を使用
+   - リクエスト検証に Zod を使用
+   - 統一されたエラーハンドリング
+   - リクエストログを記録
+   - 完全なユニットテスト（Jest）
+
+4. プロジェクト構成:
+   - src/routes/ - ルート定義
+   - src/controllers/ - コントローラーロジック
+   - src/middleware/ - ミドルウェア
+   - src/services/ - ビジネスロジック
+   - src/utils/ - ユーティリティ関数</code></pre>
+
+        <h2>Codex の実行フロー</h2>
+
+        <ol>
+            <li>プロジェクト構成を初期化する</li>
+            <li>TypeScript と開発ツールを設定する</li>
+            <li>Prisma とデータベースモデルを用意する</li>
+            <li>認証ミドルウェアを実装する</li>
+            <li>ルートとコントローラーを作成する</li>
+            <li>テストケースを書く</li>
+        </ol>
+
+        <h2>重要なコード例</h2>
+
+        <h3>認証ミドルウェア</h3>
+        <pre><code>// src/middleware/auth.ts
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
+export interface AuthRequest extends Request {
+  user?: { id: string; email: string };
+}
+
+export const authMiddleware = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+};</code></pre>
+
+        <h2>検証</h2>
+
+        <pre><code>npm run test
+npm run dev</code></pre>
+
+        <h2>学べるポイント</h2>
+
+        <ul>
+            <li>構造化されたプロンプトで完成度の高い実装を引き出せる</li>
+            <li>型安全なコードを自動生成できる</li>
+            <li>レイヤードアーキテクチャの設計に沿って実装できる</li>
+            <li>テストのベストプラクティスまで含められる</li>
+        </ul>
+        </div>
+
+        <div class="lang-content" lang="es" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Volver a los ejemplos</a>
+
+        <h1 style="margin: 1rem 0;">Desarrollo de backend API</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty" style="background: #f59e0b;">Intermedio</span>
+            <span class="example-time">30 min</span>
+        </div>
+
+        <h2>Objetivo</h2>
+        <p>Construir una API RESTful completa con autenticacion de usuarios, operaciones CRUD, validacion de datos y pruebas.</p>
+
+        <h2>Prompt</h2>
+
+        <pre><code>Crea una API con Node.js + Express + TypeScript con los siguientes requisitos:
+
+1. Autenticacion de usuarios:
+   - POST /auth/register - Registro de usuario
+   - POST /auth/login - Inicio de sesion
+   - POST /auth/refresh - Renovacion de token
+   - Usar JWT para la autenticacion
+
+2. API de gestion de usuarios:
+   - GET /users - Obtener lista de usuarios (requiere autenticacion y soporta paginacion)
+   - GET /users/:id - Obtener un usuario concreto
+   - PUT /users/:id - Actualizar informacion del usuario
+   - DELETE /users/:id - Eliminar usuario
+
+3. Requisitos tecnicos:
+   - Usar Prisma ORM con SQLite
+   - Usar Zod para validar solicitudes
+   - Manejo unificado de errores
+   - Registro de solicitudes
+   - Pruebas unitarias completas (Jest)
+
+4. Estructura del proyecto:
+   - src/routes/ - Definicion de rutas
+   - src/controllers/ - Logica de controladores
+   - src/middleware/ - Middleware
+   - src/services/ - Logica de negocio
+   - src/utils/ - Funciones auxiliares</code></pre>
+
+        <h2>Flujo de ejecucion de Codex</h2>
+
+        <ol>
+            <li>Inicializar la estructura del proyecto</li>
+            <li>Configurar TypeScript y las herramientas de desarrollo</li>
+            <li>Preparar Prisma y los modelos de base de datos</li>
+            <li>Implementar el middleware de autenticacion</li>
+            <li>Crear rutas y controladores</li>
+            <li>Escribir los casos de prueba</li>
+        </ol>
+
+        <h2>Fragmento clave de codigo</h2>
+
+        <h3>Middleware de autenticacion</h3>
+        <pre><code>// src/middleware/auth.ts
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
+export interface AuthRequest extends Request {
+  user?: { id: string; email: string };
+}
+
+export const authMiddleware = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+};</code></pre>
+
+        <h2>Verificacion</h2>
+
+        <pre><code>npm run test
+npm run dev</code></pre>
+
+        <h2>Aprendizajes clave</h2>
+
+        <ul>
+            <li>Los prompts estructurados producen implementaciones completas</li>
+            <li>Se genera codigo con seguridad de tipos de forma automatica</li>
+            <li>Sigue patrones de arquitectura por capas</li>
+            <li>Incluye buenas practicas de testing</li>
+        </ul>
+        </div>
+
     </div>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">

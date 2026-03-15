@@ -218,6 +218,158 @@ npm run dev</code></pre>
         <pre><code>> Add a to-do list feature with add, complete, and delete functionality</code></pre>
         </div>
 
+        <div class="lang-content" lang="ja" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← 事例一覧に戻る</a>
+
+        <h1 style="margin: 1rem 0;">React プロジェクトを素早く構築</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty">初級</span>
+            <span class="example-time">10分</span>
+        </div>
+
+        <h2>目的</h2>
+        <p>Codex を使って、ルーティング、状態管理、基本 UI を備えた React + TypeScript + Vite プロジェクトをゼロから作成します。</p>
+
+        <h2>ステップ 1: プロジェクトを初期化する</h2>
+
+        <p>Codex を起動して、次のように入力します。</p>
+
+        <pre><code>> React + TypeScript + Vite のプロジェクトを作成してください。プロジェクト名は my-app。
+> React Router でルーティングを設定し、Home、About、404 ページを含めてください。
+> Tailwind CSS でスタイリングを設定してください。
+> Zustand を使ったグローバル状態管理を追加してください。</code></pre>
+
+        <h2>ステップ 2: 実行を待つ</h2>
+
+        <p>Codex は次の処理を行います。</p>
+
+        <ol>
+            <li><code>npm create vite@latest</code> を実行</li>
+            <li>依存関係をインストール（react-router-dom、zustand、tailwindcss）</li>
+            <li>Tailwind を設定</li>
+            <li>ルーティング関連ファイルを作成</li>
+            <li>ページコンポーネントを作成</li>
+            <li>Zustand ストアをセットアップ</li>
+        </ol>
+
+        <h2>ステップ 3: 結果を確認する</h2>
+
+        <p>Codex の処理が完了したら、次を実行します。</p>
+
+        <pre><code>cd my-app
+npm run dev</code></pre>
+
+        <h2>生成されるプロジェクト構成</h2>
+
+        <pre><code>my-app/
+├── src/
+│   ├── components/      # 共通コンポーネント
+│   ├── pages/          # ページコンポーネント
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   └── NotFound.tsx
+│   ├── store/          # Zustand ストア
+│   │   └── index.ts
+│   ├── App.tsx         # ルーティング設定
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.js
+└── vite.config.ts</code></pre>
+
+        <h2>学べるポイント</h2>
+
+        <ul>
+            <li>1 回のプロンプトで複数ステップの作業を完了できる</li>
+            <li>依存関係のインストールを自動化できる</li>
+            <li>標準的なプロジェクト構造をそのまま生成できる</li>
+            <li>hooks や型定義などのベストプラクティスに従える</li>
+        </ul>
+
+        <h2>追加課題</h2>
+
+        <p>続けて Codex にこう依頼できます。</p>
+
+        <pre><code>> 追加で、追加・完了・削除ができる ToDo リスト機能を実装してください</code></pre>
+        </div>
+
+        <div class="lang-content" lang="es" hidden>
+        <a href="index.html" style="color: var(--color-primary);">← Volver a los ejemplos</a>
+
+        <h1 style="margin: 1rem 0;">Crear un proyecto React rapidamente</h1>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <span class="example-difficulty">Principiante</span>
+            <span class="example-time">10 min</span>
+        </div>
+
+        <h2>Objetivo</h2>
+        <p>Usa Codex para crear desde cero un proyecto React + TypeScript + Vite con enrutamiento, gestion de estado y una UI basica.</p>
+
+        <h2>Paso 1: Inicializar el proyecto</h2>
+
+        <p>Inicia Codex e introduce lo siguiente:</p>
+
+        <pre><code>> Crea un proyecto React + TypeScript + Vite llamado my-app.
+> Configura el enrutamiento con React Router e incluye una pagina de inicio, una pagina About y una pagina 404.
+> Configura los estilos con Tailwind CSS.
+> Agrega gestion de estado global con Zustand.</code></pre>
+
+        <h2>Paso 2: Esperar la ejecucion</h2>
+
+        <p>Codex hara lo siguiente:</p>
+
+        <ol>
+            <li>Ejecutar <code>npm create vite@latest</code></li>
+            <li>Instalar dependencias (react-router-dom, zustand, tailwindcss)</li>
+            <li>Configurar Tailwind</li>
+            <li>Crear archivos de rutas</li>
+            <li>Crear componentes de pagina</li>
+            <li>Preparar el store de Zustand</li>
+        </ol>
+
+        <h2>Paso 3: Verificar el resultado</h2>
+
+        <p>Cuando Codex termine, ejecuta:</p>
+
+        <pre><code>cd my-app
+npm run dev</code></pre>
+
+        <h2>Estructura del proyecto generado</h2>
+
+        <pre><code>my-app/
+├── src/
+│   ├── components/      # Componentes compartidos
+│   ├── pages/          # Componentes de pagina
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   └── NotFound.tsx
+│   ├── store/          # Store de Zustand
+│   │   └── index.ts
+│   ├── App.tsx         # Configuracion de rutas
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.js
+└── vite.config.ts</code></pre>
+
+        <h2>Puntos clave de aprendizaje</h2>
+
+        <ul>
+            <li>Resolver una tarea de varios pasos con un solo prompt</li>
+            <li>Automatizar la instalacion de dependencias</li>
+            <li>Generar una estructura de proyecto estandar</li>
+            <li>Seguir buenas practicas como hooks y definiciones de tipos</li>
+        </ul>
+
+        <h2>Ejercicio de ampliacion</h2>
+
+        <p>Puedes seguir pidiendole a Codex:</p>
+
+        <pre><code>> Agrega una funcion de lista de tareas con opciones para crear, completar y eliminar elementos</code></pre>
+        </div>
+
     </div>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">

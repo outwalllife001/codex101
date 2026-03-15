@@ -662,6 +662,586 @@ prompt = "Review this code for security vulnerabilities, focusing on input valid
 /security</code></pre>
             </div>
 
+            <div class="lang-content" lang="ja" hidden>
+            <h1>Slash コマンド完全リファレンス</h1>
+
+            <p>
+                Slash コマンドは、Codex CLI のセッションを素早く制御するための手段です。対話型 TUI で <code>/</code> を入力すると、コマンド一覧を開けます。
+                このページでは、24 以上ある組み込みコマンドとその使いどころをまとめています。
+            </p>
+
+            <h2>よくあるワークフロー</h2>
+            <pre><code>/status          # 現在の設定を確認
+/model          # モデルを切り替える
+/permissions    # 権限を設定する
+/mention <file>  # 重要ファイルを参照する
+/plan           # 実行計画を作る
+/review         # コードレビュー
+/diff           # 変更差分を見る
+/compact        # コンテキストを圧縮する</code></pre>
+
+            <h2>セッション制御コマンド</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>コマンド</th>
+                            <th>役割</th>
+                            <th>利用場面</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/new</code></td>
+                            <td>新しいセッションを開始</td>
+                            <td>同じ CLI プロセスのままコンテキストをリセットしたいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/resume</code></td>
+                            <td>以前のセッションを再開</td>
+                            <td>最近のセッション一覧から選び直したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/fork</code></td>
+                            <td>現在のセッションを複製</td>
+                            <td>進捗を残したまま別アプローチを新スレッドで試したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/quit</code> / <code>/exit</code></td>
+                            <td>CLI を終了</td>
+                            <td>Codex CLI を完全に終了したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/compact</code></td>
+                            <td>コンテキストを圧縮</td>
+                            <td>会話を要約してトークン使用量を減らし、上限到達を避けたいとき</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>モデルとスタイルのコマンド</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>コマンド</th>
+                            <th>役割</th>
+                            <th>利用場面</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/model</code></td>
+                            <td>モデルと推論レベルを切り替える</td>
+                            <td>対話的に選択でき、セッション途中でも変更可能</td>
+                        </tr>
+                        <tr>
+                            <td><code>/personality</code></td>
+                            <td>コミュニケーションスタイルを変更</td>
+                            <td>friendly / pragmatic / none から選ぶ</td>
+                        </tr>
+                        <tr>
+                            <td><code>/plan</code></td>
+                            <td>計画モードに入る</td>
+                            <td>実行前に Codex が計画を下書きする。複雑なタスクに向く</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>権限と状態確認コマンド</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>コマンド</th>
+                            <th>役割</th>
+                            <th>利用場面</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/permissions</code></td>
+                            <td>承認モードを調整する</td>
+                            <td>Auto / Read Only / Full Access を切り替える</td>
+                        </tr>
+                        <tr>
+                            <td><code>/status</code></td>
+                            <td>セッション情報を見る</td>
+                            <td>モデル、トークン使用量、アカウント情報を確認する</td>
+                        </tr>
+                        <tr>
+                            <td><code>/statusline</code></td>
+                            <td>ステータスバーを調整する</td>
+                            <td>画面下部の表示項目をインタラクティブに変更する</td>
+                        </tr>
+                        <tr>
+                            <td><code>/debug-config</code></td>
+                            <td>設定をデバッグする</td>
+                            <td>設定の読み込み順やポリシー診断を表示したいとき</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>コード・レビュー系コマンド</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>コマンド</th>
+                            <th>役割</th>
+                            <th>利用場面</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/review</code></td>
+                            <td>コードレビュー</td>
+                            <td>作業ディレクトリの変更確認や、ベースブランチ比較による PR 風レビュー</td>
+                        </tr>
+                        <tr>
+                            <td><code>/diff</code></td>
+                            <td>Git diff を見る</td>
+                            <td>未追跡ファイルを含めて差分を確認したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/undo</code></td>
+                            <td>直前の操作を取り消す</td>
+                            <td>Codex が直前に行った編集やコマンド実行を巻き戻したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/mention</code></td>
+                            <td>ファイルを参照する</td>
+                            <td>特定のファイルやフォルダを文脈として会話に添付したいとき</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>ツール連携コマンド</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>コマンド</th>
+                            <th>役割</th>
+                            <th>利用場面</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/mcp</code></td>
+                            <td>MCP ツール一覧</td>
+                            <td>設定済みの Model Context Protocol サーバーとツールを確認する</td>
+                        </tr>
+                        <tr>
+                            <td><code>/apps</code></td>
+                            <td>アプリ一覧を見る</td>
+                            <td>ChatGPT アプリ（コネクタ）を閲覧してプロンプトに差し込む</td>
+                        </tr>
+                        <tr>
+                            <td><code>/agent</code></td>
+                            <td>Agent スレッドを切り替える</td>
+                            <td>並列で動いている複数 Agent の間を行き来したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/skills</code></td>
+                            <td>Skill 一覧を見る</td>
+                            <td>利用可能な Skill を確認したり、特定 Skill を呼び出したいとき</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>ユーティリティコマンド</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>コマンド</th>
+                            <th>役割</th>
+                            <th>利用場面</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/init</code></td>
+                            <td>AGENTS.md を初期化</td>
+                            <td>現在のディレクトリに AGENTS.md のひな形を生成したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/clear</code></td>
+                            <td>画面をクリア</td>
+                            <td>端末をきれいにして新しい会話を始めたいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/copy</code></td>
+                            <td>出力をコピー</td>
+                            <td>Codex の最新出力や計画文をクリップボードに取りたいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/feedback</code></td>
+                            <td>フィードバック送信</td>
+                            <td>ログや診断情報を Codex メンテナに送りたいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/logout</code></td>
+                            <td>ログアウト</td>
+                            <td>共有マシンなどでローカル認証情報を消したいとき</td>
+                        </tr>
+                        <tr>
+                            <td><code>/ps</code></td>
+                            <td>バックグラウンド端末を見る</td>
+                            <td>実験的なバックグラウンド端末と最近の出力を確認する</td>
+                        </tr>
+                        <tr>
+                            <td><code>/experimental</code></td>
+                            <td>実験機能を切り替える</td>
+                            <td>サブ Agent などの実験機能を有効にしたいとき</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>使い方のヒント</h2>
+
+            <h3>1. アプローチ比較には /fork を使う</h3>
+            <p>
+                <code>/fork</code> は非常に便利です。機能実装中に別のやり方を試したくなったら、
+                現在の進捗を残しつつ新しいスレッドで別案を試せます。
+            </p>
+
+            <h3>2. 複雑な作業の前に /plan を使う</h3>
+            <p>
+                「認証モジュール全体をリファクタする」のような複雑なタスクでは、まず <code>/plan</code> で Codex に手順を整理させます。
+                計画を確認して承認してから実行するほうが安全で、方向違いの実装に時間を使わずに済みます。
+            </p>
+
+            <h3>3. /compact を定期的に使う</h3>
+            <p>
+                コンテキスト上限エラーが出るまで待たず、長いセッションでは定期的に <code>/compact</code> を使ってください。
+                重要情報を保ちながら会話を整理できます。
+            </p>
+
+            <h3>4. トラブル時は /debug-config を使う</h3>
+            <p>
+                設定が反映されていないように見えるとき、<code>/debug-config</code> で Codex がどのファイルを読み、
+                どの値が上書きされたかを確認できるため、切り分けに役立ちます。
+            </p>
+
+            <h2>カスタムコマンド</h2>
+            <p><code>~/.codex/config.toml</code> にカスタム Slash コマンドを定義できます：</p>
+
+            <pre><code>[[custom_commands]]
+name = "test"
+prompt = "Run the test suite and summarize failed tests"
+
+[[custom_commands]]
+name = "docs"
+prompt = "Update the documentation for the currently edited function"
+
+[[custom_commands]]
+name = "security"
+prompt = "Review this code for security vulnerabilities, focusing on input validation and authentication"</code></pre>
+
+            <p>追加後は Codex 内でそのまま使えます：</p>
+            <pre><code>/test
+/docs
+/security</code></pre>
+            </div>
+
+            <div class="lang-content" lang="es" hidden>
+            <h1>Referencia Completa de Comandos Slash</h1>
+
+            <p>
+                Los comandos Slash son la forma mas rapida de controlar sesiones dentro de Codex CLI. Escribe <code>/</code> en la TUI interactiva para abrir la lista de comandos.
+                Esta pagina resume los mas de 24 comandos integrados y sus casos de uso.
+            </p>
+
+            <h2>Flujo comun</h2>
+            <pre><code>/status          # Comprobar configuracion actual
+/model          # Cambiar de modelo
+/permissions    # Ajustar permisos
+/mention <file>  # Referenciar archivos clave
+/plan           # Crear un plan de ejecucion
+/review         # Hacer code review
+/diff           # Ver cambios
+/compact        # Comprimir contexto</code></pre>
+
+            <h2>Comandos de control de sesion</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comando</th>
+                            <th>Proposito</th>
+                            <th>Caso de uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/new</code></td>
+                            <td>Iniciar una nueva sesion</td>
+                            <td>Limpiar contexto sin salir del mismo proceso de CLI</td>
+                        </tr>
+                        <tr>
+                            <td><code>/resume</code></td>
+                            <td>Reanudar una sesion anterior</td>
+                            <td>Abrir un selector con la lista de sesiones recientes</td>
+                        </tr>
+                        <tr>
+                            <td><code>/fork</code></td>
+                            <td>Clonar la sesion actual</td>
+                            <td>Copiar la conversacion a un hilo nuevo y probar alternativas sin perder el progreso</td>
+                        </tr>
+                        <tr>
+                            <td><code>/quit</code> / <code>/exit</code></td>
+                            <td>Salir de la CLI</td>
+                            <td>Cerrar por completo Codex CLI</td>
+                        </tr>
+                        <tr>
+                            <td><code>/compact</code></td>
+                            <td>Comprimir contexto</td>
+                            <td>Resumir la conversacion para liberar espacio de tokens y evitar limites de contexto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Comandos de modelo y estilo</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comando</th>
+                            <th>Proposito</th>
+                            <th>Caso de uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/model</code></td>
+                            <td>Cambiar modelo y nivel de razonamiento</td>
+                            <td>Seleccion interactiva; puede cambiarse a mitad de la sesion</td>
+                        </tr>
+                        <tr>
+                            <td><code>/personality</code></td>
+                            <td>Cambiar estilo de comunicacion</td>
+                            <td>Opciones: friendly / pragmatic / none</td>
+                        </tr>
+                        <tr>
+                            <td><code>/plan</code></td>
+                            <td>Entrar en modo planificacion</td>
+                            <td>Codex redacta un plan antes de ejecutar; ideal para tareas complejas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Comandos de permisos y estado</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comando</th>
+                            <th>Proposito</th>
+                            <th>Caso de uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/permissions</code></td>
+                            <td>Ajustar el modo de autorizacion</td>
+                            <td>Cambiar entre Auto / Read Only / Full Access</td>
+                        </tr>
+                        <tr>
+                            <td><code>/status</code></td>
+                            <td>Ver informacion de la sesion</td>
+                            <td>Mostrar modelo, uso de tokens y detalles de la cuenta</td>
+                        </tr>
+                        <tr>
+                            <td><code>/statusline</code></td>
+                            <td>Personalizar la barra de estado</td>
+                            <td>Ajustar interactivamente la barra inferior</td>
+                        </tr>
+                        <tr>
+                            <td><code>/debug-config</code></td>
+                            <td>Depurar configuracion</td>
+                            <td>Imprimir toda la cadena de carga de configuracion y diagnosticos de politica</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Comandos de codigo y revision</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comando</th>
+                            <th>Proposito</th>
+                            <th>Caso de uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/review</code></td>
+                            <td>Code review</td>
+                            <td>Revisar cambios del directorio de trabajo o compararlos con la rama base como en una PR</td>
+                        </tr>
+                        <tr>
+                            <td><code>/diff</code></td>
+                            <td>Ver diff de Git</td>
+                            <td>Mostrar el diff de Git, incluidos archivos sin seguimiento</td>
+                        </tr>
+                        <tr>
+                            <td><code>/undo</code></td>
+                            <td>Deshacer accion reciente</td>
+                            <td>Revertir la ultima edicion o ejecucion de comando hecha por Codex</td>
+                        </tr>
+                        <tr>
+                            <td><code>/mention</code></td>
+                            <td>Referenciar archivos</td>
+                            <td>Adjuntar archivos o carpetas concretas a la conversacion como contexto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Comandos de herramientas e integracion</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comando</th>
+                            <th>Proposito</th>
+                            <th>Caso de uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/mcp</code></td>
+                            <td>Listar herramientas MCP</td>
+                            <td>Ver los servidores y herramientas Model Context Protocol configurados</td>
+                        </tr>
+                        <tr>
+                            <td><code>/apps</code></td>
+                            <td>Explorar apps</td>
+                            <td>Examinar apps de ChatGPT (connectors) e insertarlas en prompts</td>
+                        </tr>
+                        <tr>
+                            <td><code>/agent</code></td>
+                            <td>Cambiar de hilo Agent</td>
+                            <td>Moverse entre varios Agents ejecutandose en paralelo</td>
+                        </tr>
+                        <tr>
+                            <td><code>/skills</code></td>
+                            <td>Listar Skills</td>
+                            <td>Ver Skills disponibles o invocar una Skill concreta</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Comandos de utilidad</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comando</th>
+                            <th>Proposito</th>
+                            <th>Caso de uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/init</code></td>
+                            <td>Inicializar AGENTS.md</td>
+                            <td>Generar un archivo base de AGENTS.md en el directorio actual</td>
+                        </tr>
+                        <tr>
+                            <td><code>/clear</code></td>
+                            <td>Limpiar pantalla</td>
+                            <td>Limpiar el terminal y empezar una conversacion nueva</td>
+                        </tr>
+                        <tr>
+                            <td><code>/copy</code></td>
+                            <td>Copiar salida</td>
+                            <td>Copiar la salida completa mas reciente o el texto del plan</td>
+                        </tr>
+                        <tr>
+                            <td><code>/feedback</code></td>
+                            <td>Enviar feedback</td>
+                            <td>Enviar logs o informacion diagnostica a los mantenedores de Codex</td>
+                        </tr>
+                        <tr>
+                            <td><code>/logout</code></td>
+                            <td>Cerrar sesion</td>
+                            <td>Borrar credenciales locales, util en maquinas compartidas</td>
+                        </tr>
+                        <tr>
+                            <td><code>/ps</code></td>
+                            <td>Ver terminales en segundo plano</td>
+                            <td>Ver terminales experimentales en background y su salida reciente</td>
+                        </tr>
+                        <tr>
+                            <td><code>/experimental</code></td>
+                            <td>Alternar funciones experimentales</td>
+                            <td>Activar funciones experimentales como sub-Agents</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Consejos de uso</h2>
+
+            <h3>1. Usa /fork para comparar enfoques</h3>
+            <p>
+                El comando <code>/fork</code> es muy util. Cuando estes implementando una funcion y quieras probar otra estrategia,
+                usa fork para conservar tu progreso actual mientras exploras una alternativa en un hilo nuevo.
+            </p>
+
+            <h3>2. Usa /plan antes de tareas complejas</h3>
+            <p>
+                Para tareas complejas como "refactorizar todo el modulo de autenticacion", usa primero <code>/plan</code> para que Codex dibuje los pasos.
+                Revisar y aprobar el plan antes de ejecutar es mas seguro y evita perder tiempo con un enfoque equivocado.
+            </p>
+
+            <h3>3. Usa /compact con regularidad</h3>
+            <p>
+                No esperes a tener errores por limite de contexto para usar <code>/compact</code>. En sesiones largas, compacta de forma periodica
+                para mantener claridad en la conversacion y conservar lo importante.
+            </p>
+
+            <h3>4. Usa /debug-config para diagnosticar</h3>
+            <p>
+                Cuando una configuracion parece no surtir efecto, <code>/debug-config</code> puede mostrar que archivos cargo Codex
+                y que valores sobrescribieron a otros, lo cual ayuda mucho a resolver problemas.
+            </p>
+
+            <h2>Comandos personalizados</h2>
+            <p>Puedes definir comandos Slash personalizados en <code>~/.codex/config.toml</code>:</p>
+
+            <pre><code>[[custom_commands]]
+name = "test"
+prompt = "Run the test suite and summarize failed tests"
+
+[[custom_commands]]
+name = "docs"
+prompt = "Update the documentation for the currently edited function"
+
+[[custom_commands]]
+name = "security"
+prompt = "Review this code for security vulnerabilities, focusing on input validation and authentication"</code></pre>
+
+            <p>Una vez agregados, puedes usarlos directamente en Codex:</p>
+            <pre><code>/test
+/docs
+/security</code></pre>
+            </div>
+
         </main>
     </div>
 

@@ -366,6 +366,290 @@ brew upgrade codex</code></pre>
             </ul>
             </div>
 
+            <div class="lang-content" lang="ja" hidden>
+            <h1>インストールと設定</h1>
+
+            <p>
+                OpenAI Codex は、コマンドラインインターフェース（CLI）、IDE 拡張（VS Code、Cursor、Windsurf）、Web アプリなど複数の利用方法を提供しています。
+                このガイドでは、Codex CLI のインストールと初期設定を完了するまでを案内します。
+            </p>
+
+            <h2>システム要件</h2>
+            <ul>
+                <li><strong>対応 OS</strong>: macOS（Apple Silicon または Intel）、Linux（x86_64 または arm64）</li>
+                <li><strong>Node.js</strong>: v18.0.0 以上（npm インストール時に必要）</li>
+                <li><strong>Git</strong>: コードのバージョン管理に必要</li>
+            </ul>
+
+            <div class="callout">
+                <strong>注意</strong>: Windows 対応は現在実験段階です。Codex CLI は WSL（Windows Subsystem for Linux）内で使うことをおすすめします。
+            </div>
+
+            <h2>インストール方法</h2>
+
+            <h3>方法 1: npm でインストール（推奨）</h3>
+            <p>Codex CLI をグローバルにインストールします：</p>
+            <pre><code>npm install -g @openai/codex</code></pre>
+
+            <h3>方法 2: Homebrew でインストール（macOS）</h3>
+            <pre><code>brew install --cask codex</code></pre>
+
+            <h3>方法 3: バイナリをダウンロード</h3>
+            <p><a href="https://github.com/openai/codex/releases" target="_blank">GitHub Releases</a> から、利用中のプラットフォームに合ったバイナリを取得します：</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>プラットフォーム</th>
+                        <th>アーキテクチャ</th>
+                        <th>ファイル名</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>macOS</td>
+                        <td>Apple Silicon</td>
+                        <td><code>codex-aarch64-apple-darwin.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>macOS</td>
+                        <td>Intel</td>
+                        <td><code>codex-x86_64-apple-darwin.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>Linux</td>
+                        <td>x86_64</td>
+                        <td><code>codex-x86_64-unknown-linux-musl.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>Linux</td>
+                        <td>ARM64</td>
+                        <td><code>codex-aarch64-unknown-linux-musl.tar.gz</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>初回起動</h2>
+            <p>インストール後、ターミナルで次を実行します：</p>
+            <pre><code>codex</code></pre>
+
+            <p>初回起動時にはログインが求められます。以下の 2 つの方法から選べます：</p>
+
+            <h3>方法 1: ChatGPT アカウントでサインイン</h3>
+            <p>既存の ChatGPT Plus/Pro/Business サブスクリプションを使えるため、この方法が推奨です。</p>
+            <ol>
+                <li><code>codex</code> を実行する</li>
+                <li>「Sign in with ChatGPT」を選ぶ</li>
+                <li>ブラウザで認証を完了する</li>
+                <li>ターミナルに戻って作業を始める</li>
+            </ol>
+
+            <h3>方法 2: API Key を使う</h3>
+            <p>従量課金で使いたい場合は OpenAI API Key を利用できます：</p>
+            <ol>
+                <li><a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a> で API Key を作成する</li>
+                <li><code>codex</code> を実行する</li>
+                <li>「Sign in with API Key」を選ぶ</li>
+                <li>API Key を入力する</li>
+            </ol>
+
+            <div class="callout warning">
+                <strong>重要</strong>: API Key を使う場合、一部機能（クラウドスレッドなど）が利用できないことがあります。
+            </div>
+
+            <h2>設定ファイル</h2>
+            <p>Codex の設定は <code>~/.codex/config.toml</code> に保存されます。手動で編集することも、CLI で設定することもできます。</p>
+
+            <h3>基本設定の例</h3>
+            <pre><code># Core model settings
+model = "gpt-5.4"
+model_provider = "openai"
+
+# Reasoning effort: minimal | low | medium | high | xhigh
+model_reasoning_effort = "medium"
+
+# Approval policy
+approval_policy = "on-request"
+
+# Sandbox mode: read-only | workspace-write | danger-full-access
+sandbox_mode = "read-only"
+
+# Web search mode: disabled | cached | live
+web_search = "cached"
+
+# File opener: vscode | vscode-insiders | windsurf | cursor | none
+file_opener = "vscode"</code></pre>
+
+            <h2>インストール確認</h2>
+            <p>次のコマンドでインストール結果を確認できます：</p>
+            <pre><code># バージョン確認
+codex --version
+
+# ヘルプ表示
+codex --help
+
+# セッション状態確認（対話モード内）
+/status</code></pre>
+
+            <h2>Codex のアップグレード</h2>
+            <p>新機能や修正を取り込むため、Codex は定期的に更新しましょう：</p>
+            <pre><code># npm でインストールした場合
+npm i -g @openai/codex@latest
+
+# Homebrew でインストールした場合
+brew upgrade codex</code></pre>
+
+            <h2>次のステップ</h2>
+            <p>インストール後は次の内容に進めます：</p>
+            <ul>
+                <li><a href="concepts.html">基本概念</a> を読んで Codex の仕組みを理解する</li>
+                <li><a href="basic-usage.html">基本的な使い方</a> を見て基本操作を学ぶ</li>
+                <li><a href="../examples/">実践例</a> を確認して最初のプロジェクトに取りかかる</li>
+            </ul>
+            </div>
+
+            <div class="lang-content" lang="es" hidden>
+            <h1>Instalacion y Configuracion</h1>
+
+            <p>
+                OpenAI Codex ofrece varias formas de uso: interfaz de linea de comandos (CLI), extensiones de IDE (VS Code, Cursor, Windsurf) y aplicaciones web.
+                Esta guia te ayudara a completar la instalacion y configuracion inicial de Codex CLI.
+            </p>
+
+            <h2>Requisitos del sistema</h2>
+            <ul>
+                <li><strong>Sistema operativo</strong>: macOS (Apple Silicon o Intel), Linux (x86_64 o arm64)</li>
+                <li><strong>Node.js</strong>: v18.0.0 o superior (necesario para instalar con npm)</li>
+                <li><strong>Git</strong>: necesario para control de versiones</li>
+            </ul>
+
+            <div class="callout">
+                <strong>Nota</strong>: El soporte para Windows sigue siendo experimental. Se recomienda usar Codex CLI dentro de WSL (Windows Subsystem for Linux).
+            </div>
+
+            <h2>Metodos de instalacion</h2>
+
+            <h3>Metodo 1: Instalar con npm (Recomendado)</h3>
+            <p>Instala Codex CLI de forma global:</p>
+            <pre><code>npm install -g @openai/codex</code></pre>
+
+            <h3>Metodo 2: Instalar con Homebrew (macOS)</h3>
+            <pre><code>brew install --cask codex</code></pre>
+
+            <h3>Metodo 3: Descargar el binario</h3>
+            <p>Descarga el binario adecuado para tu plataforma desde <a href="https://github.com/openai/codex/releases" target="_blank">GitHub Releases</a>:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plataforma</th>
+                        <th>Arquitectura</th>
+                        <th>Nombre de archivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>macOS</td>
+                        <td>Apple Silicon</td>
+                        <td><code>codex-aarch64-apple-darwin.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>macOS</td>
+                        <td>Intel</td>
+                        <td><code>codex-x86_64-apple-darwin.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>Linux</td>
+                        <td>x86_64</td>
+                        <td><code>codex-x86_64-unknown-linux-musl.tar.gz</code></td>
+                    </tr>
+                    <tr>
+                        <td>Linux</td>
+                        <td>ARM64</td>
+                        <td><code>codex-aarch64-unknown-linux-musl.tar.gz</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Primer inicio</h2>
+            <p>Despues de instalarlo, ejecuta esto en tu terminal:</p>
+            <pre><code>codex</code></pre>
+
+            <p>La primera vez que lo abras, Codex te pedira iniciar sesion. Puedes elegir una de estas dos opciones:</p>
+
+            <h3>Metodo 1: Iniciar sesion con tu cuenta de ChatGPT</h3>
+            <p>Este es el metodo recomendado porque aprovecha tu suscripcion existente de ChatGPT Plus/Pro/Business.</p>
+            <ol>
+                <li>Ejecuta <code>codex</code></li>
+                <li>Selecciona "Sign in with ChatGPT"</li>
+                <li>Completa la autorizacion en el navegador</li>
+                <li>Vuelve a la terminal y empieza a trabajar</li>
+            </ol>
+
+            <h3>Metodo 2: Usar API Key</h3>
+            <p>Si prefieres pagar por uso, puedes iniciar con una OpenAI API Key:</p>
+            <ol>
+                <li>Crea una API Key en <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a></li>
+                <li>Ejecuta <code>codex</code></li>
+                <li>Selecciona "Sign in with API Key"</li>
+                <li>Introduce tu API Key</li>
+            </ol>
+
+            <div class="callout warning">
+                <strong>Importante</strong>: Algunas funciones (como los hilos en la nube) pueden no estar disponibles cuando usas API Key.
+            </div>
+
+            <h2>Archivo de configuracion</h2>
+            <p>La configuracion de Codex se guarda en <code>~/.codex/config.toml</code>. Puedes editarla manualmente o configurarla desde la linea de comandos.</p>
+
+            <h3>Ejemplo de configuracion basica</h3>
+            <pre><code># Core model settings
+model = "gpt-5.4"
+model_provider = "openai"
+
+# Reasoning effort: minimal | low | medium | high | xhigh
+model_reasoning_effort = "medium"
+
+# Approval policy
+approval_policy = "on-request"
+
+# Sandbox mode: read-only | workspace-write | danger-full-access
+sandbox_mode = "read-only"
+
+# Web search mode: disabled | cached | live
+web_search = "cached"
+
+# File opener: vscode | vscode-insiders | windsurf | cursor | none
+file_opener = "vscode"</code></pre>
+
+            <h2>Verificar la instalacion</h2>
+            <p>Ejecuta los siguientes comandos para confirmar que todo esta bien instalado:</p>
+            <pre><code># Comprobar version
+codex --version
+
+# Ver ayuda
+codex --help
+
+# Comprobar estado de la sesion (en modo interactivo)
+/status</code></pre>
+
+            <h2>Actualizar Codex</h2>
+            <p>Manten Codex actualizado para obtener las ultimas funciones y correcciones:</p>
+            <pre><code># Si lo instalaste con npm
+npm i -g @openai/codex@latest
+
+# Si lo instalaste con Homebrew
+brew upgrade codex</code></pre>
+
+            <h2>Siguientes pasos</h2>
+            <p>Despues de instalarlo, puedes:</p>
+            <ul>
+                <li>Leer <a href="concepts.html">Conceptos Core</a> para entender como funciona Codex</li>
+                <li>Revisar <a href="basic-usage.html">Uso Basico</a> para aprender las operaciones principales</li>
+                <li>Explorar <a href="../examples/">Ejemplos practicos</a> para empezar tu primer proyecto</li>
+            </ul>
+            </div>
+
         </main>
     </div>
 

@@ -380,6 +380,304 @@ enabled = false</code></pre>
             </ul>
             </div>
 
+            <div class="lang-content" lang="ja" hidden>
+            <h1>Skills 拡張</h1>
+
+            <p>Skills を使うと、Codex にタスク特化のワークフローを実行させられます。Skill は手順・参照資料・必要に応じてスクリプトをまとめてパッケージ化し、特定の仕事を安定してこなせるようにします。</p>
+
+            <h2>Skill とは？</h2>
+            <p>Skill は Codex の拡張機構で、次のことを可能にします：</p>
+            <ul>
+                <li>繰り返し作業の手順をカプセル化する</li>
+                <li>標準化されたワークフローを定義する</li>
+                <li>チーム内でベストプラクティスを共有する</li>
+                <li>外部ツールやサービスと連携する</li>
+            </ul>
+
+            <h2>Skill の構成</h2>
+            <pre><code>my-skill/
+├── SKILL.md          # 必須: 手順とメタデータ
+├── scripts/          # 任意: 実行可能コード
+├── references/       # 任意: ドキュメント
+├── assets/           # 任意: テンプレートや素材
+└── agents/
+    └── openai.yaml   # 任意: UI 設定</code></pre>
+
+            <h2>SKILL.md の形式</h2>
+            <pre><code>---
+name: security-audit
+description: Scan the codebase for security vulnerabilities including SQL injection, XSS, hardcoded secrets
+---
+
+# Security Audit
+
+Please scan the current codebase for the following vulnerabilities:
+
+1. SQL injection risks
+2. Hardcoded secrets or tokens
+3. XSS vulnerabilities
+4. Insecure dependencies
+
+Generate a Markdown report containing:
+- Issue severity (Critical/High/Medium/Low)
+- File location and code snippets
+- Fix recommendations</code></pre>
+
+            <h2>Skill の使い方</h2>
+
+            <h3>明示的に呼び出す</h3>
+            <pre><code>$security-audit</code></pre>
+            <p>または</p>
+            <pre><code>/skills
+# Then select from the list</code></pre>
+
+            <h3>暗黙的に呼び出す</h3>
+            <p>タスクの説明に基づいて、Codex が自動で Skill を選ぶこともあります：</p>
+            <pre><code>> セキュリティ上の問題がないかコードを調べて</code></pre>
+
+            <h2>Skill のインストール</h2>
+
+            <h3>組み込みインストーラを使う</h3>
+            <pre><code>$skill-installer linear</code></pre>
+
+            <h3>Skill を探す場所</h3>
+            <p>Codex は次の場所をスキャンして Skill を見つけます：</p>
+            <ol>
+                <li>リポジトリ内の <code>.agents/skills/</code></li>
+                <li>ユーザーディレクトリの <code>~/.codex/skills/</code></li>
+                <li>システムディレクトリ（管理者設定）</li>
+            </ol>
+
+            <h2>カスタム Skill を作る</h2>
+
+            <h3>ステップ 1: Creator を使う</h3>
+            <pre><code>$skill-creator</code></pre>
+            <p>Creator では次の点を聞かれます：</p>
+            <ul>
+                <li>その Skill が何をするか</li>
+                <li>いつ発火するべきか</li>
+                <li>手順だけか、スクリプトも含むか</li>
+            </ul>
+
+            <h3>ステップ 2: 手動で作成する</h3>
+            <pre><code>mkdir -p ~/.codex/skills/my-skill
+cd ~/.codex/skills/my-skill
+cat > SKILL.md << 'EOF'
+---
+name: my-skill
+description: Describe when the Skill should be triggered
+---
+
+# My Skill
+
+Instruction content...
+EOF</code></pre>
+
+            <h2>よく使われる組み込み Skill</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>用途</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>$skill-creator</code></td>
+                        <td>新しい Skill を作成する</td>
+                    </tr>
+                    <tr>
+                        <td><code>$skill-installer</code></td>
+                        <td>コミュニティ Skill をインストールする</td>
+                    </tr>
+                    <tr>
+                        <td><code>$linear</code></td>
+                        <td>プロジェクト管理連携</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>UI メタデータの設定</h2>
+            <p><code>agents/openai.yaml</code> に設定します：</p>
+            <pre><code>interface:
+  display_name: "Security Audit"
+  short_description: "Scan code for security vulnerabilities"
+  icon_small: "./assets/shield.svg"
+  brand_color: "#ef4444"
+  default_prompt: "Please scan the codebase for security issues"
+
+policy:
+  allow_implicit_invocation: true
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "securityScanner"</code></pre>
+
+            <h2>Skill を無効化する</h2>
+            <p><code>~/.codex/config.toml</code> で設定できます：</p>
+            <pre><code>[[skills.config]]
+path = "/path/to/skill/SKILL.md"
+enabled = false</code></pre>
+
+            <h2>ベストプラクティス</h2>
+            <ul>
+                <li>1 つの Skill は 1 つのタスクに集中させる</li>
+                <li>可能ならスクリプトより手順を優先する</li>
+                <li>入出力の仕様を明確に書く</li>
+                <li>トリガー説明をテストして正しくマッチするか確認する</li>
+            </ul>
+            </div>
+
+            <div class="lang-content" lang="es" hidden>
+            <h1>Extension Skills</h1>
+
+            <p>Las Skills permiten que Codex ejecute flujos de trabajo especificos para una tarea. Una Skill empaqueta instrucciones, recursos y, si hace falta, scripts opcionales para que Codex complete trabajos concretos con mas fiabilidad.</p>
+
+            <h2>Que es una Skill?</h2>
+            <p>Una Skill es el mecanismo de extension de Codex y te permite:</p>
+            <ul>
+                <li>Encapsular instrucciones para tareas repetitivas</li>
+                <li>Definir flujos de trabajo estandarizados</li>
+                <li>Compartir buenas practicas con tu equipo</li>
+                <li>Conectar herramientas y servicios externos</li>
+            </ul>
+
+            <h2>Estructura de una Skill</h2>
+            <pre><code>my-skill/
+├── SKILL.md          # Requerido: instrucciones y metadatos
+├── scripts/          # Opcional: codigo ejecutable
+├── references/       # Opcional: documentacion
+├── assets/           # Opcional: plantillas y recursos
+└── agents/
+    └── openai.yaml   # Opcional: configuracion de UI</code></pre>
+
+            <h2>Formato de SKILL.md</h2>
+            <pre><code>---
+name: security-audit
+description: Scan the codebase for security vulnerabilities including SQL injection, XSS, hardcoded secrets
+---
+
+# Security Audit
+
+Please scan the current codebase for the following vulnerabilities:
+
+1. SQL injection risks
+2. Hardcoded secrets or tokens
+3. XSS vulnerabilities
+4. Insecure dependencies
+
+Generate a Markdown report containing:
+- Issue severity (Critical/High/Medium/Low)
+- File location and code snippets
+- Fix recommendations</code></pre>
+
+            <h2>Uso de Skills</h2>
+
+            <h3>Invocacion explicita</h3>
+            <pre><code>$security-audit</code></pre>
+            <p>O</p>
+            <pre><code>/skills
+# Then select from the list</code></pre>
+
+            <h3>Invocacion implicita</h3>
+            <p>Codex puede seleccionar automaticamente una Skill a partir de la descripcion de la tarea:</p>
+            <pre><code>> Revisa el codigo en busca de problemas de seguridad</code></pre>
+
+            <h2>Instalar Skills</h2>
+
+            <h3>Usando el instalador integrado</h3>
+            <pre><code>$skill-installer linear</code></pre>
+
+            <h3>Ubicaciones de descubrimiento</h3>
+            <p>Codex busca Skills en estas ubicaciones:</p>
+            <ol>
+                <li>El directorio <code>.agents/skills/</code> del repositorio</li>
+                <li>El directorio de usuario <code>~/.codex/skills/</code></li>
+                <li>El directorio del sistema (configuracion de administrador)</li>
+            </ol>
+
+            <h2>Crear Skills personalizados</h2>
+
+            <h3>Paso 1: Usar el Creator</h3>
+            <pre><code>$skill-creator</code></pre>
+            <p>El creator preguntara:</p>
+            <ul>
+                <li>Que hace la Skill</li>
+                <li>Cuando debe activarse</li>
+                <li>Si solo contiene instrucciones o tambien scripts</li>
+            </ul>
+
+            <h3>Paso 2: Creacion manual</h3>
+            <pre><code>mkdir -p ~/.codex/skills/my-skill
+cd ~/.codex/skills/my-skill
+cat > SKILL.md << 'EOF'
+---
+name: my-skill
+description: Describe when the Skill should be triggered
+---
+
+# My Skill
+
+Instruction content...
+EOF</code></pre>
+
+            <h2>Skills integradas comunes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Proposito</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>$skill-creator</code></td>
+                        <td>Crear nuevas Skills</td>
+                    </tr>
+                    <tr>
+                        <td><code>$skill-installer</code></td>
+                        <td>Instalar Skills de la comunidad</td>
+                    </tr>
+                    <tr>
+                        <td><code>$linear</code></td>
+                        <td>Integracion con gestion de proyectos</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Configurar metadatos de UI</h2>
+            <p>Configuralos en <code>agents/openai.yaml</code>:</p>
+            <pre><code>interface:
+  display_name: "Security Audit"
+  short_description: "Scan code for security vulnerabilities"
+  icon_small: "./assets/shield.svg"
+  brand_color: "#ef4444"
+  default_prompt: "Please scan the codebase for security issues"
+
+policy:
+  allow_implicit_invocation: true
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "securityScanner"</code></pre>
+
+            <h2>Desactivar una Skill</h2>
+            <p>En <code>~/.codex/config.toml</code>:</p>
+            <pre><code>[[skills.config]]
+path = "/path/to/skill/SKILL.md"
+enabled = false</code></pre>
+
+            <h2>Buenas practicas</h2>
+            <ul>
+                <li>Cada Skill debe centrarse en una sola tarea</li>
+                <li>Prioriza instrucciones antes que scripts</li>
+                <li>Escribe especificaciones claras de entrada y salida</li>
+                <li>Prueba las descripciones de activacion para asegurar una coincidencia correcta</li>
+            </ul>
+            </div>
+
         </main>
     </div>
 
